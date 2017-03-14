@@ -1,0 +1,200 @@
+/* ===  NAV WIDGET === */
+.header .nav {
+    height: 120px;
+}
+
+.header .nav ul {
+    list-style-type: none;
+    border-bottom: 1px solid #0ead8e;
+}
+
+.header .nav ul li {
+    display: inline-flex;
+    padding: 50px 30px 10px 30px;
+}
+
+.header .nav ul li a {
+    color: #333;
+}
+.header .nav ul li a:hover {
+    color: #0ead8e;
+    text-decoration: none;
+}
+
+
+.header .nav ul li ul.child_menu {
+    border-radius: 0;
+    border: 0;
+    box-shadow: 0 5px 5px #333;
+}
+
+.header .nav ul li ul.child_menu li {
+    display: list-item;
+    padding: 0;
+}
+
+.header .nav ul li ul.child_menu li a {
+}
+
+.header .nav ul li ul.child_menu li a:hover {
+}
+
+.header .nav li:hover {
+
+}
+
+.header .nav li a:hover {
+
+}
+
+.header .nav ul li.pos_right {
+    float: right;
+    padding-right: 0;
+    padding-left: 5px;
+    padding-top: 45px;
+}
+
+.header .nav ul li.pos_right span {
+    padding: 5px 7px;
+    background: #0ead8e;
+}
+
+.header .nav ul li.pos_right span a {
+    color: #FFFFFF;
+}
+
+.header .nav ul li.pos_right span a:hover {
+    color: #cccccc;
+}
+
+
+
+/* ===== SLIDE HOME ========= */
+.main_content .slide_news {
+    width: 72% !important;
+    height: 300px;
+}
+
+.slide_news #slider1_container {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.slide_news #slider1_container div.slides {
+    width: 100%;
+    cursor: move;
+    position: absolute;
+    overflow: hidden;
+    left: 0; top: 0;
+    height: 300px;
+}
+
+.slide_news #slider1_container .jssora12l {
+    top:130px !important;left:0px;width:30px;height:46px;
+}
+
+.slide_news #slider1_container .jssora12r {
+    top:130px !important;right:0px;width:30px;height:46px;
+}
+
+.slide_news #slider1_container .jssora12l, .jssora12r {
+    display: block;
+    position: absolute;
+    width: 30px;
+    height: 46px;
+    cursor: pointer;
+    background: url('../images/slide_1/a12.png');
+    overflow: hidden;
+}
+.slide_news #slider1_container .jssora12l { background-position: -16px -37px; }
+.slide_news #slider1_container .jssora12r { background-position: -75px -37px; }
+.slide_news #slider1_container .jssora12l:hover { background-position: -136px -37px; }
+.slide_news #slider1_container .jssora12r:hover { background-position: -195px -37px; }
+
+
+/* ===  WIDGET TIN TỨC NỔI BẬT === */
+.main_content .news_feature {
+    margin-left: 20px;
+    float: right;
+    border: 1px solid #0ead8e;
+}
+.main_content .news_feature .widget_header {
+    background: #0ead8e;
+    height: 40px;
+    padding: 10px;
+}
+
+.main_content .news_feature .widget_header ul.nav-tabs {
+    list-style-type: none;
+    border: none;
+    float: right;
+}
+
+.main_content .news_feature .widget_header  ul.nav-tabs li {
+}
+
+.main_content .news_feature .widget_header  ul.nav-tabs li:hover {
+
+}
+
+.main_content .news_feature .widget_header  ul.nav-tabs li.active {
+}
+
+.main_content .news_feature .widget_header  ul.nav-tabs li a {
+    color: #FFFFFF;
+    padding: 5px 7px;
+    background: transparent;
+}
+
+.main_content .news_feature .list_news {
+    padding: 5px 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
