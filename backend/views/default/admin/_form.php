@@ -23,12 +23,20 @@ Icon::map($this, Icon::FA);
         'formConfig' => [
             'labelSpan' => 2,
             'deviceSize' => ActiveForm::SIZE_SMALL
+        ],
+        'options' => [
+            'enctype' => 'multipart/form-data'
         ]
     ]); ?>
 
-    <?= $form->field($model, 'ad_username')->textInput(['maxlength' => 50]) ?>
+    <?= $form->field($model, 'ad_username')->textInput(['maxlength' => 50, 'disabled' => (!$model->isNewRecord ? true : false)]) ?>
 
-    <?= $form->field($model, 'ad_password')->textInput(['maxlength' => 255]) ?>
+    <?php if ($model->isNewRecord) {
+        echo $form->field($model, 'ad_password')->passwordInput(['maxlength' => 255]);
+    } else {
+        echo $form->field($model, 'new_password')->passwordInput(['maxlength' => 255])->label(Yii::t('cms', 'New Password'));
+        echo $form->field($model, 're_new_password')->passwordInput(['maxlength' => 255])->label(Yii::t('cms', 'Re-New Password'));
+    } ?>
 
     <?= $form->field($model, 'ad_full_name')->textInput(['maxlength' => 100]) ?>
 
@@ -65,16 +73,16 @@ Icon::map($this, Icon::FA);
             'multiple' => false
         ],
         'pluginOptions' => [
-            'initialPreview'=>[
-                "http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg"
-            ],
-            'initialPreviewAsData' => true,
-            'initialCaption' => "The Moon and the Earth",
-            'initialPreviewConfig' => [
-                ['caption' => 'Moon.jpg', 'size' => '873727'],
-            ],
-            'overwriteInitial' => false,
-            'maxFileSize' => 2800
+//            'initialPreview'=>[
+//                "http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg"
+//            ],
+//            'initialPreviewAsData' => true,
+//            'initialCaption' => "The Moon and the Earth",
+//            'initialPreviewConfig' => [
+//                ['caption' => 'Moon.jpg', 'size' => '873727'],
+//            ],
+//            'overwriteInitial' => false,
+//            'maxFileSize' => 2800
         ]
     ]) ?>
 

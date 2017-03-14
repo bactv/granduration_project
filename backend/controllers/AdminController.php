@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use yii\web\UploadedFile;
 use Yii;
 use backend\models\Admin;
 use common\models\search\AdminSearch;
@@ -63,7 +64,17 @@ class AdminController extends BackendController
         $model = new Admin();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ad_id]);
+            $model->avatar = UploadedFile::getInstance($model, 'avatar');
+            if (!empty($model->avatar) && $model->uploadAvatar()) {
+                $model->ad_avatar = 1;
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->ad_id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,

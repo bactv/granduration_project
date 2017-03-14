@@ -15,6 +15,7 @@ use Yii;
  * @property string $icon
  * @property integer $visible
  * @property integer $status
+ * @property integer $sort
  * @property string $created_time
  * @property string $updated_time
  */
@@ -34,7 +35,7 @@ class MenuDB extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'module', 'visible', 'status'], 'integer'],
+            [['parent_id', 'module', 'visible', 'status', 'sort'], 'integer'],
             [['name'], 'required'],
             [['created_time', 'updated_time'], 'safe'],
             [['name'], 'string', 'max' => 100],
@@ -57,6 +58,7 @@ class MenuDB extends \yii\db\ActiveRecord
             'icon' => Yii::t('cms', 'Icon'),
             'visible' => Yii::t('cms', 'Visible'),
             'status' => Yii::t('cms', 'Status'),
+            'sort' => Yii::t('cms', 'Sort'),
             'created_time' => Yii::t('cms', 'Created Time'),
             'updated_time' => Yii::t('cms', 'Updated Time'),
         ];

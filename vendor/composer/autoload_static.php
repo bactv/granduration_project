@@ -85,6 +85,8 @@ class ComposerStaticInit228e95e36c88534ba18a640dbc85d515
         ),
         'd' => 
         array (
+            'dosamigos\\gallery\\' => 18,
+            'dosamigos\\fileupload\\' => 21,
             'dosamigos\\ckeditor\\' => 19,
         ),
         'c' => 
@@ -356,6 +358,14 @@ class ComposerStaticInit228e95e36c88534ba18a640dbc85d515
         'kartik\\affix\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-affix',
+        ),
+        'dosamigos\\gallery\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/2amigos/yii2-gallery-widget/src',
+        ),
+        'dosamigos\\fileupload\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/2amigos/yii2-file-upload-widget/src',
         ),
         'dosamigos\\ckeditor\\' => 
         array (

@@ -64,7 +64,7 @@ class Menu extends \common\models\MenuBase
      */
     public static function getChildMenu($parent_id)
     {
-        $allMenus = static::find()->where(['status' => 1, 'module' => 1, 'parent_id' => $parent_id])->all();
+        $allMenus = static::find()->where(['status' => 1, 'module' => 1, 'parent_id' => $parent_id])->orderBy('sort')->all();
         // $menus = [];
         // foreach ($allMenus as $menu) {
         //     if (self::checkMenuPermission($menu)) {
