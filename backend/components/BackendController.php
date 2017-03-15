@@ -23,7 +23,7 @@ class BackendController extends Controller
 //        if (Yii::$app->user->isGuest) {
 //            return $this->redirect(Yii::$app->urlManager->createUrl(['default/login']));
 //        } else if (CheckPermission::checkPermission($user_id, $controller_name, $action_name)) {
-//            $model = Admin::getAdmin(['ad_id' => $user_id]);
+//            $model = Admin::findIdentity($user_id);
 //            $model['ad_last_active_time'] = date('Y-m-d H:i:s');
 //            $model->save();
 //            return true;

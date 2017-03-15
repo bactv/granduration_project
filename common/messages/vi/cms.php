@@ -43,6 +43,44 @@ return [
     'Ad Status' => 'Trạng thái',
     'Ad Group Ids' => 'Nhóm quyền quản trị',
 
-    // Menu
+    // Agreement Type
+    'Agreement Types' => 'Loại Hợp Đồng',
+    'Agreement Type ID' => 'ID',
+    'Agreement Type Name' => 'Tên loại HĐ',
+    'Agreement Type Description' => 'Mô tả',
+
+    // Agreement
+    'Agreements' => 'Hợp đồng',
+    'Agreement ID' => 'ID',
+    'Agreement Code' => 'Số HĐ',
+    'Party Id A' => 'Bên A',
+    'Party Id B' => 'Bên B',
+    'Agreement Signed Date' => 'Ngày ký HĐ',
+    'Agreement Effective Date' => 'Ngày hiệu lực HĐ',
+    'Mg' => 'Số tiền thanh toán',
+    'Create Agreement' => 'Tạo mới HĐ',
+
+    // Agreement Right
+    'Agreement Rights' => 'Quyền HĐ',
+    'Agreement Right ID' => 'ID',
+    'Agreement Right Name' => 'Tên quyền HĐ',
+    'Agreement Right Description' => 'Mô tả',
+
+    // Đối tượng, chủ thể
+    'Party Types' => 'Loại đối tượng',
+    'Party Type ID' => 'ID',
+    'Party Type Name' => 'Tên loại đối tượng',
+    'Party Type Description' => 'Mô tả',
+    'Party Type Created Time' => 'Ngày tạo',
+    'Party Type Updated Time' => 'Ngày cập nhật',
+    'Party Type Created By' => 'Người tạo',
+    'Party Type Updated By' => 'Ngưới cập nhật',
+    'Parties' => 'Đối tượng, chủ thể',
+    'Party ID' => 'ID',
+    'Party Name' => 'Tên đối tượng, chủ thể',
+    'Party Rep Title' => 'Người đại diện',
+    'Party Address' => 'Địa chỉ',
+    'Party Tax Code' => 'Mã số thuế',
+    'Party Phone' => 'Số ĐT'
 
 ];

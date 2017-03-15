@@ -18,7 +18,7 @@ class CheckPermission
     public static function checkPermission($admin_id, $controller_name, $action_name)
     {
         $check = false;
-        $admin = Admin::getAdmin(['ad_id' => $admin_id, 'ad_status' => 1]);
+        $admin = Admin::findIdentity($admin_id);
         $arr_ad_group_ids = !empty($admin['ad_group_ids']) ? json_decode($admin['ad_group_ids']) : [];
         if (!empty($arr_ad_group_ids)) {
             foreach ($arr_ad_group_ids as $ad_group_id) {
