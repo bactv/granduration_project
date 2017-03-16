@@ -255,3 +255,7 @@ div.right_col div.footer {
     font-style: italic;
     color: #cacaca;
 }
+
+.agreement-view .table-bordered > tbody > tr > th {
+    text-align: left !important;
+}

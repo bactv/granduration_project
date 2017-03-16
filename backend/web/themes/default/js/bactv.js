@@ -76,6 +76,66 @@ function list_menu(module_id) {
 }
 
 
+// CHI TIẾT HỢP ĐỒNG
+function view_agreement(agreement_id) {
+    if (agreement_id == '' || agreement_id == 'undefined') {
+        return '';
+    }
+    $.ajax({
+        method: 'GET',
+        data: {'agreement_id' : agreement_id},
+        url: '/agreement/view-agreement.html',
+        success: function (data) {
+            $("div#view-agreement").html(data);
+        },
+        error: function () {
+            alert("Có lỗi xảy ra.");
+        }
+    });
+}
+
+// DANH SÁCH PHỤ LỤC HỢP ĐỒNG
+function agreement_addendum(agreement_id) {
+    if (agreement_id == '' || agreement_id == 'undefined') {
+        return '';
+    }
+    $.ajax({
+        method: 'GET',
+        data: {'agreement_id' : agreement_id},
+        url: '/agreement/addendum.html',
+        success: function (data) {
+            $("div#agreement-addendum").html(data);
+        },
+        error: function () {
+            alert("Có lỗi xảy ra.");
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
