@@ -16,6 +16,7 @@ return [
     'Updated Time' => 'Ngày cập nhật',
     'Created By' => 'Người tạo',
     'Updated By' => 'Người cập nhật',
+    'Agreement Detail' => 'Chi tiết HĐ',
 
     // admin_group
     'Admin Groups' => 'Nhóm quyền quản trị',
@@ -81,6 +82,11 @@ return [
     'Party Rep Title' => 'Người đại diện',
     'Party Address' => 'Địa chỉ',
     'Party Tax Code' => 'Mã số thuế',
-    'Party Phone' => 'Số ĐT'
+    'Party Phone' => 'Số ĐT',
+
+    // PHỤ LỤC HĐ
+    'Addendum ID' => 'ID',
+    'Addendum Number' => 'Số PL',
+    'Addendum Content' => 'Nội dung PL',
 
 ];
