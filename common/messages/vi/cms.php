@@ -89,4 +89,6 @@ return [
     'Addendum Number' => 'Số PL',
     'Addendum Content' => 'Nội dung PL',
 
+    'Type File Import' => 'Loại File Import',
+
 ];

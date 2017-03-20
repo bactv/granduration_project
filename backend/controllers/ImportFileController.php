@@ -2,18 +2,18 @@
 
 namespace backend\controllers;
 
-use yii\web\UploadedFile;
 use Yii;
-use backend\models\Admin;
-use common\models\search\AdminSearch;
+use backend\models\ImportFile;
+use common\models\search\ImportFileSearch;
 use backend\components\BackendController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
- * AdminController implements the CRUD actions for Admin model.
+ * ImportFileController implements the CRUD actions for ImportFile model.
  */
-class AdminController extends BackendController
+class ImportFileController extends BackendController
 {
     public function behaviors()
     {
@@ -28,12 +28,12 @@ class AdminController extends BackendController
     }
 
     /**
-     * Lists all Admin models.
+     * Lists all ImportFile models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AdminSearch();
+        $searchModel = new ImportFileSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -43,7 +43,7 @@ class AdminController extends BackendController
     }
 
     /**
-     * Displays a single Admin model.
+     * Displays a single ImportFile model.
      * @param integer $id
      * @return mixed
      */
@@ -55,21 +55,23 @@ class AdminController extends BackendController
     }
 
     /**
-     * Creates a new Admin model.
+     * Creates a new ImportFile model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Admin();
+        $type = isset($_GET['type']) ? $_GET['type'] : 'agreement';
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->avatar = UploadedFile::getInstance($model, 'avatar');
-            if (!empty($model->avatar)) {
-                $model->ad_avatar = 1;
-            }
-            if ($model->save() && $model->uploadAvatar($model->ad_id)) {
-                return $this->redirect(['view', 'id' => $model->ad_id]);
+        $model = new ImportFile();
+        $model->type = $type;
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+            $model->file_name = $model->file->baseName;
+
+            if ($model->save() && $model->uploadFile($model->id, $model->type)) {
+                return $this->redirect(['view', 'id' => $model->id]);
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -83,7 +85,7 @@ class AdminController extends BackendController
     }
 
     /**
-     * Updates an existing Admin model.
+     * Updates an existing ImportFile model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -93,12 +95,11 @@ class AdminController extends BackendController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->avatar = UploadedFile::getInstance($model, 'avatar');
-            if (!empty($model->avatar)) {
-                $model->ad_avatar = 1;
-            }
-            if ($model->save() && $model->uploadAvatar($model->ad_id)) {
-                return $this->redirect(['view', 'id' => $model->ad_id]);
+            $model->file = UploadedFile::getInstance($model, 'file');
+            $model->file_name = $model->file->baseName;
+
+            if ($model->save() && $model->uploadFile($model->id, $model->type)) {
+                return $this->redirect(['view', 'id' => $model->id]);
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -112,7 +113,7 @@ class AdminController extends BackendController
     }
 
     /**
-     * Deletes an existing Admin model.
+     * Deletes an existing ImportFile model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -127,15 +128,15 @@ class AdminController extends BackendController
     }
 
     /**
-     * Finds the Admin model based on its primary key value.
+     * Finds the ImportFile model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Admin the loaded model
+     * @return ImportFile the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Admin::findOne($id)) !== null) {
+        if (($model = ImportFile::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

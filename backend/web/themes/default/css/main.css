@@ -19,7 +19,7 @@ div.left_col div.side_left {
 }
 
 div.left_col div.side_left .person_info {
-    height: 250px;
+    height: 200px;
     position: relative;
     border-bottom: 1px solid #ccc;
 }
@@ -28,6 +28,7 @@ div.left_col div.side_left .person_info .logo_header {
     height: 100px;
     position: relative;
     padding: 0px 5px;
+    display: none;
 }
 
 div.left_col div.side_left .person_info .logo_header #logo_img {
@@ -55,6 +56,7 @@ div.left_col div.side_left .person_info .logo_header #site_name {
 div.left_col div.side_left .person_info .person {
     position: absolute;
     width: 100%;
+    padding-top: 30px;
 }
 
 div.left_col div.side_left .person_info .person .avatar {
@@ -72,7 +74,7 @@ div.left_col div.side_left .person_info .person .username {
     font-family: cursive;
     height: 100%;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 110px;
 }
 
 /* menu list */

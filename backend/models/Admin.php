@@ -136,17 +136,17 @@ class Admin extends \common\models\AdminBase implements IdentityInterface
 
     /**
      * Upload avatar
+     * @param $id
      * @return bool
      */
-    public function uploadAvatar()
+    public function uploadAvatar($id)
     {
-        $path = Yii::$app->params['storage_url'] . '/' . Yii::$app->params['img_url']['admin_avatar']['source'] . '/';
-
-        if (!file_exists($path)) {
-            mkdir($path);
+        $path = Yii::getAlias('@webroot') . Yii::$app->params['img_url']['dataPath'] . Yii::$app->params['img_url']['admin_avatar']['source'] . '/';
+        if (!is_dir($path)) {
+            mkdir($path, 0777);
         }
         if ($this->validate()) {
-            $this->avatar->saveAs($path . $this->ad_id . '.png');
+            $this->avatar->saveAs($path . $id . '.' . $this->avatar->extension);
             return true;
         } else {
             return false;

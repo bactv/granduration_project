@@ -17,6 +17,11 @@ Icon::map($this, Icon::FA);
 
 ?>
 
+<div class="list_action" style="margin-bottom: 20px">
+    <?php echo Html::a(Icon::show('plus') . " " . Yii::t('cms', 'Create'), 'javascript:void(0)', ['class' => 'btn btn-primary']) ?>
+    <?php echo Html::a(Icon::show('file-excel-o') . " " . Yii::t('cms', 'Import'), ['import-file/create', 'type' => 'agreement_addendum'], ['class' => 'btn btn-warning', 'target' => '_blank']) ?>
+</div>
+
 <?php Pjax::begin(['id' => 'admin-grid-view']);?>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,

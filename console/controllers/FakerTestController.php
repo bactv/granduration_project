@@ -8,6 +8,7 @@
 namespace console\controllers;
 
 use backend\models\Agreement;
+use backend\models\AgreementAddendum;
 use backend\models\Party;
 use Yii;
 use yii\console\Controller;
@@ -48,6 +49,21 @@ class FakerTestController extends Controller
             $object->mg = ($object->agreement_type_id == 1 ? $faker->randomFloat(4) : 0);
             $object->agreement_created_time = $faker->date('Y-m-d H:i:s');
             $object->agreement_updated_time = $faker->date('Y-m-d H:i:s');
+            $object->save();
+        }
+    }
+
+    public function actionTestAgreementAddendum($count = 20)
+    {
+        $faker = \Faker\Factory::create();
+
+        for ($i = 0; $i < $count; $i++) {
+            $object = new AgreementAddendum();
+            $object->agreement_id = $faker->numberBetween(1, 5);
+            $object->addendum_number = $faker->unique()->streetAddress;
+            $object->addendum_content = $faker->sentence(30);
+            $object->addendum_created_time = $faker->date('Y-m-d H:i:s');
+            $object->addendum_updated_time = $faker->date('Y-m-d H:i:s');
             $object->save();
         }
     }

@@ -25,7 +25,7 @@ use backend\models\Menu;
     <div class="person">
         <div class="row avatar">
             <?php
-            $avatar = AssetApp::getImageBaseUrl() . '/avatar_icon_backend_2.png';
+            $avatar = AssetApp::getImageBaseUrl() . '/avatar_icon_backend_3.png';
             if (isset(Yii::$app->user->identity->ad_avatar) && Yii::$app->user->identity->ad_avatar > 0) {
                 $avatar = Yii::$app->params['img_url']['data_path'] . Yii::$app->params['img_url']['admin_avatar']['source'] . '/' . Yii::$app->user->identity->ad_id . '.png';
             }
