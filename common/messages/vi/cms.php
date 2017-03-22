@@ -43,6 +43,8 @@ return [
     'Ad Avatar' => 'Ảnh đại diện',
     'Ad Status' => 'Trạng thái',
     'Ad Group Ids' => 'Nhóm quyền quản trị',
+    'username' => 'Tên đăng nhập',
+    'password' => 'Mật khẩu',
 
     // Agreement Type
     'Agreement Types' => 'Loại Hợp Đồng',
@@ -90,5 +92,51 @@ return [
     'Addendum Content' => 'Nội dung PL',
 
     'Type File Import' => 'Loại File Import',
+
+    // Subject
+    'Subject ID' => 'ID',
+    'Subject Name' => 'Môn học',
+    'Subject Description' => 'Mô tả',
+    'Subjects' => 'Môn học',
+
+    'Class Level ID' => 'ID',
+    'Class Level Name' => 'Lớp',
+    'Class Levels' => 'Lớp',
+
+    'Quiz Type ID' => 'ID',
+    'Quiz Type Name' => 'Loại đề thi',
+    'Quiz Type Description' => 'Mô tả',
+    'Number Quiz' => 'Số đề thi',
+    'Quiz Types' => 'Loại đề thi',
+
+    'Question ID' => 'ID',
+    'Question Content' => 'ND câu hỏi',
+    'Questions' => 'Câu hỏi',
+
+    'Quiz ID' => 'ID',
+    'Quiz Name' => 'Tên đề thi',
+    'Quiz Description' => 'Mô tả',
+    'Section' => 'Chủ đề',
+    'Quizzes' => 'Đề thi',
+    'Quiz Level' => 'Mức độ',
+
+    // Học sinh, giáo viên
+    'Std ID' => 'ID',
+    'Std Username' => 'Tên đăng nhập',
+    'Std Password' => 'Mật khẩu',
+    'Std Full Name' => 'Tên đầy đủ',
+    'Std Phone' => 'Số điện thoại',
+    'Std Birthday' => 'Ngày sinh',
+    'Std School Name' => 'Trường học',
+    'Std Balance' => 'Số dư TK',
+    'Students' => 'Học sinh',
+
+    // Gói
+    'Pk ID' => 'ID',
+    'Pk Name' => 'Tên gói',
+    'Pk Code' => 'Mã gói',
+    'Pk Description' => 'Mô tả',
+    'Pk Price' => 'Giá gói',
+    'Packages' => 'Gói học tập'
 
 ];
