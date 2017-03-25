@@ -5,13 +5,8 @@
 use frontend\components\widgets\SlideNewsHomeWidget;
 use frontend\components\widgets\NewsFeatureWidget;
 
-$this->title = 'Study.EDU - Học tập trực tuyến';
+$this->title = 'Study.EDU - Hệ thống học tập trực tuyên';
 ?>
 <div class="row">
-    <div class="col-md-9 slide_news">
-        <?php echo SlideNewsHomeWidget::widget([]) ?>
-    </div>
-    <div class="col-md-3 news_feature">
-        <?php echo NewsFeatureWidget::widget([]) ?>
-    </div>
+    <?php echo SlideNewsHomeWidget::widget([]) ?>
 </div>

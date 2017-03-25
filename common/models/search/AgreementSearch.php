@@ -18,7 +18,7 @@ class AgreementSearch extends Agreement
     public function rules()
     {
         return [
-            [['agreement_id', 'party_id_a', 'party_id_b', 'agreement_right_id', 'agreement_type_id', 'agreement_created_by', 'agreement_updated_by'], 'integer'],
+            [['agreement_id', 'party_id_a', 'party_id_b', 'agreement_right_ids', 'agreement_type_id', 'agreement_created_by', 'agreement_updated_by'], 'integer'],
             [['agreement_code', 'agreement_signed_date', 'agreement_effective_date', 'agreement_created_time', 'agreement_updated_time'], 'safe'],
             [['mg'], 'number'],
         ];
@@ -42,7 +42,7 @@ class AgreementSearch extends Agreement
      */
     public function search($params)
     {
-        $query = Agreement::find();
+        $query = Agreement::find()->where(['deleted' => 0]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -58,7 +58,6 @@ class AgreementSearch extends Agreement
             'party_id_b' => $this->party_id_b,
             'agreement_signed_date' => $this->agreement_signed_date,
             'agreement_effective_date' => $this->agreement_effective_date,
-            'agreement_right_id' => $this->agreement_right_id,
             'agreement_type_id' => $this->agreement_type_id,
             'mg' => $this->mg,
             'agreement_created_time' => $this->agreement_created_time,

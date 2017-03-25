@@ -12,9 +12,4 @@ return [
             'height' => ''
         ]
     ],
-    'storage_url' => '/storage/',
-    'type_file_import' => [
-        'agreement' => 'Hợp Đồng',
-        'agreement_addendum' => 'Phụ Lục Hợp Đồng'
-    ]
 ];

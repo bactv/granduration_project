@@ -471,4 +471,13 @@ return array (
       '@dosamigos/fileupload' => $vendorDir . '/2amigos/yii2-file-upload-widget/src',
     ),
   ),
+  'arogachev/yii2-excel' => 
+  array (
+    'name' => 'arogachev/yii2-excel',
+    'version' => '0.1.1.0',
+    'alias' => 
+    array (
+      '@arogachev/excel' => $vendorDir . '/arogachev/yii2-excel/src',
+    ),
+  ),
 );

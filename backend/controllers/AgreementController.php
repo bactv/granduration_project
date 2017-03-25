@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\AgreementAddendum;
+use common\components\Utility;
 use Yii;
 use backend\models\Agreement;
 use common\models\search\AgreementSearch;
@@ -64,8 +65,21 @@ class AgreementController extends BackendController
     {
         $model = new Agreement();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->agreement_id]);
+        $request = Yii::$app->request->post();
+
+        if ($model->load($request)) {
+            $model->party_id_a = (isset($model->party_id_a)) ? $model->party_id_a : 1;
+            $model->agreement_right_ids = (!empty($request['Agreement']['agreement_right_ids'])) ? json_encode($request['Agreement']['agreement_right_ids']) : '';
+            $model->agreement_signed_date = Utility::formatDataTime($model->agreement_signed_date, '/', '-', false);
+            $model->agreement_effective_date = Utility::formatDataTime($model->agreement_effective_date, '/', '-', false);
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->agreement_id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -83,8 +97,24 @@ class AgreementController extends BackendController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->agreement_id]);
+        $request = Yii::$app->request->post();
+
+        $model->agreement_signed_date = Utility::formatDataTime($model->agreement_signed_date, '-', '/', false);
+        $model->agreement_effective_date = Utility::formatDataTime($model->agreement_effective_date, '-', '/', false);
+        $model->agreement_right_ids = json_decode($model->agreement_right_ids);
+
+        if ($model->load($request)) {
+            $model->agreement_right_ids = (!empty($request['Agreement']['agreement_right_ids'])) ? json_encode($request['Agreement']['agreement_right_ids']) : '';
+            $model->agreement_signed_date = Utility::formatDataTime($model->agreement_signed_date, '/', '-', false);
+            $model->agreement_effective_date = Utility::formatDataTime($model->agreement_effective_date, '/', '-', false);
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->agreement_id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,

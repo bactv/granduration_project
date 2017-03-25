@@ -18,7 +18,8 @@ $this->title = $this->params['title'] = Yii::t('cms', 'Agreements');
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['menu'] = [
     ['label'=>Icon::show('plus') . " " . Yii::t('cms', 'Create'), 'url' => ['create'], 'options' => ['class' => 'btn btn-primary']],
-    ['label'=>Icon::show('trash-o') . " " . Yii::t('cms', 'Delete'), 'url' => 'javascript:void(0)', 'options' => ['class' => 'btn btn-danger', 'onclick' => 'deleteAllItems()']]
+    ['label'=>Icon::show('trash-o') . " " . Yii::t('cms', 'Delete'), 'url' => 'javascript:void(0)', 'options' => ['class' => 'btn btn-danger', 'onclick' => 'deleteAllItems()']],
+    ['label'=>Icon::show('file-excel-o') . " " . Yii::t('cms', 'Import HĐ'), 'url' => ['/import-file/create', 'type' => 'agreement'], 'options' => ['class' => 'btn btn-warning', 'onclick' => 'deleteAllItems()']]
 ];
 ?>
 
@@ -86,14 +87,20 @@ $this->params['menu'] = [
                 'contentOptions' => ['style' => 'text-align: center; vertical-align: middle'],
             ],
             [
-                'attribute' => 'agreement_right_id',
+                'attribute' => 'agreement_right_ids',
                 'label' => Yii::t('cms', 'Agreement Rights'),
                 'format' => 'raw',
                 'value' => function ($model) {
-                    return AgreementRight::getAttributeValue(['agreement_right_id' => $model['agreement_right_id']], 'agreement_right_name');
+                    $str = '';
+                    foreach (json_decode($model['agreement_right_ids']) as $item) {
+                        if (trim($item) != '') {
+                            $str .= '<p> - ' . AgreementRight::getAttributeValue(['agreement_right_id' => trim($item)], 'agreement_right_name') . '</p>';
+                        }
+                    }
+                    return $str;
                 },
                 'headerOptions' => ['style' => 'text-align: center; vertical-align: middle'],
-                'contentOptions' => ['style' => 'text-align: center; vertical-align: middle'],
+                'contentOptions' => ['style' => 'text-align: left; vertical-align: middle'],
             ],
             [
                 'attribute' => 'agreement_type_id',

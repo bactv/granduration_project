@@ -110,6 +110,11 @@ class Menu extends \common\models\MenuBase
         $str .= "<a href='" . $url ."'>";
         $str .= "<span id='icon'>" . Icon::show($menu['icon']) . "</span>";
         $str .= "<span id='menu_name'>" . $menu['name'] . "</span>";
+        if ($menu['url'] == 'feedback/index') {
+            $all_feedback = count(Feedback::list_new_feedback());
+            $add_str = "<span class=\"label label-warning\">" . $all_feedback . "</span>";
+            $str .= " " . $add_str;
+        }
         if (!empty($childs)) {
             $str .= "<span id='chevron_icon'>" . Icon::show('chevron-right') . "</span>";
         }

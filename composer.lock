@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ecb3addcd190765735068cdf75907160",
+    "content-hash": "53e776dcf7f9eabf83e52578ab571759",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
@@ -193,6 +193,55 @@
                 "yii2"
             ],
             "time": "2016-09-10T19:18:19+00:00"
+        },
+        {
+            "name": "arogachev/yii2-excel",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arogachev/yii2-excel.git",
+                "reference": "e8321b9b3e121323a6f6e8cc1df14d72dd6eacc3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arogachev/yii2-excel/zipball/e8321b9b3e121323a6f6e8cc1df14d72dd6eacc3",
+                "reference": "e8321b9b3e121323a6f6e8cc1df14d72dd6eacc3",
+                "shasum": ""
+            },
+            "require": {
+                "phpoffice/phpexcel": "1.8.*",
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "yiisoft/yii2-codeception": "~2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "arogachev\\excel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Rogachev",
+                    "email": "arogachev90@gmail.com"
+                }
+            ],
+            "description": "ActiveRecord import and export based on PHPExcel for Yii 2 framework",
+            "homepage": "https://github.com/arogachev/yii2-excel",
+            "keywords": [
+                "Active Record",
+                "PHPExcel",
+                "excel",
+                "export",
+                "import",
+                "yii2"
+            ],
+            "time": "2016-07-23T06:45:48+00:00"
         },
         {
             "name": "bower-asset/blueimp-canvas-to-blob",
@@ -1289,7 +1338,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-11-19 11:38:12"
+            "time": "2016-11-19T11:38:12+00:00"
         },
         {
             "name": "kartik-v/yii2-context-menu",
@@ -1341,7 +1390,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-11-26 11:22:17"
+            "time": "2016-11-26T11:22:17+00:00"
         },
         {
             "name": "kartik-v/yii2-date-range",
@@ -1395,7 +1444,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-12-16 15:59:06"
+            "time": "2016-12-16T15:59:06+00:00"
         },
         {
             "name": "kartik-v/yii2-datecontrol",
@@ -1447,7 +1496,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-01-14 11:34:27"
+            "time": "2017-01-14T11:34:27+00:00"
         },
         {
             "name": "kartik-v/yii2-detail-view",
@@ -1501,7 +1550,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-12-14 16:38:38"
+            "time": "2016-12-14T16:38:38+00:00"
         },
         {
             "name": "kartik-v/yii2-dialog",
@@ -1553,7 +1602,7 @@
                 "modal",
                 "yii2"
             ],
-            "time": "2016-12-01 05:23:53"
+            "time": "2016-12-01T05:23:53+00:00"
         },
         {
             "name": "kartik-v/yii2-dropdown-x",
@@ -1600,7 +1649,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-01-03 11:46:16"
+            "time": "2017-01-03T11:46:16+00:00"
         },
         {
             "name": "kartik-v/yii2-dynagrid",
@@ -1768,7 +1817,7 @@
                 "xlsx",
                 "yii2"
             ],
-            "time": "2016-12-28 16:02:15"
+            "time": "2016-12-28T16:02:15+00:00"
         },
         {
             "name": "kartik-v/yii2-field-range",
@@ -1819,7 +1868,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-09-04 09:29:14"
+            "time": "2016-09-04T09:29:14+00:00"
         },
         {
             "name": "kartik-v/yii2-grid",
@@ -1923,7 +1972,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2016-12-03 05:09:33"
+            "time": "2016-12-03T05:09:33+00:00"
         },
         {
             "name": "kartik-v/yii2-icons",
@@ -1971,7 +2020,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-02-24 18:03:31"
+            "time": "2017-02-24T18:03:31+00:00"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -2070,7 +2119,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-06-17 17:08:17"
+            "time": "2015-06-17T17:08:17+00:00"
         },
         {
             "name": "kartik-v/yii2-nav-x",
@@ -2122,7 +2171,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-07-23 16:27:54"
+            "time": "2016-07-23T16:27:54+00:00"
         },
         {
             "name": "kartik-v/yii2-popover-x",
@@ -2170,7 +2219,7 @@
                 "popover",
                 "popover-x"
             ],
-            "time": "2016-04-27 19:19:49"
+            "time": "2016-04-27T19:19:49+00:00"
         },
         {
             "name": "kartik-v/yii2-slider",
@@ -2217,7 +2266,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-11-08 05:35:43"
+            "time": "2016-11-08T05:35:43+00:00"
         },
         {
             "name": "kartik-v/yii2-social",
@@ -2270,7 +2319,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-10-21 11:59:39"
+            "time": "2016-10-21T11:59:39+00:00"
         },
         {
             "name": "kartik-v/yii2-sortable",
@@ -2374,7 +2423,7 @@
                 "tree",
                 "treeview"
             ],
-            "time": "2017-02-19 06:55:49"
+            "time": "2017-02-19T06:55:49+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-activeform",

@@ -5,6 +5,10 @@ use kartik\form\ActiveForm;
 use kartik\icons\Icon;
 use kartik\select2\Select2;
 use kartik\date\DatePicker;
+use backend\models\AgreementRight;
+use yii\helpers\ArrayHelper;
+use backend\models\Party;
+use backend\models\AgreementType;
 
 Icon::map($this, Icon::FA);
 
@@ -25,11 +29,21 @@ Icon::map($this, Icon::FA);
 
     <?= $form->field($model, 'agreement_code')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'party_id_a')->textInput() ?>
+    <?= $form->field($model, 'party_id_a')->widget(Select2::className(), [
+        'data' => ArrayHelper::map(Party::findAll(['party_id' => 1]), 'party_id', 'party_name'),
+        'options' => [
+            'disabled' => true,
+        ],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]) ?>
 
     <?= $form->field($model, 'party_id_b')->widget(Select2::className(), [
-        'data' => [],
-        'options' => ['placeholder' => 'Đối tác ...'],
+        'data' => ArrayHelper::map(Party::find()->where('party_id <> 1')->all(), 'party_id', 'party_name'),
+        'options' => [
+            'placeholder' => 'Đối tác ...'
+        ],
         'pluginOptions' => [
             'allowClear' => true
         ],
@@ -53,17 +67,22 @@ Icon::map($this, Icon::FA);
         ]
     ]) ?>
 
-    <?= $form->field($model, 'agreement_right_id')->widget(Select2::className(), [
-        'data' => [],
-        'options' => ['placeholder' => 'Quyền HĐ ...'],
-        'pluginOptions' => [
-            'allowClear' => true
+    <?= $form->field($model, 'agreement_right_ids')->widget(Select2::className(), [
+        'data' => ArrayHelper::map(AgreementRight::find()->all(), 'agreement_right_id', 'agreement_right_name'),
+        'options' => [
+            'placeholder' => 'Quyền HĐ ...',
+            'multiple' => true,
         ],
-    ]) ?>
+        'pluginOptions' => [
+            'allowClear' => true,
+        ],
+    ])->label(Yii::t('cms', 'Agreement Rights')) ?>
 
     <?= $form->field($model, 'agreement_type_id')->widget(Select2::className(), [
-        'data' => [],
-        'options' => ['placeholder' => 'Loại HĐ ...'],
+        'data' => ArrayHelper::map(AgreementType::find()->all(), 'agreement_type_id', 'agreement_type_name'),
+        'options' => [
+            'placeholder' => 'Loại HĐ ...'
+        ],
         'pluginOptions' => [
             'allowClear' => true
         ],

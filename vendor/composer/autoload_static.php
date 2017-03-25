@@ -94,6 +94,10 @@ class ComposerStaticInit228e95e36c88534ba18a640dbc85d515
             'creocoder\\nestedsets\\' => 21,
             'cebe\\markdown\\' => 14,
         ),
+        'a' => 
+        array (
+            'arogachev\\excel\\' => 16,
+        ),
         'W' => 
         array (
             'Webmozart\\Assert\\' => 17,
@@ -378,6 +382,10 @@ class ComposerStaticInit228e95e36c88534ba18a640dbc85d515
         'cebe\\markdown\\' => 
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
+        ),
+        'arogachev\\excel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/arogachev/yii2-excel/src',
         ),
         'Webmozart\\Assert\\' => 
         array (

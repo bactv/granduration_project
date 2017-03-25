@@ -65,7 +65,7 @@ return [
 
     // Agreement Right
     'Agreement Rights' => 'Quyền HĐ',
-    'Agreement Right ID' => 'ID',
+    'Agreement Right IDS' => 'ID',
     'Agreement Right Name' => 'Tên quyền HĐ',
     'Agreement Right Description' => 'Mô tả',
 
