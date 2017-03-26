@@ -8,6 +8,7 @@
 
 use yii\helpers\Html;
 use kartik\icons\Icon;
+use yii\helpers\Url;
 
 Icon::map($this, Icon::FA);
 
@@ -26,8 +27,8 @@ Icon::map($this, Icon::FA);
     <li><a href="#">Menu 3</a></li>
     <li><a href="#">Menu 4</a></li>
     <li><a href="#">Menu 5</a></li>
-    <li class="pos_right"><span><a href="#">Đăng ký</a></span></li>
-    <li class="pos_right"><span><a href="#">Đăng nhập</a></span></li>
+    <li class="pos_right"><span><a href="<?php echo Url::toRoute(['/account/create-account']) ?>" target="_blank">Đăng ký</a></span></li>
+    <li class="pos_right"><span><a href="<?php echo Url::toRoute(['/account/login']) ?>" target="_blank">Đăng nhập</a></span></li>
 </ul>
 
 

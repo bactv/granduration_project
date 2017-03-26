@@ -29,7 +29,7 @@ AppAsset::register($this);
         <title><?php echo Html::encode($this->title); ?></title>
         <?php $this->head() ?>
     </head>
-    <body class="gray-bg">
+    <body class="gray-bg" style="background: #e9ebee;">
     <?php $this->beginBody() ?>
     <div class="middle-box loginscreen  animated fadeInDown">
         <?php echo $content; ?>

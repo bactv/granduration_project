@@ -109,7 +109,7 @@ AssetApp::regJsFilePlugin('jssor.slider-22.2.11.mini.js', 'jssor_slider');
     #jssor_1 {width: 100% !important;height: 300px !important;}
     #jssor_1 > div:first-child {width: 100% !important;height: 300px !important;}
     #jssor_1 > div:first-child > div:first-child {width: 100% !important;height: 300px !important;}
-    div[data-u="navigator"] {width: 100% !important;left: 50% !important;}
+    div[data-u="navigator"] {width: 100% !important;left: 43% !important;}
     /*div[data-u="slides"] div { width: 700px !important;}*/
     /*img[data-u="image"] {width: 900px !important;}*/
 </style>
