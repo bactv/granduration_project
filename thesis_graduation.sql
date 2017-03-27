@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-03-25 23:52:16
+Date: 2017-03-28 00:52:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -5742,11 +5742,16 @@ CREATE TABLE `student` (
   PRIMARY KEY (`std_id`),
   KEY `idx_login` (`std_username`,`std_password`,`std_status`),
   KEY `idx_phone` (`std_phone`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of student
 -- ----------------------------
+INSERT INTO `student` VALUES ('1', 'christ', '$2y$13$QM4cC6NcdIV9l1R1xCCfEO5ym3lHk.3G8tCbWhT2rOvKutNpHbiUK', 'Laverne Hilll', null, null, null, '0', '1', null, null);
+INSERT INTO `student` VALUES ('2', 'howard', '$2y$13$EE0QRWGVq3xIQy35abC5QOVkeFrJUhe0N1ToqIOjsjbPemhaaWgPm', 'Anibal Mertz Jr.', null, null, null, '0', '1', null, null);
+INSERT INTO `student` VALUES ('3', 'gaylord', '$2y$13$.PupBg/nTqKeDjaOML0YcuQDZPx/DqeX.yffW1iVhpfFdfMjc6Q9a', 'Maritza Spencer DVM', null, null, null, '0', '1', null, null);
+INSERT INTO `student` VALUES ('4', 'elmore', '$2y$13$sJ.gc6ipomY8E0xAGmkzz.5t7iI9CUQ1waVnhQ2lXdNcKGZxDjyXK', 'Eli Schamberger', null, null, null, '0', '1', null, null);
+INSERT INTO `student` VALUES ('5', 'jovanny', '$2y$13$1ylz6at7jCCn3Y7SVXeaC.ixD0FfyMkdtObc6U3aneRuFqofYaYUW', 'Madison Watsica', null, null, null, '0', '1', null, null);
 
 -- ----------------------------
 -- Table structure for student_course
@@ -5793,10 +5798,10 @@ INSERT INTO `subject` VALUES ('8', 'Tiếng Anh', null);
 -- ----------------------------
 DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE `teacher` (
-  `tch_id` int(11) NOT NULL,
+  `tch_id` int(11) NOT NULL AUTO_INCREMENT,
   `tch_username` varchar(255) DEFAULT NULL,
   `tch_password` varchar(255) DEFAULT NULL,
-  `tch_name` varchar(255) NOT NULL,
+  `tch_full_name` varchar(255) NOT NULL,
   `tch_gender` tinyint(1) DEFAULT '1' COMMENT '1: nam, 0: nu',
   `tch_intro` text,
   `tch_work_place` varchar(255) DEFAULT NULL,
