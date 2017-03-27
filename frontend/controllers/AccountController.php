@@ -8,22 +8,49 @@
 namespace frontend\controllers;
 
 use frontend\components\FrontendController;
-use frontend\models\User;
+use frontend\models\Student;
+use frontend\models\Teacher;
+use kartik\helpers\Html;
 use Yii;
 
 class AccountController extends FrontendController
 {
-    public function actionCreateAccount()
+    public function actionCreateAccount($type = null)
     {
         $this->layout = 'main_2';
-        $model = new User();
+        $model = new Student();
+        if ($type != 'teacher') {
+            $model = new Student();
+        }
+        if ($type == 'teacher') {
+            $model = new Teacher();
+        }
         return $this->render('create_account', [
-            'model' => $model
+            'model' => $model,
+            'type' => $type
         ]);
     }
 
-    public function actionLogin()
+    public function actionLogin($type = null)
     {
-        return $this->render('login');
+        $this->layout = 'main_2';
+        $model = new Student();
+        if ($type != 'teacher') {
+            $model = new Student();
+        }
+        if ($type == 'teacher') {
+            $model = new Teacher();
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
+//            $this->redirect('/');
+            var_dump($model->std_username);
+            var_dump(Yii::$app->security->generatePasswordHash($model->std_password));die();
+        } else {
+            return $this->render('login', [
+                'model' => $model,
+                'type' => $type
+            ]);
+        }
     }
 }

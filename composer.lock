@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "53e776dcf7f9eabf83e52578ab571759",
+    "content-hash": "51f58a3e3e8e9c2bca2ace96122f9a82",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
@@ -1340,7 +1340,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-11-19 11:38:12"
+            "time": "2016-11-19T11:38:12+00:00"
         },
         {
             "name": "kartik-v/yii2-context-menu",
@@ -1392,7 +1392,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-11-26 11:22:17"
+            "time": "2016-11-26T11:22:17+00:00"
         },
         {
             "name": "kartik-v/yii2-date-range",
@@ -1446,7 +1446,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-03-22 17:55:06"
+            "time": "2017-03-22T17:55:06+00:00"
         },
         {
             "name": "kartik-v/yii2-datecontrol",
@@ -1498,7 +1498,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-01-14 11:34:27"
+            "time": "2017-01-14T11:34:27+00:00"
         },
         {
             "name": "kartik-v/yii2-detail-view",
@@ -1552,7 +1552,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-03-16 05:23:54"
+            "time": "2017-03-16T05:23:54+00:00"
         },
         {
             "name": "kartik-v/yii2-dialog",
@@ -1604,7 +1604,7 @@
                 "modal",
                 "yii2"
             ],
-            "time": "2017-03-11 08:47:41"
+            "time": "2017-03-11T08:47:41+00:00"
         },
         {
             "name": "kartik-v/yii2-dropdown-x",
@@ -1651,7 +1651,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-01-03 11:46:16"
+            "time": "2017-01-03T11:46:16+00:00"
         },
         {
             "name": "kartik-v/yii2-dynagrid",
@@ -1819,7 +1819,7 @@
                 "xlsx",
                 "yii2"
             ],
-            "time": "2017-03-13 06:21:23"
+            "time": "2017-03-13T06:21:23+00:00"
         },
         {
             "name": "kartik-v/yii2-field-range",
@@ -1870,7 +1870,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-09-04 09:29:14"
+            "time": "2016-09-04T09:29:14+00:00"
         },
         {
             "name": "kartik-v/yii2-grid",
@@ -1974,7 +1974,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2016-12-03 05:09:33"
+            "time": "2016-12-03T05:09:33+00:00"
         },
         {
             "name": "kartik-v/yii2-icons",
@@ -2022,7 +2022,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-02-24 18:03:31"
+            "time": "2017-02-24T18:03:31+00:00"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -2121,7 +2121,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-06-17 17:08:17"
+            "time": "2015-06-17T17:08:17+00:00"
         },
         {
             "name": "kartik-v/yii2-nav-x",
@@ -2173,7 +2173,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-07-23 16:27:54"
+            "time": "2016-07-23T16:27:54+00:00"
         },
         {
             "name": "kartik-v/yii2-popover-x",
@@ -2221,7 +2221,7 @@
                 "popover",
                 "popover-x"
             ],
-            "time": "2016-04-27 19:19:49"
+            "time": "2016-04-27T19:19:49+00:00"
         },
         {
             "name": "kartik-v/yii2-slider",
@@ -2268,7 +2268,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-11-08 05:35:43"
+            "time": "2016-11-08T05:35:43+00:00"
         },
         {
             "name": "kartik-v/yii2-social",
@@ -2321,7 +2321,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-03-15 12:18:32"
+            "time": "2017-03-15T12:18:32+00:00"
         },
         {
             "name": "kartik-v/yii2-sortable",
@@ -2425,7 +2425,7 @@
                 "tree",
                 "treeview"
             ],
-            "time": "2017-02-19 06:55:49"
+            "time": "2017-02-19T06:55:49+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-activeform",
@@ -3666,6 +3666,54 @@
             "time": "2017-02-08T09:04:32+00:00"
         },
         {
+            "name": "yiisoft/yii2-authclient",
+            "version": "2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-authclient.git",
+                "reference": "9929acc03d61d96e6eabbb5e31b02d6f9faab10d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-authclient/zipball/9929acc03d61d96e6eabbb5e31b02d6f9faab10d",
+                "reference": "9929acc03d61d96e6eabbb5e31b02d6f9faab10d",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2-httpclient": "~2.0.1"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\authclient\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com"
+                }
+            ],
+            "description": "External authentication via OAuth and OpenID for the Yii framework",
+            "keywords": [
+                "OpenId",
+                "api",
+                "auth",
+                "oauth",
+                "yii2"
+            ],
+            "time": "2017-02-15T14:34:51+00:00"
+        },
+        {
             "name": "yiisoft/yii2-bootstrap",
             "version": "2.0.6",
             "source": {
@@ -3764,6 +3812,53 @@
                 "yii2"
             ],
             "time": "2016-12-20T13:26:02+00:00"
+        },
+        {
+            "name": "yiisoft/yii2-httpclient",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-httpclient.git",
+                "reference": "113e4e361730f62c1bf50fbd6f09898776d404b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-httpclient/zipball/113e4e361730f62c1bf50fbd6f09898776d404b1",
+                "reference": "113e4e361730f62c1bf50fbd6f09898776d404b1",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\httpclient\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com"
+                }
+            ],
+            "description": "HTTP client extension for the Yii framework",
+            "keywords": [
+                "curl",
+                "http",
+                "httpclient",
+                "yii2"
+            ],
+            "time": "2017-02-15T14:28:10+00:00"
         },
         {
             "name": "yiisoft/yii2-jui",

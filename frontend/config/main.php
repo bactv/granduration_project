@@ -16,7 +16,7 @@ return [
             'csrfParam' => '_csrf-frontend',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'frontend\models\Student',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
@@ -55,6 +55,19 @@ return [
                     '@app/views' => '@app/views/default',
                 ],
             ],
+        ],
+        'authClientCollection' => [
+            'class' => 'yii\authclient\Collection',
+            'authClientCollection' => [
+                'class' => 'yii\authclient\Collection',
+                'clients' => [
+                    'facebook' => [
+                        'class' => 'yii\authclient\clients\Facebook',
+                        'clientId' => '798868116932355',
+                        'clientSecret' => 'af027df26fdbe55d47cc5a708a6da72a',
+                    ],
+                ],
+            ]
         ],
     ],
     'params' => $params,

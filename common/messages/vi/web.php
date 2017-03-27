@@ -7,5 +7,9 @@
  */
 
 return [
-
+    'Register' => 'Tạo tài khoản',
+    'Reset' => 'Thiết lập lại',
+    'FullName' => 'Họ và tên',
+    'Username' => 'Tên đăng nhập',
+    'Password' => 'Mật khẩu',
 ];

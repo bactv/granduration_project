@@ -42,7 +42,8 @@
         "2amigos/yii2-ckeditor-widget": "^2.0",
         "leandrogehlen/yii2-treegrid": "*",
         "2amigos/yii2-file-upload-widget": "~1.0",
-        "arogachev/yii2-excel": "^0.1.1"
+        "arogachev/yii2-excel": "^0.1.1",
+        "yiisoft/yii2-authclient": "^2.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

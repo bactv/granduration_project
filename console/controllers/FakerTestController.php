@@ -13,6 +13,7 @@ use backend\models\Party;
 use backend\models\Question;
 use backend\models\QuestionAnswer;
 use backend\models\Quiz;
+use backend\models\Student;
 use Yii;
 use yii\console\Controller;
 
@@ -135,6 +136,19 @@ class FakerTestController extends Controller
             $object->section = $faker->unique()->sentence(5);
             $object->price = mt_rand(0, 1000);
             $object->save();
+        }
+    }
+
+    public function actionTestStudent($count = 5)
+    {
+        $faker = \Faker\Factory::create();
+
+        for ($i = 0; $i < $count; $i++) {
+            $model = new Student();
+            $model->std_username = strtolower($faker->unique()->firstNameMale);
+            $model->std_password = Yii::$app->security->generatePasswordHash($faker->randomElement(['123456', '13579', '02468']));
+            $model->std_full_name = $faker->name;
+            $model->save();
         }
     }
 }

@@ -27,6 +27,9 @@ Icon::map($this, Icon::FA);
     <li><a href="#">Menu 3</a></li>
     <li><a href="#">Menu 4</a></li>
     <li><a href="#">Menu 5</a></li>
+    <?php if (!empty(Yii::$app->user->identity)) { ?>
+        <li class="pos_right"><?php echo Yii::$app->user->identity->std_username ?></li>
+    <?php } ?>
     <li class="pos_right"><span><a href="<?php echo Url::toRoute(['/account/create-account']) ?>" target="_blank">Đăng ký</a></span></li>
     <li class="pos_right"><span><a href="<?php echo Url::toRoute(['/account/login']) ?>" target="_blank">Đăng nhập</a></span></li>
 </ul>

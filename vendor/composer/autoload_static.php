@@ -20,11 +20,13 @@ class ComposerStaticInit228e95e36c88534ba18a640dbc85d515
         array (
             'yii\\swiftmailer\\' => 16,
             'yii\\jui\\' => 8,
+            'yii\\httpclient\\' => 15,
             'yii\\gii\\' => 8,
             'yii\\faker\\' => 10,
             'yii\\debug\\' => 10,
             'yii\\composer\\' => 13,
             'yii\\bootstrap\\' => 14,
+            'yii\\authclient\\' => 15,
             'yii\\' => 4,
         ),
         'p' => 
@@ -150,6 +152,10 @@ class ComposerStaticInit228e95e36c88534ba18a640dbc85d515
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-jui',
         ),
+        'yii\\httpclient\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-httpclient',
+        ),
         'yii\\gii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-gii',
@@ -169,6 +175,10 @@ class ComposerStaticInit228e95e36c88534ba18a640dbc85d515
         'yii\\bootstrap\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-bootstrap',
+        ),
+        'yii\\authclient\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-authclient',
         ),
         'yii\\' => 
         array (
