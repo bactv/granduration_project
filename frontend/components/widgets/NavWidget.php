@@ -8,6 +8,7 @@
 namespace frontend\components\widgets;
 
 use frontend\components\WidgetBase;
+use frontend\models\Menu;
 use Yii;
 
 class NavWidget extends WidgetBase
@@ -23,8 +24,9 @@ class NavWidget extends WidgetBase
 
     public function run()
     {
+        $menus = Menu::find()->where(['module' => 2, 'status' => 1])->orderBy('sort ASC')->all();
         return $this->render($this->dir . DIRECTORY_SEPARATOR . $this->view, [
-            'menus' => $this->arr_items,
+            'menus' => $menus,
         ]);
     }
 }

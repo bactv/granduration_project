@@ -79,34 +79,4 @@ class Student extends StudentBase implements IdentityInterface
     {
         // TODO: Implement validateAuthKey() method.
     }
-
-    public function login($username, $password)
-    {
-        if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser($username, $password), $this->rememberMe ? 36000 : 0);
-        } else {
-            return false;
-        }
-    }
-
-    private function getUser($username, $password)
-    {
-        $object = Student::findOne(['std_username' => $username, 'std_password' => Yii::$app->security->generatePasswordHash($password)]);
-        return !empty($object) ? $object : null;
-    }
-
-    public function validateStdPassword($attribute, $params)
-    {
-        if (!$this->hasErrors()) {
-            $this->addError($attribute, Yii::t('cms', 'check_login_fail'));
-        }
-    }
-    public function rules()
-    {
-        return [
-            [['std_username', 'std_password'], 'required'],
-            ['rememberMe', 'boolean'],
-            ['std_password', 'validateStdPassword'],
-        ];
-    }
 }

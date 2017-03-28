@@ -10,6 +10,7 @@ use yii\helpers\Html;
 use kartik\icons\Icon;
 use common\components\AssetApp;
 use frontend\components\widgets\NavWidget;
+use frontend\models\Menu;
 
 Icon::map($this, Icon::FA);
 

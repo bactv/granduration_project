@@ -53,4 +53,18 @@ class AccountController extends FrontendController
             ]);
         }
     }
+
+    /**
+     * cần mã hóa user_id
+     * @param $user_id
+     * @return string
+     */
+    public function actionInfo($user_id = 1, $type = 1)
+    {
+        $this->layout = 'main_2';
+        if ($type == 1) {
+
+        }
+        return $this->render('user_info');
+    }
 }

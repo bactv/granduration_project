@@ -12,6 +12,9 @@
     display: inline-flex;
     padding: 50px 30px 10px 30px;
 }
+.header .nav ul li ul.dropdown-menu li {
+    padding: 0;
+}
 
 .header .nav ul li a {
     color: #333;
@@ -51,7 +54,7 @@
     float: right;
     padding-right: 0;
     padding-left: 5px;
-    padding-top: 45px;
+    padding-top: 30px;
 }
 
 .header .nav ul li.pos_right span {
