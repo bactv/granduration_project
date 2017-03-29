@@ -14,8 +14,9 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/normalize.css',
         'css/reset_bootstrap.css',
+        'css/widgets.css',
+        'css/common.css',
         'css/main.css',
-        'css/widgets.css'
     ];
     public $js = [
     ];

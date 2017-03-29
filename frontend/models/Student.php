@@ -15,6 +15,8 @@ use yii\web\IdentityInterface;
 class Student extends StudentBase implements IdentityInterface
 {
     public $rememberMe;
+    public $std_new_password;
+    public $std_re_new_password;
     /**
      * Finds an identity by the given ID.
      * @param string|int $id the ID to be looked for

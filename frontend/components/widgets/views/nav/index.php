@@ -23,6 +23,21 @@ Icon::map($this, Icon::FA);
         padding: 0 7px;
         width: 100%;
     }
+    .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+        background: none;
+    }
+    .badge-notify{
+        background: red;
+        position: relative;
+        top: -10px;
+        left: -10px;
+        font-size: 10px;
+    }
+    ul.notification {
+        width: 400px;
+        height: 500px;
+        overflow-y: scroll;
+    }
 </style>
 
 <ul>
@@ -34,14 +49,14 @@ Icon::map($this, Icon::FA);
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <span id="avatar" style="background: none">
                     <?php
-                    $avatar = AssetApp::getImageBaseUrl() . '/avatar_icon_backend_3.png';
+                    $avatar = AssetApp::getImageBaseUrl() . '/avatar_icon.png';
                     ?>
-                    <?php echo Html::img($avatar, ['alt' => 'admin', 'width' => '50px', 'height' => '50px']) ?>
+                    <?php echo Html::img($avatar, ['alt' => 'admin', 'width' => '50px', 'height' => '50px', 'style' => 'border-radius: 50%;']) ?>
                 </span>
             </a>
             <ul class="dropdown-menu dropdown-menu-right">
                 <li>
-                    <a href="<?php echo Url::toRoute(['/admin/update', 'id' => Yii::$app->user->identity->id]) ?>">
+                    <a href="<?php echo Url::toRoute(['/account/info']) ?>">
                         <?php echo Icon::show('info-circle') ?> Xem chi tiết
                     </a>
                 </li>
@@ -52,10 +67,27 @@ Icon::map($this, Icon::FA);
                 </li>
             </ul>
         </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <div onclick="notification_event()" id="notification">
+                    <span class="glyphicon glyphicon-comment" style="color: #0ead8e;font-size: 20px"></span>
+                    <span class="badge badge-notify">3</span>
+                </div>
+                <ul class="dropdown-menu dropdown-menu-right notification">
+                    <li><a href="">1. ABC CBD DFG HHD JDD DSD  DSJ DJS DJS DJSH DJSH DJSHJ DSJ DHSJ HDJSH JD  D </a></li>
+                    <li><a href="">2. SAD LASKDJKSAJDKLSA JKDJSA LDJKSA JDKSAJ KDLJSAK LDJKSA JKDSAJDKA SDAS S DASDASDSADS </a></li>
+                </ul>
+            </a>
+        </li>
     <?php } else { ?>
         <li class="pos_right"><span><a href="<?php echo Url::toRoute(['/account/create-account']) ?>" target="_blank">Đăng ký</a></span></li>
         <li class="pos_right"><span><a href="<?php echo Url::toRoute(['/account/login']) ?>" target="_blank">Đăng nhập</a></span></li>
     <?php } ?>
 </ul>
 
+<script>
+    function notification_event() {
+        $("div#notification > span.badge").text(0).css({'background' : 'transparent'});
+    }
+</script>
 

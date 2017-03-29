@@ -10,6 +10,7 @@ namespace frontend\controllers;
 use frontend\components\FrontendController;
 use frontend\models\Student;
 use frontend\models\Teacher;
+use frontend\models\User;
 use kartik\helpers\Html;
 use Yii;
 
@@ -56,15 +57,57 @@ class AccountController extends FrontendController
 
     /**
      * cần mã hóa user_id
-     * @param $user_id
      * @return string
      */
-    public function actionInfo($user_id = 1, $type = 1)
+    public function actionInfo()
     {
         $this->layout = 'main_2';
-        if ($type == 1) {
-
+        $object = User::findOne(['id' => Yii::$app->user->identity->id]);
+        if ($object['type'] == 1) {
+            $model = Student::findOne(['std_id' => $object['id']]);
+            return $this->render('student_info', ['model' => $model]);
+        } else {
+            $model = Teacher::findOne(['tch_id' => $object['id']]);
+            return $this->render('teacher_info', ['model' => $model]);
         }
-        return $this->render('user_info');
+    }
+
+    public function actionDetailInfo()
+    {
+        $object = User::findOne(['id' => Yii::$app->user->identity->id]);
+        if ($object['type'] == 1) {
+            $model = Student::findOne(['std_id' => $object['id']]);
+            return $this->renderAjax('detail_student_info', ['model' => $model]);
+        } else {
+            $model = Teacher::findOne(['tch_id' => $object['id']]);
+            return $this->renderAjax('detail_teacher_info', ['model' => $model]);
+        }
+    }
+
+    public function actionHistoryTransactionInfo()
+    {
+        $user_id = Yii::$app->user->identity->id;
+        $object = $this->getObject($user_id);
+        if ($object instanceof Student) {
+            $history_charging = [];
+            $history_transaction = [];
+            return $this->renderAjax('history_transaction_info', [
+                'model' => $object,
+                'history_charging' => $history_charging,
+                'history_transaction' => $history_transaction
+            ]);
+        }
+        return '';
+    }
+
+    private function getObject($object_id)
+    {
+        $object = User::findOne(['id' => $object_id]);
+        if ($object['type'] == 1) {
+            $model = Student::findOne(['std_id' => $object['id']]);
+        } else {
+            $model = Teacher::findOne(['tch_id' => $object['id']]);
+        }
+        return $model;
     }
 }
