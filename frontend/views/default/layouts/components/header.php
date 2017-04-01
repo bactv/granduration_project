@@ -17,10 +17,13 @@ Icon::map($this, Icon::FA);
 ?>
 
 <div class="row">
-    <div class="col-md-2 logo">
+    <div class="col-md-2 col-sm-12 logo">
         <?php echo Html::img(AssetApp::getImageBaseUrl() . '/logo_backend_3.png', ['alt' => 'Study.EDU']) ?>
     </div>
-    <div class="col-md-10 nav">
+    <div class="col-md-10 sol-sm-12 nav">
         <?php echo NavWidget::widget() ?>
+    </div>
+    <div class="sol-sm-12 nav2" style="display: none">
+        <?php echo NavWidget::widget(['view' => 'index_2']) ?>
     </div>
 </div>

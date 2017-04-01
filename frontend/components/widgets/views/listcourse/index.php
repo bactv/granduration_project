@@ -11,522 +11,205 @@ use kartik\icons\Icon;
 
 Icon::map($this, Icon::FA);
 
+AssetApp::regJsFilePlugin('owl.carousel.js', 'owl-carousel');
+AssetApp::regCssFilePlugin('owl.carousel.css', 'owl-carousel');
+AssetApp::regCssFilePlugin('owl.theme.css', 'owl-carousel');
+AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel');
+
 ?>
 
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
-<!-- Add the slick-theme.css if you want default styling -->
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css"/>
 
 <style>
-    .list_c .item {
-        width: 280px !important;
-        margin: 0 6px;
-    }
-
-    .list_c .item .logo {
+    .course_type {
 
     }
-
-    .list_c .item .logo img {
-        width: 280px;
-        height: 180px;
+    .course_type #title {
+        font-size: 30px;
+        margin-bottom: 20px;
     }
-    .list_c .item .course_info {
-        padding: 10px;
+    .course_type .item {
+        width: 97%
+    }
+    .course_type .item:hover {
+        box-shadow: 0 0 10px #ccc;
+    }
+    .course_type .item img#course_logo {
+        width: 100%;
+        height: 200px;
+    }
+    .course_type .item .course_info {
         border: 1px solid #ccc;
+        padding: 10px;
     }
-    .list_c .item .course_info .teacher_info {
-        margin-bottom: 10px;
+    .course_type .item .course_info .tch_info {
+        height: 70px;
+        margin-bottom: 7px;
     }
-    .list_c .item .course_info .teacher_info img {
-        width: 50px;
-        height: 50px;
+    .course_type .item .course_info .tch_info .avatar {
+
+    }
+    .course_type .item .course_info .tch_info .avatar img {
+        width: 70px;
         border-radius: 50%;
         float: left;
+        margin-right: 10px;
     }
-    .list_c .item .course_info .teacher_info span.tch_name {
-        height: 50px;
-        line-height: 50px;
-        margin-left: 10px;
+    .course_type .item .course_info .tch_info .tch_name {
+        line-height: 70px;
         font-weight: bold;
     }
-    .list_c .item .course_info .course_name {
+    .course_type .item .course_info .course_name {
         font-weight: bold;
-        font-size: 16px;
+        font-size: 17px;
+        margin-bottom: 10px;
+    }
+    .course_type .item .course_info .course_des {
+        margin-bottom: 10px;
+    }
+    .course_type .item .course_info .num_std {
         margin-bottom: 7px;
     }
-    .list_c .item .course_info .course_description {
+    .course_type .item .course_info .signed_date {
         margin-bottom: 7px;
-        text-align: justify;
     }
-    .list_c .item .course_info .course_student {
+    .course_type .item .course_info .course_fee {
         margin-bottom: 7px;
-        font-weight: bold;
-        font-size: 13px;
     }
-    .list_c .item .course_info .course_fee {
-        font-weight: bold;
+    .course_type .item .course_info span#spe {
+        font-style: italic;
     }
-    .list_c .item .course_info .course_fee #fee{
-        color: #2F33AB;
-    }
-
-    p#header {
-        text-align: center;
-        color: #0ead8e;
-        font-size: 25px;
-        text-transform: uppercase;
-    }
-    .slick-arrow {
-
-    }
-    .slick-next {
-        width: 50px;
-        height: 50px;
-        background-color: #0ead8e;
-        z-index: 1;
-    }
-    .slick-prev {
-        width: 50px;
-        height: 50px;
-        background-color: #0ead8e;
-        z-index: 1;
-    }
-    .slick-next:hover {
-        background-color: #0ead8e;
-    }
-    .slick-prev:hover {
-        background-color: #0ead8e;
-    }
-    .course_mg_bt {
-        margin-bottom: 40px;
-    }
-
 </style>
 
-<div class="row course_free course_mg_bt">
-    <p id="header">Khóa học miễn phí</p>
-    <div class="list_c" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
+<div class="row course_type">
+    <p id="title" class="m_color txt_center">Khóa học miễn phí</p>
+    <div id="owl-course" class="owl-carousel owl-theme">
+        <div class="item">
+            <img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>">
             <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
+                <div class="tch_info">
+                    <div class="avatar">
+                        <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                    </div>
+                    <div class="tch_name">
+                        Richard Buckland
+                    </div>
                 </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
+                <div class="course_name">Apply Lean Six Sigma fundamental skills & knowledge</div>
+                <div class="course_des">FREE FULL COURSE CONTENT WITH OPTIONAL RECOGNISED CERTIFICATE shipped to your address One of the ...</div>
+                <div class="num_std"><?php echo Icon::show('users') ?> <span id="spe">3000 đăng ký</span></div>
+                <div class="signed_date"><?php echo Icon::show('calendar') ?> <span id="spe">30/04/2015 - 5/07/2015</span></div>
+                <div class="course_fee"><?php echo Icon::show('money') ?> <span id="spe">Miễn phí</span></div>
             </div>
         </div>
 
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
+        <div class="item">
+            <img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>">
             <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
+                <div class="tch_info">
+                    <div class="avatar">
+                        <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                    </div>
+                    <div class="tch_name">
+                        Richard Buckland
+                    </div>
                 </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
+                <div class="course_name">Apply Lean Six Sigma fundamental skills & knowledge</div>
+                <div class="course_des">FREE FULL COURSE CONTENT WITH OPTIONAL RECOGNISED CERTIFICATE shipped to your address One of the ...</div>
+                <div class="num_std"><?php echo Icon::show('users') ?> <span id="spe">3000 đăng ký</span></div>
+                <div class="signed_date"><?php echo Icon::show('calendar') ?> <span id="spe">30/04/2015 - 5/07/2015</span></div>
+                <div class="course_fee"><?php echo Icon::show('money') ?> <span id="spe">Miễn phí</span></div>
             </div>
         </div>
 
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
+        <div class="item">
+            <img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>">
             <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
+                <div class="tch_info">
+                    <div class="avatar">
+                        <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                    </div>
+                    <div class="tch_name">
+                        Richard Buckland
+                    </div>
                 </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
+                <div class="course_name">Apply Lean Six Sigma fundamental skills & knowledge</div>
+                <div class="course_des">FREE FULL COURSE CONTENT WITH OPTIONAL RECOGNISED CERTIFICATE shipped to your address One of the ...</div>
+                <div class="num_std"><?php echo Icon::show('users') ?> <span id="spe">3000 đăng ký</span></div>
+                <div class="signed_date"><?php echo Icon::show('calendar') ?> <span id="spe">30/04/2015 - 5/07/2015</span></div>
+                <div class="course_fee"><?php echo Icon::show('money') ?> <span id="spe">Miễn phí</span></div>
             </div>
         </div>
 
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
+        <div class="item">
+            <img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>">
             <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
+                <div class="tch_info">
+                    <div class="avatar">
+                        <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                    </div>
+                    <div class="tch_name">
+                        Richard Buckland
+                    </div>
                 </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
+                <div class="course_name">Apply Lean Six Sigma fundamental skills & knowledge</div>
+                <div class="course_des">FREE FULL COURSE CONTENT WITH OPTIONAL RECOGNISED CERTIFICATE shipped to your address One of the ...</div>
+                <div class="num_std"><?php echo Icon::show('users') ?> <span id="spe">3000 đăng ký</span></div>
+                <div class="signed_date"><?php echo Icon::show('calendar') ?> <span id="spe">30/04/2015 - 5/07/2015</span></div>
+                <div class="course_fee"><?php echo Icon::show('money') ?> <span id="spe">Miễn phí</span></div>
             </div>
         </div>
 
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
+        <div class="item">
+            <img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>">
             <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
+                <div class="tch_info">
+                    <div class="avatar">
+                        <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                    </div>
+                    <div class="tch_name">
+                        Richard Buckland
+                    </div>
                 </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
+                <div class="course_name">Apply Lean Six Sigma fundamental skills & knowledge</div>
+                <div class="course_des">FREE FULL COURSE CONTENT WITH OPTIONAL RECOGNISED CERTIFICATE shipped to your address One of the ...</div>
+                <div class="num_std"><?php echo Icon::show('users') ?> <span id="spe">3000 đăng ký</span></div>
+                <div class="signed_date"><?php echo Icon::show('calendar') ?> <span id="spe">30/04/2015 - 5/07/2015</span></div>
+                <div class="course_fee"><?php echo Icon::show('money') ?> <span id="spe">Miễn phí</span></div>
             </div>
         </div>
 
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
+        <div class="item">
+            <img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>">
             <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
+                <div class="tch_info">
+                    <div class="avatar">
+                        <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                    </div>
+                    <div class="tch_name">
+                        Richard Buckland
+                    </div>
                 </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
+                <div class="course_name">Apply Lean Six Sigma fundamental skills & knowledge</div>
+                <div class="course_des">FREE FULL COURSE CONTENT WITH OPTIONAL RECOGNISED CERTIFICATE shipped to your address One of the ...</div>
+                <div class="num_std"><?php echo Icon::show('users') ?> <span id="spe">3000 đăng ký</span></div>
+                <div class="signed_date"><?php echo Icon::show('calendar') ?> <span id="spe">30/04/2015 - 5/07/2015</span></div>
+                <div class="course_fee"><?php echo Icon::show('money') ?> <span id="spe">Miễn phí</span></div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row course_hot course_mg_bt">
-    <p id="header">Khóa học HOT nhất</p>
-    <div class="list_c" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
-            <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
-                </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
 
-            </div>
-        </div>
-
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
-            <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
-                </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
-            <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
-                </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
-            <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
-                </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row course_college_exam_pre course_mg_bt">
-    <p id="header">Luyện thi ĐH, CĐ</p>
-    <div class="list_c" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
-            <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
-                </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
-            <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
-                </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
-            <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
-                </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
-            <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
-                </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row course_high_school_exam_pre course_mg_bt">
-    <p id="header">Luyện thi THPT</p>
-    <div class="list_c" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
-            <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
-                </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
-            <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
-                </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
-            <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
-                </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="item" id="c_1">
-            <div class="logo">
-                <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/005.jpg' ?>"/></a>
-            </div>
-            <div class="course_info">
-                <div class="teacher_info">
-                    <a href="#"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>"/> <span class="tch_name">Trần Văn A</span></a>
-                </div>
-                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
-                <div class="course_description">UNSW in proud partnership with the CBA are releasing a sequence of public courses in cyber security, under... </div>
-                <div class="course_student">
-                    <?php echo Icon::show('users') . " 2221 học sinh" ?>
-                </div>
-                <div class="course_fee">
-                    <span id="lb">Học phí: </span><span id="fee"><i> 1234 xu</i></span>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row course_high_school">
-
-</div>
-
-<div class="row course_junior_high_school">
-
-</div>
-
-<div class="row course_primary_school">
-
-</div>
-
-<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
 <script>
     $(document).ready(function () {
-        $(".list_c").slick({
+        $("#owl-course").owlCarousel({
 
-            // normal options...
-            infinite: false,
+            autoPlay: 3000, //Set AutoPlay to 3 seconds
 
-            // the magic
-            responsive: [{
+            items : 4,
+            itemsDesktop : [1199,4],
+            itemsDesktopSmall : [979,3]
 
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    infinite: true
-                }
-
-            }, {
-
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    dots: true
-                }
-
-            }, {
-
-                breakpoint: 300,
-                settings: "unslick" // destroys slick
-
-            }]
         });
     });
 </script>
