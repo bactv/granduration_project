@@ -27,6 +27,7 @@ Icon::map($this, Icon::FA);
             <div class="info">
                 <p id="username" class="m_color txt_center"><?php echo $model['std_username'] ?></p>
                 <p id="balance" class="txt_center">Số dư TK: <span id="if" class="red_color"><?php echo $model['std_balance'] ?></span></p>
+                <p id="charging"><a href="<?php echo Url::toRoute(['/account/charging']) ?>" class="btn btn-warning">Nạp tiền</a></p>
             </div>
         </div>
 

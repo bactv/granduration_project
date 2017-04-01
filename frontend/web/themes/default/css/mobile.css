@@ -22,4 +22,22 @@
     .course_type .item img#course_logo {
         display: none !important;
     }
+    .list_questions {
+        width: 100% !important;
+    }
+    .form-answer {
+        display: none;
+    }
+    .time_run_mobile {
+        display: block !important;
+        margin: 0 auto 20px auto;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 150px;
+    }
+    .course_detail .join_course {
+        padding: 0 !important;
+        margin: 20px 0 20px 0;
+    }
 }

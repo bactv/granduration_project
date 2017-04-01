@@ -11,6 +11,7 @@ use kartik\icons\Icon;
 use common\components\AssetApp;
 use frontend\components\widgets\NavWidget;
 use frontend\models\Menu;
+use yii\helpers\Url;
 
 Icon::map($this, Icon::FA);
 
@@ -18,7 +19,9 @@ Icon::map($this, Icon::FA);
 
 <div class="row">
     <div class="col-md-2 col-sm-12 logo">
-        <?php echo Html::img(AssetApp::getImageBaseUrl() . '/logo_backend_3.png', ['alt' => 'Study.EDU']) ?>
+        <a href="<?php echo Url::toRoute(['/site/index']) ?>">
+            <?php echo Html::img(AssetApp::getImageBaseUrl() . '/logo_backend_3.png', ['alt' => 'Study.EDU']) ?>
+        </a>
     </div>
     <div class="col-md-10 sol-sm-12 nav">
         <?php echo NavWidget::widget() ?>

@@ -13,6 +13,7 @@ use frontend\models\Teacher;
 use frontend\models\User;
 use kartik\helpers\Html;
 use Yii;
+use yii\web\NotFoundHttpException;
 
 class AccountController extends FrontendController
 {
@@ -99,6 +100,18 @@ class AccountController extends FrontendController
         }
         return '';
     }
+
+    public function actionCharging()
+    {
+        $user_id = Yii::$app->user->identity->id;
+        $object = $this->getObject($user_id);
+        if ($object instanceof Student) {
+            return $this->render('charging');
+        } else {
+            return new NotFoundHttpException("Not Found");
+        }
+    }
+
 
     private function getObject($object_id)
     {

@@ -8,6 +8,7 @@
 
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
+use yii\widgets\Breadcrumbs;
 
 AppAsset::register($this);
 ?>
@@ -29,6 +30,10 @@ AppAsset::register($this);
             <?php echo $this->render('components/header.php') ?>
         </header>
         <div class="container main_content">
+            <?php echo Breadcrumbs::widget([
+                'itemTemplate' => "<li>{link}</li>\n",
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]); ?>
             <?php echo $content ?>
         </div>
         <footer class="container-fluid footer">

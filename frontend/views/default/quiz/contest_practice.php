@@ -110,53 +110,59 @@ use common\components\AssetApp;
 </div>
 
 <div class="row">
-<div class="list_questions">
-    <?php
-    $question_ids = json_decode($quiz['question_ids']);
-    foreach ($question_ids as $k => $question_id) {
-        $question = Question::find()->where(['question_id' => $question_id])->one();
-        $answers = QuestionAnswer::find()->where(['question_id' => $question_id])->all();
-    ?>
-        <div class="box_question">
-            <p id="question_content"><?php echo ($k + 1) . ". " . $question['question_content'] ?></p>
-            <ol class="box_answer" type="A">
-            <?php foreach ($answers as $ans) { ?>
-                <li id="ans">
-                    <input type="radio" class="form-check-input" name="ans_<?php echo $question_id ?>" value="<?php echo $ans['ans_id'] ?>">
-                    <?php echo $ans['ans_content'] ?>
-                </li>
-            <?php } ?>
-            </ol>
-        </div>
-    <?php } ?>
-</div>
-
-<div class="form-answer">
-    <div class="time_run">
+    <div class="time_run time_run_mobile" style="display: none">
         <p>Kết thúc bài thi</p>
         <p id="time_run">
             <?php echo $quiz['time'] . ':00' ?>
         </p>
     </div>
-   <?php
-       $question_ids = json_decode($quiz['question_ids']);
-       foreach ($question_ids as $k => $question_id) {
-           $answers = QuestionAnswer::find()->where(['question_id' => $question_id])->all();
-       ?>
-           <div class="box_answer">
-               <span id="ques_number"><?php echo ($k + 1) ?></span>
-               <div class="list_ans">
-                   <ol type="A">
-                       <?php foreach ($answers as $ans) { ?>
-                           <li>
-                               <input type="radio" class="form-check-input" name="ans_<?php echo $question_id ?>" value="<?php echo $ans['ans_id'] ?>">
-                           </li>
-                       <?php } ?>
-                   </ol>
+    <div class="list_questions">
+        <?php
+        $question_ids = json_decode($quiz['question_ids']);
+        foreach ($question_ids as $k => $question_id) {
+            $question = Question::find()->where(['question_id' => $question_id])->one();
+            $answers = QuestionAnswer::find()->where(['question_id' => $question_id])->all();
+        ?>
+            <div class="box_question">
+                <p id="question_content"><?php echo ($k + 1) . ". " . $question['question_content'] ?></p>
+                <ol class="box_answer" type="A">
+                <?php foreach ($answers as $ans) { ?>
+                    <li id="ans">
+                        <input type="radio" class="form-check-input" name="ans_<?php echo $question_id ?>" value="<?php echo $ans['ans_id'] ?>">
+                        <?php echo $ans['ans_content'] ?>
+                    </li>
+                <?php } ?>
+                </ol>
+            </div>
+        <?php } ?>
+    </div>
+
+    <div class="form-answer">
+        <div class="time_run">
+            <p>Kết thúc bài thi</p>
+            <p id="time_run">
+                <?php echo $quiz['time'] . ':00' ?>
+            </p>
+        </div>
+       <?php
+           $question_ids = json_decode($quiz['question_ids']);
+           foreach ($question_ids as $k => $question_id) {
+               $answers = QuestionAnswer::find()->where(['question_id' => $question_id])->all();
+           ?>
+               <div class="box_answer">
+                   <span id="ques_number"><?php echo ($k + 1) ?></span>
+                   <div class="list_ans">
+                       <ol type="A">
+                           <?php foreach ($answers as $ans) { ?>
+                               <li>
+                                   <input type="radio" class="form-check-input" name="ans_<?php echo $question_id ?>" value="<?php echo $ans['ans_id'] ?>">
+                               </li>
+                           <?php } ?>
+                       </ol>
+                   </div>
                </div>
-           </div>
-   <?php } ?>
-</div>
+       <?php } ?>
+    </div>
 </div>
 
 <div class="row" style="text-align: center;margin-top: 30px">

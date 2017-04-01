@@ -14,37 +14,29 @@ use yii\helpers\Html;
     <div class="col-md-3 txt_center">
         <p class="header">Về chúng tôi</p>
         <ul class="list_item">
-            <li><a href="#">Item 1</a></li>
-            <li><a href="#">Item 2</a></li>
-            <li><a href="#">Item 3</a></li>
-            <li><a href="#">Item 4</a></li>
+            <li><a href="#">Giới thiệu</a></li>
+            <li><a href="#">Mục dích</a></li>
+            <li><a href="#">Liên hệ</a></li>
         </ul>
     </div>
     <div class="col-md-3 txt_center">
-        <p class="header">Về chúng tôi</p>
+        <p class="header">FAQs</p>
         <ul class="list_item">
-            <li><a href="#">Item 1</a></li>
-            <li><a href="#">Item 2</a></li>
-            <li><a href="#">Item 3</a></li>
-            <li><a href="#">Item 4</a></li>
+            <li><a href="#">Hỗ trợ</a></li>
+            <li><a href="#">Điều khoản và điều kiện</a></li>
         </ul>
     </div>
     <div class="col-md-3 txt_center">
-        <p class="header">Về chúng tôi</p>
+        <p class="header">Luyện tập</p>
         <ul class="list_item">
-            <li><a href="#">Item 1</a></li>
-            <li><a href="#">Item 2</a></li>
-            <li><a href="#">Item 3</a></li>
-            <li><a href="#">Item 4</a></li>
+            <li><a href="#">Khóa học miễn phí</a></li>
+            <li><a href="#">Luyện thi trắc nghiệm</a></li>
         </ul>
     </div>
     <div class="col-md-3 txt_center">
-        <p class="header">Về chúng tôi</p>
+        <p class="header">Công việc</p>
         <ul class="list_item">
-            <li><a href="#">Item 1</a></li>
-            <li><a href="#">Item 2</a></li>
-            <li><a href="#">Item 3</a></li>
-            <li><a href="#">Item 4</a></li>
+            <li><a href="#">Tuyển dụng</a></li>
         </ul>
     </div>
 </div>

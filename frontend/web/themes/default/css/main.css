@@ -15,7 +15,7 @@ div.main_content, footer.footer {
 }
 
 header.header {
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
     height: 120px;
 }
 
@@ -115,10 +115,20 @@ footer.footer p.copy_right {
 }
 .user_info .info #username {
     font-size: 25px;
+    margin-bottom: 20px;
 }
 .user_info .info #balance {
     font-size: 16px;
     opacity: 0.9;
+    margin-bottom: 20px;
+}
+.user_info .info #charging {
+
+}
+.user_info .info #charging a{
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
 }
 
 .user_info .tab-content {
@@ -137,6 +147,17 @@ footer.footer p.copy_right {
 }
 
 
+/* ========================= TRANG CHỦ ========================= */
+.search_course {
+    margin-bottom: 30px;
+    text-align: center;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #ddd;
+    box-shadow: 0 4px 6px -6px #ccc;
+}
+.search_course p#title {
+    font-size: 30px;
+}
 
 
 

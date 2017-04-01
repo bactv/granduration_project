@@ -60,8 +60,9 @@ AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel');
     }
     .course_type .item .course_info .course_name {
         font-weight: bold;
-        font-size: 17px;
+        font-size: 15px;
         margin-bottom: 10px;
+        color: #0ead8e;
     }
     .course_type .item .course_info .course_des {
         margin-bottom: 10px;
@@ -78,122 +79,140 @@ AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel');
     .course_type .item .course_info span#spe {
         font-style: italic;
     }
+    .course_type .item .course_info .view_more {
+        text-align: right;
+        font-style: italic;
+        font-size: 12px;
+        color: orange;
+    }
 </style>
 
 <div class="row course_type">
     <p id="title" class="m_color txt_center">Khóa học miễn phí</p>
     <div id="owl-course" class="owl-carousel owl-theme">
         <div class="item">
-            <img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>">
+            <a href="#"><img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>"></a>
             <div class="course_info">
-                <div class="tch_info">
-                    <div class="avatar">
-                        <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                <a href="#">
+                    <div class="tch_info">
+                        <div class="avatar">
+                            <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                        </div>
+                        <div class="tch_name">
+                            Richard Buckland
+                        </div>
                     </div>
-                    <div class="tch_name">
-                        Richard Buckland
-                    </div>
-                </div>
-                <div class="course_name">Apply Lean Six Sigma fundamental skills & knowledge</div>
-                <div class="course_des">FREE FULL COURSE CONTENT WITH OPTIONAL RECOGNISED CERTIFICATE shipped to your address One of the ...</div>
+                </a>
+                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
                 <div class="num_std"><?php echo Icon::show('users') ?> <span id="spe">3000 đăng ký</span></div>
-                <div class="signed_date"><?php echo Icon::show('calendar') ?> <span id="spe">30/04/2015 - 5/07/2015</span></div>
-                <div class="course_fee"><?php echo Icon::show('money') ?> <span id="spe">Miễn phí</span></div>
+                <div class="signed_date"><?php echo Icon::show('calendar') ?> Mở đăng ký: <span id="spe">30/04/2015 - 5/07/2015</span></div>
+                <div class="course_fee"><?php echo Icon::show('money') ?> Học phí: <span id="spe">Miễn phí</span></div>
+                <div class="view_more"><a href="#">Xem thêm >> </a></div>
             </div>
         </div>
 
         <div class="item">
-            <img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>">
+            <a href="#"><img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>"></a>
             <div class="course_info">
-                <div class="tch_info">
-                    <div class="avatar">
-                        <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                <a href="#">
+                    <div class="tch_info">
+                        <div class="avatar">
+                            <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                        </div>
+                        <div class="tch_name">
+                            Richard Buckland
+                        </div>
                     </div>
-                    <div class="tch_name">
-                        Richard Buckland
-                    </div>
-                </div>
-                <div class="course_name">Apply Lean Six Sigma fundamental skills & knowledge</div>
-                <div class="course_des">FREE FULL COURSE CONTENT WITH OPTIONAL RECOGNISED CERTIFICATE shipped to your address One of the ...</div>
+                </a>
+                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
                 <div class="num_std"><?php echo Icon::show('users') ?> <span id="spe">3000 đăng ký</span></div>
-                <div class="signed_date"><?php echo Icon::show('calendar') ?> <span id="spe">30/04/2015 - 5/07/2015</span></div>
-                <div class="course_fee"><?php echo Icon::show('money') ?> <span id="spe">Miễn phí</span></div>
+                <div class="signed_date"><?php echo Icon::show('calendar') ?> Mở đăng ký: <span id="spe">30/04/2015 - 5/07/2015</span></div>
+                <div class="course_fee"><?php echo Icon::show('money') ?> Học phí: <span id="spe">Miễn phí</span></div>
+                <div class="view_more"><a href="#">Xem thêm >> </a></div>
             </div>
         </div>
 
         <div class="item">
-            <img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>">
+            <a href="#"><img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>"></a>
             <div class="course_info">
-                <div class="tch_info">
-                    <div class="avatar">
-                        <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                <a href="#">
+                    <div class="tch_info">
+                        <div class="avatar">
+                            <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                        </div>
+                        <div class="tch_name">
+                            Richard Buckland
+                        </div>
                     </div>
-                    <div class="tch_name">
-                        Richard Buckland
-                    </div>
-                </div>
-                <div class="course_name">Apply Lean Six Sigma fundamental skills & knowledge</div>
-                <div class="course_des">FREE FULL COURSE CONTENT WITH OPTIONAL RECOGNISED CERTIFICATE shipped to your address One of the ...</div>
+                </a>
+                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
                 <div class="num_std"><?php echo Icon::show('users') ?> <span id="spe">3000 đăng ký</span></div>
-                <div class="signed_date"><?php echo Icon::show('calendar') ?> <span id="spe">30/04/2015 - 5/07/2015</span></div>
-                <div class="course_fee"><?php echo Icon::show('money') ?> <span id="spe">Miễn phí</span></div>
+                <div class="signed_date"><?php echo Icon::show('calendar') ?> Mở đăng ký: <span id="spe">30/04/2015 - 5/07/2015</span></div>
+                <div class="course_fee"><?php echo Icon::show('money') ?> Học phí: <span id="spe">Miễn phí</span></div>
+                <div class="view_more"><a href="#">Xem thêm >> </a></div>
             </div>
         </div>
 
         <div class="item">
-            <img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>">
+            <a href="#"><img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>"></a>
             <div class="course_info">
-                <div class="tch_info">
-                    <div class="avatar">
-                        <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                <a href="#">
+                    <div class="tch_info">
+                        <div class="avatar">
+                            <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                        </div>
+                        <div class="tch_name">
+                            Richard Buckland
+                        </div>
                     </div>
-                    <div class="tch_name">
-                        Richard Buckland
-                    </div>
-                </div>
-                <div class="course_name">Apply Lean Six Sigma fundamental skills & knowledge</div>
-                <div class="course_des">FREE FULL COURSE CONTENT WITH OPTIONAL RECOGNISED CERTIFICATE shipped to your address One of the ...</div>
+                </a>
+                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
                 <div class="num_std"><?php echo Icon::show('users') ?> <span id="spe">3000 đăng ký</span></div>
-                <div class="signed_date"><?php echo Icon::show('calendar') ?> <span id="spe">30/04/2015 - 5/07/2015</span></div>
-                <div class="course_fee"><?php echo Icon::show('money') ?> <span id="spe">Miễn phí</span></div>
+                <div class="signed_date"><?php echo Icon::show('calendar') ?> Mở đăng ký: <span id="spe">30/04/2015 - 5/07/2015</span></div>
+                <div class="course_fee"><?php echo Icon::show('money') ?> Học phí: <span id="spe">Miễn phí</span></div>
+                <div class="view_more"><a href="#">Xem thêm >> </a></div>
             </div>
         </div>
 
         <div class="item">
-            <img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>">
+            <a href="#"><img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>"></a>
             <div class="course_info">
-                <div class="tch_info">
-                    <div class="avatar">
-                        <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                <a href="#">
+                    <div class="tch_info">
+                        <div class="avatar">
+                            <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                        </div>
+                        <div class="tch_name">
+                            Richard Buckland
+                        </div>
                     </div>
-                    <div class="tch_name">
-                        Richard Buckland
-                    </div>
-                </div>
-                <div class="course_name">Apply Lean Six Sigma fundamental skills & knowledge</div>
-                <div class="course_des">FREE FULL COURSE CONTENT WITH OPTIONAL RECOGNISED CERTIFICATE shipped to your address One of the ...</div>
+                </a>
+                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
                 <div class="num_std"><?php echo Icon::show('users') ?> <span id="spe">3000 đăng ký</span></div>
-                <div class="signed_date"><?php echo Icon::show('calendar') ?> <span id="spe">30/04/2015 - 5/07/2015</span></div>
-                <div class="course_fee"><?php echo Icon::show('money') ?> <span id="spe">Miễn phí</span></div>
+                <div class="signed_date"><?php echo Icon::show('calendar') ?> Mở đăng ký: <span id="spe">30/04/2015 - 5/07/2015</span></div>
+                <div class="course_fee"><?php echo Icon::show('money') ?> Học phí: <span id="spe">Miễn phí</span></div>
+                <div class="view_more"><a href="#">Xem thêm >> </a></div>
             </div>
         </div>
 
         <div class="item">
-            <img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>">
+            <a href="#"><img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>"></a>
             <div class="course_info">
-                <div class="tch_info">
-                    <div class="avatar">
-                        <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                <a href="#">
+                    <div class="tch_info">
+                        <div class="avatar">
+                            <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
+                        </div>
+                        <div class="tch_name">
+                            Richard Buckland
+                        </div>
                     </div>
-                    <div class="tch_name">
-                        Richard Buckland
-                    </div>
-                </div>
-                <div class="course_name">Apply Lean Six Sigma fundamental skills & knowledge</div>
-                <div class="course_des">FREE FULL COURSE CONTENT WITH OPTIONAL RECOGNISED CERTIFICATE shipped to your address One of the ...</div>
+                </a>
+                <div class="course_name"><a href="#">Apply Lean Six Sigma fundamental skills & knowledge</a></div>
                 <div class="num_std"><?php echo Icon::show('users') ?> <span id="spe">3000 đăng ký</span></div>
-                <div class="signed_date"><?php echo Icon::show('calendar') ?> <span id="spe">30/04/2015 - 5/07/2015</span></div>
-                <div class="course_fee"><?php echo Icon::show('money') ?> <span id="spe">Miễn phí</span></div>
+                <div class="signed_date"><?php echo Icon::show('calendar') ?> Mở đăng ký: <span id="spe">30/04/2015 - 5/07/2015</span></div>
+                <div class="course_fee"><?php echo Icon::show('money') ?> Học phí: <span id="spe">Miễn phí</span></div>
+                <div class="view_more"><a href="#">Xem thêm >> </a></div>
             </div>
         </div>
     </div>
