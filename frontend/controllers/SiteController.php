@@ -66,9 +66,9 @@ class SiteController extends FrontendController
      */
     public function actionIndex()
     {
+        $this->layout = 'main';
         return $this->render('index');
     }
-
     /**
      * Logs in a user.
      *

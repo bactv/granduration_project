@@ -13,13 +13,16 @@ class CourseController extends Controller
 {
     public function actionListCourse()
     {
-        $this->layout = 'main_2';
         return $this->render('list_course');
     }
 
-    public function actionCourseDetail()
+    public function actionSearchCourse()
     {
-        $this->layout = 'main_2';
+        return $this->render('search_course');
+    }
+
+    public function actionDetail()
+    {
         return $this->render('course_detail');
     }
 }

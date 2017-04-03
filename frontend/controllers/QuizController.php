@@ -14,9 +14,18 @@ use yii\web\NotFoundHttpException;
 
 class QuizController extends FrontendController
 {
-    public function actionContestPractice($quiz_id = 1)
+    public function actionListContest()
     {
-        $this->layout = 'main_2';
+        return $this->render('list_contest_practice');
+    }
+
+    public function actionDetail()
+    {
+        return $this->render('contest_detail');
+    }
+
+    public function actionDoContest($quiz_id = 1)
+    {
         $quiz = Quiz::findById($quiz_id);
         if (empty($quiz_id)) {
             throw new NotFoundHttpException("Not Found");

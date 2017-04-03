@@ -1,5 +1,14 @@
+.center-align {
+    margin: 0 auto;
+}
 .txt_center {
     text-align: center;
+}
+.txt_left {
+    text-align: left;
+}
+.txt_right {
+    text-align: right;
 }
 .m_color {
     color: #0ead8e;

@@ -25,7 +25,7 @@ AppAsset::register($this);
     <header class="container header">
         <?php echo $this->render('components/header.php') ?>
     </header>
-    <div class="container main_content">
+    <div class="main_content">
         <?php echo $content ?>
     </div>
     <footer class="container-fluid footer">

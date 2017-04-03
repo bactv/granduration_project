@@ -36,6 +36,7 @@ Icon::map($this, Icon::FA);
                 <li class="active"><a data-toggle="tab" href="#detail_info" onclick="get_user_detail_info()">Thông tin chi tiết</a></li>
                 <li><a data-toggle="tab" href="#list_course">Các khóa học tham gia</a></li>
                 <li><a data-toggle="tab" href="#history_transaction" onclick="get_history_transaction_info()">Lịch sử giao dịch</a></li>
+                <li><a data-toggle="tab" href="#user_package" onclick="get_user_package()">Đăng ký gói cước</a></li>
             </ul>
 
             <div class="tab-content">
@@ -45,7 +46,8 @@ Icon::map($this, Icon::FA);
                 <div id="list_course" class="tab-pane fade">
                 </div>
                 <div id="history_transaction" class="tab-pane fade">
-
+                </div>
+                <div id="user_package" class="tab-pane fade">
                 </div>
             </div>
         </div>
@@ -68,6 +70,15 @@ Icon::map($this, Icon::FA);
             url: '<?php echo Url::toRoute(['/account/history-transaction-info']) ?>',
             success: function (data) {
                 $("#history_transaction").html(data);
+            }
+        });
+    }
+    function get_user_package() {
+        $.ajax({
+            method: 'GET',
+            url: '<?php echo Url::toRoute(['/account/user-package']) ?>',
+            success: function (data) {
+                $("#user_package").html(data);
             }
         });
     }

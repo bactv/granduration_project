@@ -101,6 +101,18 @@ class AccountController extends FrontendController
         return '';
     }
 
+    public function actionUserPackage()
+    {
+        $user_id = Yii::$app->user->identity->id;
+        $object = $this->getObject($user_id);
+        if ($object instanceof Student) {
+            return $this->renderAjax('user_package', [
+                'model' => $object,
+            ]);
+        }
+        return '';
+    }
+
     public function actionCharging()
     {
         $user_id = Yii::$app->user->identity->id;

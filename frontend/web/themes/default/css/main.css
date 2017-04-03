@@ -149,7 +149,7 @@ footer.footer p.copy_right {
 
 /* ========================= TRANG CHỦ ========================= */
 .search_course {
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
     text-align: center;
     padding-bottom: 30px;
     border-bottom: 2px solid #ddd;
@@ -157,6 +157,11 @@ footer.footer p.copy_right {
 }
 .search_course p#title {
     font-size: 30px;
+}
+
+.list_course {
+    /*background: #e9ebee;*/
+    padding: 20px
 }
 
 

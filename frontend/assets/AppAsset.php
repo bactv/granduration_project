@@ -20,6 +20,7 @@ class AppAsset extends AssetBundle
         'css/mobile.css',
     ];
     public $js = [
+        'js/bactv.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
