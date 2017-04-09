@@ -23,6 +23,7 @@ use yii\helpers\Html;
         <p class="header">FAQs</p>
         <ul class="list_item">
             <li><a href="#">Hỗ trợ</a></li>
+            <li><a href="#">Phản hồi hệ thống</a></li>
             <li><a href="#">Điều khoản và điều kiện</a></li>
         </ul>
     </div>

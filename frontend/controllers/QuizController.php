@@ -10,9 +10,10 @@ namespace frontend\controllers;
 use frontend\models\Quiz;
 use Yii;
 use frontend\components\FrontendController;
+use yii\base\Controller;
 use yii\web\NotFoundHttpException;
 
-class QuizController extends FrontendController
+class QuizController extends Controller
 {
     public function actionListContest()
     {

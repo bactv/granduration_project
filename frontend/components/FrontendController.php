@@ -15,8 +15,9 @@ class FrontendController extends Controller
 {
     public function beforeAction($action)
     {
-        $object = User::findOne(['id' => 1]);
-        Yii::$app->user->identity = $object;
+        if (empty(Yii::$app->user->identity)) {
+            return false;
+        }
         return true;
     }
 }

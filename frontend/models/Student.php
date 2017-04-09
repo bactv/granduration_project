@@ -1,84 +1,111 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bactv
- * Date: 27/03/2017
- * Time: 10:23 CH
- */
+
 namespace frontend\models;
 
-use common\models\StudentBase;
+use common\behaviors\TimestampBehavior;
 use Yii;
-use yii\helpers\Html;
-use yii\web\IdentityInterface;
 
-class Student extends StudentBase implements IdentityInterface
+
+class Student extends \common\models\StudentBase
 {
-    public $rememberMe;
-    public $std_new_password;
-    public $std_re_new_password;
-    /**
-     * Finds an identity by the given ID.
-     * @param string|int $id the ID to be looked for
-     * @return IdentityInterface the identity object that matches the given ID.
-     * Null should be returned if such an identity cannot be found
-     * or the identity is not in an active state (disabled, deleted, etc.)
-     */
-    public static function findIdentity($id)
+    public $new_password;
+    public $re_new_password;
+
+    public function behaviors()
     {
-        // TODO: Implement findIdentity() method.
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    self::EVENT_BEFORE_INSERT => ['std_created_time', 'std_updated_time'],
+                    self::EVENT_BEFORE_UPDATE => ['std_updated_time']
+                ]
+            ]
+        ];
     }
 
     /**
-     * Finds an identity by the given token.
-     * @param mixed $token the token to be looked for
-     * @param mixed $type the type of the token. The value of this parameter depends on the implementation.
-     * For example, [[\yii\filters\auth\HttpBearerAuth]] will set this parameter to be `yii\filters\auth\HttpBearerAuth`.
-     * @return IdentityInterface the identity object that matches the given token.
-     * Null should be returned if such an identity cannot be found
-     * or the identity is not in an active state (disabled, deleted, etc.)
+     * @inheritdoc
      */
-    public static function findIdentityByAccessToken($token, $type = null)
+    public function rules()
     {
-        // TODO: Implement findIdentityByAccessToken() method.
+        return [
+            [['std_username', 'std_password', 'std_full_name'], 'required'],
+            [['std_balance', 'std_status'], 'integer'],
+            [['std_created_time', 'std_updated_time'], 'safe'],
+            [['std_username', 'std_birthday'], 'string', 'max' => 50],
+            [['std_password'], 'string', 'max' => 255],
+            [['std_full_name', 'std_school_name'], 'string', 'max' => 100],
+            [['std_phone'], 'string', 'max' => 30],
+            ['std_username', 'validateUsername', 'on' => 'create'],
+            ['re_new_password', 'validateReNewPassword']
+        ];
     }
 
     /**
-     * Returns an ID that can uniquely identify a user identity.
-     * @return string|int an ID that uniquely identifies a user identity.
+     * @inheritdoc
      */
-    public function getId()
+    public function attributeLabels()
     {
-        // TODO: Implement getId() method.
+        return [
+            'std_id' => Yii::t('web', 'Std ID'),
+            'std_username' => Yii::t('web', 'Std Username'),
+            'std_password' => Yii::t('web', 'Std Password'),
+            'std_full_name' => Yii::t('web', 'Std Full Name'),
+            'std_phone' => Yii::t('web', 'Std Phone'),
+            'std_birthday' => Yii::t('web', 'Std Birthday'),
+            'std_school_name' => Yii::t('web', 'Std School Name'),
+            'std_balance' => Yii::t('web', 'Std Balance'),
+            'std_status' => Yii::t('web', 'Std Status'),
+            'std_created_time' => Yii::t('web', 'Std Created Time'),
+            'std_updated_time' => Yii::t('web', 'Std Updated Time'),
+        ];
     }
 
-    /**
-     * Returns a key that can be used to check the validity of a given identity ID.
-     *
-     * The key should be unique for each individual user, and should be persistent
-     * so that it can be used to check the validity of the user identity.
-     *
-     * The space of such keys should be big enough to defeat potential identity attacks.
-     *
-     * This is required if [[User::enableAutoLogin]] is enabled.
-     * @return string a key that is used to check the validity of a given identity ID.
-     * @see validateAuthKey()
-     */
-    public function getAuthKey()
+
+    public function validateUsername()
     {
-        // TODO: Implement getAuthKey() method.
+        $object = self::findOne(['std_username' => $this->std_username]);
+        if (!empty($object)) {
+            $this->addError('std_username', 'Tên đăng nhập đã tồn tại, vui lòng chọn tên khác.');
+        }
     }
 
-    /**
-     * Validates the given auth key.
-     *
-     * This is required if [[User::enableAutoLogin]] is enabled.
-     * @param string $authKey the given auth key
-     * @return bool whether the given auth key is valid.
-     * @see getAuthKey()
-     */
-    public function validateAuthKey($authKey)
+    public function validateReNewPassword()
     {
-        // TODO: Implement validateAuthKey() method.
+        if ($this->new_password != '') {
+            if ($this->re_new_password == '') {
+                $this->addError('re_new_password', 'Vui lòng nhập lại mật khẩu lần nữa');
+            } else if ($this->re_new_password !== $this->new_password) {
+                $this->addError('re_new_password', 'Mật khẩu không khớp');
+            }
+        }
+    }
+
+    public function signup(Student $model)
+    {
+        if (!$this->validate()) {
+            return false;
+        }
+        $model->std_password = $this->setPassword($model->std_password);
+        if ($model->save()) {
+            $user = new User();
+            $user->type = 1;
+            $user->student_id = $model->std_id;
+            $user->teacher_id = '';
+            $user->username = $model->std_username;
+            $user->password = $model->std_password;
+            $user->status = 1;
+            if ($user->save()) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    private function setPassword($password)
+    {
+        return md5($password);
     }
 }

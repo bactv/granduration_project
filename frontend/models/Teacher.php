@@ -2,75 +2,102 @@
 
 namespace frontend\models;
 
+use common\behaviors\TimestampBehavior;
 use Yii;
-use yii\web\IdentityInterface;
 
 
-class Teacher extends \common\models\TeacherBase implements IdentityInterface
+class Teacher extends \common\models\TeacherBase
 {
     public $rememberMe;
-    /**
-     * Finds an identity by the given ID.
-     * @param string|int $id the ID to be looked for
-     * @return IdentityInterface the identity object that matches the given ID.
-     * Null should be returned if such an identity cannot be found
-     * or the identity is not in an active state (disabled, deleted, etc.)
-     */
-    public static function findIdentity($id)
+
+    public function behaviors()
     {
-        // TODO: Implement findIdentity() method.
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    self::EVENT_BEFORE_INSERT => ['tch_created_time', 'tch_updated_time'],
+                    self::EVENT_BEFORE_UPDATE => ['tch_updated_time']
+                ]
+            ]
+        ];
     }
 
     /**
-     * Finds an identity by the given token.
-     * @param mixed $token the token to be looked for
-     * @param mixed $type the type of the token. The value of this parameter depends on the implementation.
-     * For example, [[\yii\filters\auth\HttpBearerAuth]] will set this parameter to be `yii\filters\auth\HttpBearerAuth`.
-     * @return IdentityInterface the identity object that matches the given token.
-     * Null should be returned if such an identity cannot be found
-     * or the identity is not in an active state (disabled, deleted, etc.)
+     * @inheritdoc
      */
-    public static function findIdentityByAccessToken($token, $type = null)
+    public function attributeLabels()
     {
-        // TODO: Implement findIdentityByAccessToken() method.
+        return [
+            'tch_id' => Yii::t('web', 'Tch ID'),
+            'tch_username' => Yii::t('web', 'Tch Username'),
+            'tch_password' => Yii::t('web', 'Tch Password'),
+            'tch_full_name' => Yii::t('web', 'Tch Full Name'),
+            'tch_gender' => Yii::t('web', 'Tch Gender'),
+            'tch_intro' => Yii::t('web', 'Tch Intro'),
+            'tch_work_place' => Yii::t('web', 'Tch Work Place'),
+            'tch_degree' => Yii::t('web', 'Tch Degree'),
+            'tch_email' => Yii::t('web', 'Tch Email'),
+            'tch_status' => Yii::t('web', 'Tch Status'),
+            'tch_created_time' => Yii::t('web', 'Tch Created Time'),
+            'tch_updated_time' => Yii::t('web', 'Tch Updated Time'),
+            'tch_created_by' => Yii::t('web', 'Tch Created By'),
+            'tch_updated_by' => Yii::t('web', 'Tch Updated By'),
+        ];
     }
 
-    /**
-     * Returns an ID that can uniquely identify a user identity.
-     * @return string|int an ID that uniquely identifies a user identity.
-     */
-    public function getId()
+    public function rules()
     {
-        // TODO: Implement getId() method.
+        return [
+            [['tch_username', 'tch_password', 'tch_full_name', 'tch_email'], 'required'],
+            [['tch_gender', 'tch_status', 'tch_created_by', 'tch_updated_by'], 'integer'],
+            [['tch_intro'], 'string'],
+            [['tch_created_time', 'tch_updated_time'], 'safe'],
+            [['tch_username', 'tch_password', 'tch_full_name', 'tch_work_place', 'tch_degree', 'tch_email'], 'string', 'max' => 255],
+            ['tch_username', 'validateTchUsername'],
+            ['tch_email', 'validateEmail']
+        ];
     }
 
-    /**
-     * Returns a key that can be used to check the validity of a given identity ID.
-     *
-     * The key should be unique for each individual user, and should be persistent
-     * so that it can be used to check the validity of the user identity.
-     *
-     * The space of such keys should be big enough to defeat potential identity attacks.
-     *
-     * This is required if [[User::enableAutoLogin]] is enabled.
-     * @return string a key that is used to check the validity of a given identity ID.
-     * @see validateAuthKey()
-     */
-    public function getAuthKey()
+    public function validateTchUsername()
     {
-        // TODO: Implement getAuthKey() method.
+        $object = self::findOne(['tch_username' => $this->tch_username]);
+        if (!empty($object)) {
+            $this->addError('tch_username', 'Tên đăng nhập đã tồn tại, vui lòng chọn tên khác.');
+        }
     }
 
-    /**
-     * Validates the given auth key.
-     *
-     * This is required if [[User::enableAutoLogin]] is enabled.
-     * @param string $authKey the given auth key
-     * @return bool whether the given auth key is valid.
-     * @see getAuthKey()
-     */
-    public function validateAuthKey($authKey)
+    public function validateEmail()
     {
-        // TODO: Implement validateAuthKey() method.
+        if (!filter_var($this->tch_email, FILTER_VALIDATE_EMAIL)) {
+            $this->addError('tch_email', 'Địa chỉ email không hợp lệ.');
+        }
+    }
+
+    public function signup(Teacher $tch)
+    {
+        if (!$this->validate()) {
+            return false;
+        }
+        $tch->tch_password = $this->setTchPassword($tch->tch_password);
+        if ($tch->save()) {
+            $user = new User();
+            $user->type = 2;
+            $user->student_id = '';
+            $user->teacher_id = $tch->tch_id;
+            $user->username = $tch->tch_username;
+            $user->password = $tch->tch_password;
+            $user->status = 1;
+            if ($user->save()) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    private function setTchPassword($password)
+    {
+        return md5($password);
     }
 }

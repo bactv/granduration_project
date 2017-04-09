@@ -53,6 +53,11 @@ Icon::map($this, Icon::FA);
         padding: 15px;
         margin-bottom: 20px;
     }
+    .create_account p#intro {
+        text-align: center;
+        font-style: italic;
+        margin-bottom: 30px;
+    }
 
 </style>
 
@@ -69,6 +74,7 @@ Icon::map($this, Icon::FA);
 
         <div class="create_account">
             <p id="header">Đăng ký tài khoản</p>
+            <p id="intro">(Đăng ký TK là <?php echo ($type == 'teacher') ? 'giáo viên' : 'học sinh' ?>)</p>
 
             <?php $form = ActiveForm::begin([
                 'type' => ActiveForm::TYPE_HORIZONTAL,
@@ -145,6 +151,14 @@ Icon::map($this, Icon::FA);
                     ]
                 ],
             ])->textInput(['class' => 'form-control', 'placeholder' => Yii::t('web', 'FullName')])->label(false); ?>
+
+            <?php echo $form->field($model, 'tch_email', [
+                'addon' => [
+                    'prepend' => [
+                        'content'=>Icon::show('inbox')
+                    ]
+                ],
+            ])->textInput(['class' => 'form-control', 'placeholder' => Yii::t('web', 'Email Address')])->label(false); ?>
 
             <div class="form-group" style="text-align: center">
                 <?php echo Html::submitButton(Yii::t('web', 'Register') . " <i class=\"fa fa-sign-in\" aria-hidden=\"true\"></i>", ['class' => 'btn btn-primary block full-width m-b']) ?>

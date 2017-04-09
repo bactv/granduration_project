@@ -91,7 +91,6 @@ class AdminController extends BackendController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post())) {
             $model->avatar = UploadedFile::getInstance($model, 'avatar');
             if (!empty($model->avatar)) {

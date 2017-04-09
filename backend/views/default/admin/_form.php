@@ -25,8 +25,13 @@ Icon::map($this, Icon::FA);
             'deviceSize' => ActiveForm::SIZE_SMALL
         ],
         'options' => [
-            'enctype' => 'multipart/form-data'
-        ]
+            'enctype' => 'multipart/form-data',
+            'enableAjaxValidation' => true,
+            'enableClientValidation' => true,
+            'clientOptions' => [
+                'validateOnSubmit'=>true,
+            ]
+        ],
     ]); ?>
 
     <?= $form->field($model, 'ad_username')->textInput(['maxlength' => 50, 'disabled' => (!$model->isNewRecord ? true : false)]) ?>

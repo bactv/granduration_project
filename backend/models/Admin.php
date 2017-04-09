@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use common\behaviors\TimestampBehavior;
+use common\components\Utility;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
@@ -31,13 +32,14 @@ class Admin extends \common\models\AdminBase implements IdentityInterface
         );
     }
 
-//    public function rules()
-//    {
-//        $new_rule = [
+    public function rules()
+    {
+        $new_rule = [
 //            [['avatar'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg']
-//        ];
-//        return array_merge(parent::rules(), $new_rule);
-//    }
+            ['re_new_password', 'validateRe_new_password'],
+        ];
+        return array_merge(parent::rules(), $new_rule);
+    }
 
     /**
      * Finds an identity by the given ID.
@@ -141,15 +143,31 @@ class Admin extends \common\models\AdminBase implements IdentityInterface
      */
     public function uploadAvatar($id)
     {
-        $path = Yii::getAlias('@webroot') . Yii::$app->params['img_url']['dataPath'] . Yii::$app->params['img_url']['admin_avatar']['source'] . '/';
-        if (!is_dir($path)) {
-            mkdir($path, 0777);
+        if ($this->avatar == null) {
+            return true;
+        }
+        $path =  Yii::$app->params['img_url']['avatar_admin']['folder'] . '/';
+        $path_admin = Yii::getAlias('@webroot') . '/storage/' . $path;
+        if (!is_dir($path_admin)) {
+            mkdir($path_admin, 0777);
         }
         if ($this->validate()) {
-            $this->avatar->saveAs($path . $id . '.' . $this->avatar->extension);
-            return true;
+            $this->avatar->saveAs($path_admin . $id . '.png');
+            return Utility::uploadFile($path . $id . '.png', Yii::$app->params['cms_url'] . 'storage/' . $path . $id . '.png');
         } else {
             return false;
+        }
+    }
+
+    public function validateRe_new_password($attribute, $params, $validator)
+    {
+        if ($this->new_password != '') {
+            if ($this->$attribute == '') {
+                $this->addError($attribute, 'Vui lòng nhập lại mật khẩu lần nữa');
+            }
+            if ($this->$attribute != '' && $this->$attribute !== $this->new_password) {
+                $this->addError($attribute, 'Không khớp mật khẩu');
+            }
         }
     }
 

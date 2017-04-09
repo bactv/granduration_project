@@ -38,7 +38,7 @@ class TeacherDB extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tch_full_name'], 'required'],
+            [['tch_username', 'tch_password', 'tch_full_name', 'tch_email'], 'required'],
             [['tch_gender', 'tch_status', 'tch_created_by', 'tch_updated_by'], 'integer'],
             [['tch_intro'], 'string'],
             [['tch_created_time', 'tch_updated_time'], 'safe'],

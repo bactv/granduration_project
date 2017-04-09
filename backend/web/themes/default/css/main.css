@@ -68,6 +68,8 @@ div.left_col div.side_left .person_info .person .avatar {
 
 div.left_col div.side_left .person_info .person .avatar img {
     width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
 div.left_col div.side_left .person_info .person .username {
     color: #ffffff;
@@ -213,6 +215,8 @@ div.right_col div.header nav .person_info #avatar {
 
 div.right_col div.header nav .person_info #avatar img {
     width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }
 
 div.right_col div.header nav .person_info #username{

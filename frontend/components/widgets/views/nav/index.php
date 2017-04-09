@@ -45,11 +45,11 @@ Icon::map($this, Icon::FA);
         <li><a href="<?php echo Url::toRoute([$menu['url']]) ?>"><?php echo $menu['name'] ?></a></li>
     <?php } ?>
     <?php if (!empty(Yii::$app->user->identity)) { ?>
-        <li class="pos_right dropdown">
+        <li class="pos_right dropdown pos_right_log">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <span id="avatar" style="background: none">
                     <?php
-                    $avatar = AssetApp::getImageBaseUrl() . '/avatar_icon.png';
+                    $avatar = AssetApp::getImageBaseUrl() . '/avatar_icon_2.png';
                     ?>
                     <?php echo Html::img($avatar, ['alt' => 'admin', 'width' => '50px', 'height' => '50px', 'style' => 'border-radius: 50%;']) ?>
                 </span>
@@ -61,7 +61,7 @@ Icon::map($this, Icon::FA);
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo Url::toRoute(['/default/logout']) ?>">
+                    <a href="<?php echo Url::toRoute(['/account/logout']) ?>">
                         <?php echo Icon::show('circle-o-notch ') ?> Đăng xuất
                     </a>
                 </li>
@@ -80,8 +80,8 @@ Icon::map($this, Icon::FA);
             </a>
         </li>
     <?php } else { ?>
-        <li class="pos_right"><span><a href="<?php echo Url::toRoute(['/account/create-account']) ?>" target="_blank">Đăng ký</a></span></li>
-        <li class="pos_right"><span><a href="<?php echo Url::toRoute(['/account/login']) ?>" target="_blank">Đăng nhập</a></span></li>
+        <li class="pos_right"><span><a href="<?php echo Url::toRoute(['/account/create-account']) ?>">Đăng ký</a></span></li>
+        <li class="pos_right"><span><a href="<?php echo Url::toRoute(['/account/login']) ?>">Đăng nhập</a></span></li>
     <?php } ?>
 </ul>
 

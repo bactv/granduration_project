@@ -8,5 +8,16 @@ return [
         'agreement' => 'Hợp Đồng',
         'agreement_addendum' => 'Phụ Lục Hợp Đồng'
     ],
-    'storage_url' => '/storage/',
+    'cms_url' => 'http://cms.study.edu.vn/',
+    'storage_url' => 'http://static.study.edu.vn/',
+    'img_url' => [
+        'avatar_admin' => [
+            'folder' => 'avatar_admin',
+        ]
+    ],
+    'ftp' => [
+        'ftp_server' => 'static.study.edu.vn',
+        'ftp_user_name' => 'bactv',
+        'ftp_user_pass' => '123456'
+    ]
 ];

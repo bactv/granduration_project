@@ -9,6 +9,9 @@ use yii\web\IdentityInterface;
 class User extends \common\models\UserBase implements IdentityInterface
 {
     public $avatar;
+    public $rememberMe;
+    private $_user = false;
+
     /**
      * Finds an identity by the given ID.
      * @param string|int $id the ID to be looked for
@@ -18,7 +21,7 @@ class User extends \common\models\UserBase implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        // TODO: Implement findIdentity() method.
+        return self::findOne(['id' => $id]);
     }
 
     /**
@@ -41,7 +44,7 @@ class User extends \common\models\UserBase implements IdentityInterface
      */
     public function getId()
     {
-        // TODO: Implement getId() method.
+        return $this->id;
     }
 
     /**
@@ -72,5 +75,84 @@ class User extends \common\models\UserBase implements IdentityInterface
     public function validateAuthKey($authKey)
     {
         // TODO: Implement validateAuthKey() method.
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['type', 'student_id', 'teacher_id', 'status'], 'integer'],
+            [['username', 'password'], 'required'],
+            [['username'], 'string', 'max' => 30],
+            [['password'], 'string', 'max' => 255],
+            ['password', 'validatePassword', 'on' => 'login']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('web', 'ID'),
+            'type' => Yii::t('web', 'Type'),
+            'student_id' => Yii::t('web', 'Student ID'),
+            'teacher_id' => Yii::t('web', 'Teacher ID'),
+            'username' => Yii::t('web', 'Username'),
+            'password' => Yii::t('web', 'Password'),
+            'status' => Yii::t('web', 'Status'),
+        ];
+    }
+
+
+    /**
+     * Validates the password.
+     * This method serves as the inline validation for password.
+     *
+     * @param string $attribute the attribute currently being validated
+     * @param array $params the additional name-value pairs given in the rule
+     */
+    public function validatePassword($attribute, $params)
+    {
+        $type = isset($_GET['type']) ? $_GET['type'] : '';
+        if ($type != 'teacher') {
+            $type = 'student';
+        }
+        if (!$this->hasErrors()) {
+            $user = $this->getUser($type);
+            $hash = md5($this->password);
+            if (!$user || !($user->password === $hash)) {
+                $this->addError($attribute, 'Tên đăng nhập hoặc mật khẩu không hợp lệ');
+            }
+        }
+    }
+    /**
+     * Logs in a user using the provided username and password.
+     * @param $type
+     * @return boolean whether the user is logged in successfully
+     */
+    public function login($type)
+    {
+        if ($this->validate()) {
+            return Yii::$app->user->login($this->getUser($type), $this->rememberMe ? 30*24*60*60 : 0);
+        } else {
+            return false;
+        }
+    }
+    /**
+     * Finds user by [[username]]
+     * @param $type
+     * @return User | null
+     */
+    public function getUser($type)
+    {
+        $type_id = ($type == 'teacher') ? 2 : 1;
+        if ($this->_user === false) {
+            $this->_user = User::findOne(['username' => $this->username, 'type' => $type_id]);
+        }
+        return $this->_user;
     }
 }

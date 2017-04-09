@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\Pjax;
 use kartik\icons\Icon;
 use yii\grid\GridView;
+use common\components\AssetApp;
 
 Icon::map($this, Icon::FA);
 
@@ -23,7 +24,7 @@ $this->params['menu'] = [
 <?php Pjax::begin(['id' => 'admin-grid-view']);?> 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+//        'filterModel' => $searchModel,
         'columns' => [
             [
                 'class' => 'yii\grid\CheckboxColumn',
@@ -39,6 +40,20 @@ $this->params['menu'] = [
             [
                 'attribute' => 'ad_avatar',
                 'options' => ['width' => '120px'],
+                'format' => 'raw',
+                'value' => function ($model) {
+                    if ($model['ad_avatar'] == 1) {
+                        return Html::img(Yii::$app->params['storage_url'] . Yii::$app->params['img_url']['avatar_admin']['folder'] . '/' . $model['ad_id'] . '.png', [
+                            'width' => '70px',
+                            'height' => '70px'
+                        ]);
+                    } else {
+                        return Html::img(AssetApp::getImageBaseUrl() . '/avatar_icon_backend_3.png', [
+                            'width' => '70px',
+                            'height' => '70px'
+                        ]);
+                    }
+                },
                 'headerOptions' => ['style'=>'text-align: center; vertical-align: middle;'],
                 'contentOptions' => ['style'=>'text-align: center; vertical-align: middle;']
             ],
@@ -67,18 +82,12 @@ $this->params['menu'] = [
                 'headerOptions' => ['style'=>'text-align: center; vertical-align: middle;'],
                 'contentOptions' => ['style'=>'text-align: center; vertical-align: middle;']
             ],
-            // 'ad_last_active_time',
-            // 'ad_created_by',
-            // 'ad_updated_by',
-            // 'ad_created_time',
-            // 'ad_updated_time',
-            // 'ad_group_ids',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view} {update} {delete}',
                 'header' => Yii::t('cms', 'Actions'),
-                'headerOptions' => ['style'=>'text-align: center;'],
-                'contentOptions'=>['style'=>'text-align: center;'],
+                'headerOptions' => ['style'=>'text-align: center; vertical-align: middle;'],
+                'contentOptions' => ['style'=>'text-align: center; vertical-align: middle;'],
                 'options' => ['width' => '120px'],
                 'buttons' => [
                     'view' => function ($url) {

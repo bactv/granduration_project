@@ -17,6 +17,9 @@ return [
     'Created By' => 'Người tạo',
     'Updated By' => 'Người cập nhật',
     'Agreement Detail' => 'Chi tiết HĐ',
+    'Last active time' => 'Hoạt động gần nhất',
+    'New Password' => 'Mật khẩu mới',
+    'Re-New Password' => 'Nhập lại mật khẩu mới',
 
     // admin_group
     'Admin Groups' => 'Nhóm quyền quản trị',
@@ -32,7 +35,7 @@ return [
 
     // admin
     'Ad ID' => 'ID',
-    'Admins' => 'Quản trị',
+    'Admins' => 'Quản trị viên',
     'Create Admin' => 'Thêm người quản trị',
     'Ad Username' => 'Tên đăng nhập',
     'Ad Password' => 'Mật khẩu',
