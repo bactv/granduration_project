@@ -120,13 +120,59 @@ class AccountController extends Controller
 
     public function actionCharging()
     {
-        $user_id = Yii::$app->user->identity->id;
-        $object = $this->getObject($user_id);
-        if ($object instanceof Student) {
+        $model = $this->getObject();
+        if ($model instanceof Student) {
             return $this->render('charging');
         } else {
             return new NotFoundHttpException("Not Found");
         }
+    }
+
+    public function actionChargeMoney()
+    {
+        $request = Yii::$app->request->post();
+        if (!$request) {
+            Yii::$app->end();
+        }
+        if (isset($request['telco_type'])) {
+            $telco_type = isset($request['telco_type']) ? $request['telco_type'] : '';
+            $serial_number = isset($request['serial_number']) ? $request['serial_number'] : '';
+            $code_number = isset($request['code_number']) ? $request['code_number'] : '';
+
+            if ($telco_type == '' || $serial_number == '' || $code_number == '') {
+                Yii::$app->end();
+            }
+            $params = [
+                'telco_type' => $telco_type,
+                'serial_number' => $serial_number,
+                'code_number' => $code_number
+            ];
+
+            header('Content-type: application/json');
+
+            $result = Utility::curlSendPost(Yii::$app->params['api']['charging'][$telco_type], $params);
+            $str = json_decode($result);
+            if (!empty($str) && $str->{'status'} == 4) {
+                $money = $str->{'money'};
+                Yii::$app->db->createCommand("UPDATE student SET std_balance = std_balance + " . intval(Utility::exchangeMoney(intval($money))) . " WHERE std_id=" . Yii::$app->user->identity->student_id)->execute();
+                echo json_encode($str);
+                Yii::$app->end();
+            }
+            echo json_encode($str);
+            Yii::$app->end();
+        }
+    }
+
+    public function actionTest()
+    {
+        header('Content-type: application/json');
+        $params = [
+            'telco_type' => 'viettel',
+                'serial_number' => '651897541',
+            'code_number' => '431102678279'
+        ];
+        $result = Utility::curlSendPost(Yii::$app->params['api']['charging'][$params['telco_type']], $params);
+        var_dump(json_encode(json_decode($result)));
     }
 
     public function actionUpdateAccount()

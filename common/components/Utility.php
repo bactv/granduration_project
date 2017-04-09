@@ -55,4 +55,57 @@ class Utility
             return false;
         }
     }
+
+    /**
+     * @param string $url
+     * @param array $data
+     * @return \StdClass
+     */
+    public static  function curlSendPost($url, $data = [])
+    {
+        $resource = curl_init();
+        curl_setopt($resource, CURLOPT_URL, $url);
+        curl_setopt($resource, CURLOPT_POST, true);
+        curl_setopt($resource, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($resource, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($resource, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($resource, CURLOPT_SSL_VERIFYPEER, false);
+
+        $result = curl_exec($resource);
+        curl_close($resource);
+        return $result;
+    }
+    /**
+     * @param string $url
+     * @param array $data
+     * @return \StdClass
+     */
+    public static function curlSendGet($url, $data = [])
+    {
+        $resource = curl_init();
+        curl_setopt($resource, CURLOPT_URL, $url.http_build_query($data));
+        curl_setopt($resource, CURLOPT_HTTPGET, true);
+        curl_setopt($resource, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($resource, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($resource, CURLOPT_SSL_VERIFYPEER, false);
+
+        $result = curl_exec($resource);
+        curl_close($resource);
+        return $result;
+    }
+
+    /**
+     * Chuyển đổi tiền sang xu
+     * @param $real_money
+     * @param int $bonus: 30%
+     * @return float|int
+     */
+    public static function exchangeMoney($real_money, $bonus = 0)
+    {
+        $virtual = $real_money * 100;
+        if ($bonus != 0) {
+            return $bonus * $virtual / 100;
+        }
+        return $virtual;
+    }
 }

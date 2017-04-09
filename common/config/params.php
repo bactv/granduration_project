@@ -19,5 +19,10 @@ return [
         'ftp_server' => 'static.study.edu.vn',
         'ftp_user_name' => 'bactv',
         'ftp_user_pass' => '123456'
+    ],
+    'api' => [
+        'charging' => [
+            'viettel' => 'http://api.viettel.vn/api/controllers/ApiContoller.php/action_charge'
+        ]
     ]
 ];

@@ -15,6 +15,8 @@ $this->title = $this->params['title'] = 'Nạp tiền vào tài khoản';
 $this->params['breadcrumbs'][] = $this->title;
 
 Icon::map($this, Icon::FA);
+
+AssetApp::regJsFile('jquery.min.js');
 ?>
 <style>
     .charging {
@@ -69,16 +71,16 @@ Icon::map($this, Icon::FA);
                     <thead>
                         <tr>
                             <th style="text-align: center;">
-                                <img src="<?php echo AssetApp::getImageBaseUrl() . '/telco_logo/viettel_logo.png' ?>">
+                                <a href="javascript:void(0)" class="telco" id="viettel"><img src="<?php echo AssetApp::getImageBaseUrl() . '/telco_logo/viettel_logo.png' ?>"></a></th>
                             </th>
                             <th style="text-align: center;">
-                                <img src="<?php echo AssetApp::getImageBaseUrl() . '/telco_logo/mobifone_logo.png' ?>">
+                                <a href="javascript:void(0)" class="telco" id="mobifone"><img src="<?php echo AssetApp::getImageBaseUrl() . '/telco_logo/mobifone_logo.png' ?>"></a>
                             </th>
                             <th style="text-align: center;">
-                                <img src="<?php echo AssetApp::getImageBaseUrl() . '/telco_logo/vinaphone_logo.png' ?>">
+                                <a href="javascript:void(0)" class="telco" id="vinaphone"><img src="<?php echo AssetApp::getImageBaseUrl() . '/telco_logo/vinaphone_logo.png' ?>"></a>
                             </th>
                             <th style="text-align: center;">
-                                <img src="<?php echo AssetApp::getImageBaseUrl() . '/telco_logo/vietnamobile_logo.png' ?>">
+                                <a href="javascript:void(0)" class="telco" id="vietnamobile"><img src="<?php echo AssetApp::getImageBaseUrl() . '/telco_logo/vietnamobile_logo.png' ?>"></a>
                             </th>
                         </tr>
                     </thead>
@@ -88,7 +90,8 @@ Icon::map($this, Icon::FA);
                             <?php echo Html::tag('input', '', [
                                 'type' => 'text',
                                 'class' => 'form-control',
-                                'placeholder' => 'Nhập số seri ...'
+                                'placeholder' => 'Nhập số seri ...',
+                                'id' => 'serial_number'
                             ]) ?>
                         </td>
                     </tr>
@@ -97,13 +100,14 @@ Icon::map($this, Icon::FA);
                             <?php echo Html::tag('input', '', [
                                 'type' => 'text',
                                 'class' => 'form-control',
-                                'placeholder' => 'Nhập mã thẻ ...'
+                                'placeholder' => 'Nhập mã thẻ ...',
+                                'id' => 'code_number'
                             ]) ?>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4" style="text-align: center">
-                            <button type="submit" class="btn btn-primary" onclick="">Nạp tiền</button>
+                            <button type="submit" class="btn btn-primary" onclick="charging()">Nạp tiền</button>
                         </td>
                     </tr>
                     </tbody>
@@ -116,3 +120,50 @@ Icon::map($this, Icon::FA);
         </div>
     </div>
 </div>
+
+<style>
+    th.telco_active {
+        border: 2px solid #0ead8e !important;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $("a.telco").on('click', function () {
+            $("a.telco").removeClass('telco_active');
+            $("a.telco").parent().removeClass('telco_active');
+            $(this).addClass('telco_active');
+            $(this).parent().addClass('telco_active');
+        });
+    });
+
+    function charging() {
+        var telco_type = $("a.telco_active").attr('id');
+        var serial_number = $("#serial_number").val();
+        var code_number = $("#code_number").val();
+        var _csrf = $("meta[name='csrf-token']").attr('content');
+
+        if (telco_type == '') {
+            alert("Vui lòng chọn nhà mạng.");
+            return false;
+        }
+        if (serial_number == '') {
+            alert("Vui lòng nhập số serial thẻ cào.");
+            return false;
+        }
+        if (code_number == '') {
+            alert("Vui lòng nhập mã thẻ cào.");
+            return false;
+        }
+
+        $.ajax({
+            method: 'POST',
+            url: '/account/charge-money.html',
+            data: {'telco_type' : telco_type, 'serial_number' : serial_number, 'code_number' : code_number, _csrf : _csrf},
+            success: function (data) {
+                var response = JSON.parse(data);
+                alert(response.message);
+            }
+        });
+    }
+</script>

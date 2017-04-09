@@ -39,7 +39,7 @@ use yii\helpers\Url;
             <div class="row">
                 <?php
                 echo '<label class="control-label">Mật khẩu mới</label>';
-                echo $form->field($model, 'new_password')->textInput([
+                echo $form->field($model, 'new_password')->passwordInput([
                     'id' => 'new_password'
                 ])->label(false);
                 ?>
@@ -47,7 +47,7 @@ use yii\helpers\Url;
             <div class="row">
                 <?php
                 echo '<label class="control-label">Nhập lại mật khẩu mới</label>';
-                echo $form->field($model, 're_new_password')->textInput([
+                echo $form->field($model, 're_new_password')->passwordInput([
                     'id' => 're_new_password'
                 ])->label(false);
                 ?>

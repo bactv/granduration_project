@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-03-29 00:56:01
+Date: 2017-04-10 01:28:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('1', 'admin', '$2y$13$K9vy95X.hgT4Puo/wMjdCuBg73HA114fi9N9NFvoh36eyAYXGljSa', 'Administrator', 'admin@study.edu.vn', '', '0000-00-00', '0', '1', null, '0', '0', null, '2017-03-15 00:23:28', '[\"1\"]');
+INSERT INTO `admin` VALUES ('1', 'admin', '$2y$13$K9vy95X.hgT4Puo/wMjdCuBg73HA114fi9N9NFvoh36eyAYXGljSa', 'Administrator', 'admin@study.edu.vn', '', '0000-00-00', '1', '1', null, '0', '0', null, '2017-04-09 11:36:41', '[\"1\"]');
 
 -- ----------------------------
 -- Table structure for admin_action
@@ -435,7 +435,7 @@ CREATE TABLE `menu` (
   `created_time` datetime DEFAULT NULL,
   `updated_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu
@@ -460,14 +460,21 @@ INSERT INTO `menu` VALUES ('17', '12', 'Quản lý đề thi', '1', 'quiz/index'
 INSERT INTO `menu` VALUES ('18', '0', 'Quản lý học sinh, giáo viên', '1', 'student/index', 'users', '1', '1', null, '2017-03-23 00:24:49', '2017-03-23 00:24:51');
 INSERT INTO `menu` VALUES ('19', '18', 'Quản lý giáo viên', '1', 'teacher/index', 'tree', '1', '1', '1', '2017-03-23 00:25:27', '2017-03-23 00:25:28');
 INSERT INTO `menu` VALUES ('20', '18', 'Quản lý học sinh', '1', 'student/index', 'universal-access', '1', '1', '2', '2017-03-23 00:26:02', '2017-03-23 00:26:04');
-INSERT INTO `menu` VALUES ('21', '0', 'Quản lý gói học tập', '1', 'package/index', 'space-shuttle ', '1', '1', null, '2017-03-23 00:51:05', '2017-03-23 00:51:07');
+INSERT INTO `menu` VALUES ('21', '0', 'Quản lý gói cước', '1', 'package/index', 'space-shuttle ', '1', '1', null, '2017-03-23 00:51:05', '2017-03-23 00:51:07');
 INSERT INTO `menu` VALUES ('22', '0', 'Feedback người dùng', '1', 'feedback/index', 'ravelry', '1', '1', null, null, null);
 INSERT INTO `menu` VALUES ('23', '0', 'Giới thiệu', '2', 'site/intro', null, '1', '1', '1', '2017-03-29 00:07:15', '2017-03-29 00:07:17');
-INSERT INTO `menu` VALUES ('24', '0', 'Khóa học', '2', 'course/index', null, '1', '1', '2', '2017-03-29 00:08:27', '2017-03-29 00:08:29');
+INSERT INTO `menu` VALUES ('24', '0', 'Khóa học', '2', 'course/list-course', null, '1', '1', '2', '2017-03-29 00:08:27', '2017-03-29 00:08:29');
 INSERT INTO `menu` VALUES ('25', '0', 'Giáo viên', '2', 'teacher/index', null, '1', '1', '3', '2017-03-29 00:09:16', '2017-03-29 00:09:18');
-INSERT INTO `menu` VALUES ('26', '0', 'Luyện thi', '2', 'quiz/contest-practice', null, '1', '1', '4', '2017-03-29 00:10:00', '2017-03-29 00:10:02');
+INSERT INTO `menu` VALUES ('26', '0', 'Luyện thi', '2', 'quiz/list-contest', null, '1', '1', '4', '2017-03-29 00:10:00', '2017-03-29 00:10:02');
 INSERT INTO `menu` VALUES ('27', '0', 'Hỏi đáp', '2', 'forum/index', null, '1', '1', '6', '2017-03-29 00:10:31', '2017-03-29 00:10:33');
 INSERT INTO `menu` VALUES ('28', '0', 'Thách đấu', '2', 'competiton/index', null, '1', '1', '5', '2017-03-29 00:16:43', '2017-03-29 00:16:45');
+INSERT INTO `menu` VALUES ('29', '0', 'Quản lý khóa học', '1', 'course/index', 'graduation-cap', '1', '1', null, '2017-04-04 22:55:04', '2017-04-04 22:55:06');
+INSERT INTO `menu` VALUES ('30', '0', 'Báo cáo, thống kê', '1', 'report/index', 'tree', '1', '1', null, '2017-04-04 22:55:38', '2017-04-04 22:55:40');
+INSERT INTO `menu` VALUES ('31', '29', 'Danh sách khóa học', '1', 'course/index', 'book', '1', '1', '1', '2017-04-04 23:19:38', '2017-04-04 23:19:39');
+INSERT INTO `menu` VALUES ('32', '29', 'Quản lý video buổi học', '1', 'course/index', 'book', '1', '1', '2', '2017-04-04 23:20:56', '2017-04-04 23:20:57');
+INSERT INTO `menu` VALUES ('33', '30', 'Thống kê truy cập', '1', 'report/index', 'book', '1', '1', '1', '2017-04-04 23:21:48', '2017-04-04 23:21:49');
+INSERT INTO `menu` VALUES ('34', '30', 'Thống kê tổng hợp', '1', 'report/index', 'book', '1', '1', '2', '2017-04-04 23:23:25', '2017-04-04 23:23:27');
+INSERT INTO `menu` VALUES ('35', '30', 'Báo cáo đối soát', '1', 'report/index', 'book', '1', '1', '3', '2017-04-04 23:23:51', '2017-04-04 23:23:53');
 
 -- ----------------------------
 -- Table structure for package
@@ -5749,7 +5756,7 @@ CREATE TABLE `student` (
   PRIMARY KEY (`std_id`),
   KEY `idx_login` (`std_username`,`std_password`,`std_status`),
   KEY `idx_phone` (`std_phone`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of student
@@ -5759,6 +5766,7 @@ INSERT INTO `student` VALUES ('2', 'howard', '$2y$13$EE0QRWGVq3xIQy35abC5QOVkeFr
 INSERT INTO `student` VALUES ('3', 'gaylord', '$2y$13$.PupBg/nTqKeDjaOML0YcuQDZPx/DqeX.yffW1iVhpfFdfMjc6Q9a', 'Maritza Spencer DVM', null, null, null, '0', '1', null, null);
 INSERT INTO `student` VALUES ('4', 'elmore', '$2y$13$sJ.gc6ipomY8E0xAGmkzz.5t7iI9CUQ1waVnhQ2lXdNcKGZxDjyXK', 'Eli Schamberger', null, null, null, '0', '1', null, null);
 INSERT INTO `student` VALUES ('5', 'jovanny', '$2y$13$1ylz6at7jCCn3Y7SVXeaC.ixD0FfyMkdtObc6U3aneRuFqofYaYUW', 'Madison Watsica', null, null, null, '0', '1', null, null);
+INSERT INTO `student` VALUES ('6', 'student1', '96e79218965eb72c92a549dd5a330112', 'Student111', '', '1970-01-01', '', '12000', '1', null, '2017-04-09 17:42:22');
 
 -- ----------------------------
 -- Table structure for student_course
@@ -5806,25 +5814,26 @@ INSERT INTO `subject` VALUES ('8', 'Tiếng Anh', null);
 DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE `teacher` (
   `tch_id` int(11) NOT NULL AUTO_INCREMENT,
-  `tch_username` varchar(255) DEFAULT NULL,
-  `tch_password` varchar(255) DEFAULT NULL,
+  `tch_username` varchar(255) NOT NULL,
+  `tch_password` varchar(255) NOT NULL,
   `tch_full_name` varchar(255) NOT NULL,
   `tch_gender` tinyint(1) DEFAULT '1' COMMENT '1: nam, 0: nu',
   `tch_intro` text,
   `tch_work_place` varchar(255) DEFAULT NULL,
   `tch_degree` varchar(255) DEFAULT NULL,
-  `tch_email` varchar(255) DEFAULT NULL,
+  `tch_email` varchar(255) NOT NULL,
   `tch_status` tinyint(1) DEFAULT '1' COMMENT '1: active, 0: deactive',
   `tch_created_time` datetime DEFAULT NULL,
   `tch_updated_time` datetime DEFAULT NULL,
   `tch_created_by` int(11) DEFAULT NULL,
   `tch_updated_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`tch_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
+INSERT INTO `teacher` VALUES ('6', 'teacher1', '41c8949aa55b8cb5dbec662f34b62df3', 'Teacher 1', '1', null, null, null, 'teacher1@gmail.com', '1', '2017-04-09 15:33:11', '2017-04-09 15:33:11', null, null);
 
 -- ----------------------------
 -- Table structure for transaction
@@ -5860,7 +5869,7 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL,
   `status` tinyint(1) DEFAULT '1' COMMENT '1: active, 0: deactive',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
@@ -5870,6 +5879,8 @@ INSERT INTO `user` VALUES ('2', '1', '2', null, 'howard', '$2y$13$EE0QRWGVq3xIQy
 INSERT INTO `user` VALUES ('3', '1', '3', null, 'gaylord', '$2y$13$.PupBg/nTqKeDjaOML0YcuQDZPx/DqeX.yffW1iVhpfFdfMjc6Q9a', '1');
 INSERT INTO `user` VALUES ('4', '1', '4', null, 'elmore', '$2y$13$sJ.gc6ipomY8E0xAGmkzz.5t7iI9CUQ1waVnhQ2lXdNcKGZxDjyXK', '1');
 INSERT INTO `user` VALUES ('5', '1', '5', null, 'jovanny', '$2y$13$1ylz6at7jCCn3Y7SVXeaC.ixD0FfyMkdtObc6U3aneRuFqofYaYUW', '1');
+INSERT INTO `user` VALUES ('8', '2', null, '6', 'teacher1', '41c8949aa55b8cb5dbec662f34b62df3', '1');
+INSERT INTO `user` VALUES ('9', '1', '6', null, 'student1', '96e79218965eb72c92a549dd5a330112', '1');
 
 -- ----------------------------
 -- Table structure for video_record
