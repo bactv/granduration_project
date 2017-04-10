@@ -9,6 +9,8 @@ use Yii;
 class Teacher extends \common\models\TeacherBase
 {
     public $rememberMe;
+    public $new_password;
+    public $re_new_password;
 
     public function behaviors()
     {

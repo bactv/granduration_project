@@ -84,9 +84,9 @@ class AccountController extends Controller
         $model = $this->getObject();
         if ($model instanceof Student) {
             $model->std_birthday = Utility::formatDataTime($model->std_birthday, '-', '/', false);
-            return $this->render('student_info', ['model' => $model]);
+            return $this->renderAjax('detail_student_info', ['model' => $model]);
         } else {
-            return $this->render('teacher_info', ['model' => $model]);
+            return $this->renderAjax('detail_teacher_info', ['model' => $model]);
         }
     }
 
