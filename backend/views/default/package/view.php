@@ -9,7 +9,7 @@ Icon::map($this, Icon::FA);
 /* @var $this yii\web\View */
 /* @var $model backend\models\Package */
 
-$this->title = $model->pk_id;
+$this->title = $model->pk_name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('cms', 'Packages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -36,7 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'pk_code',
             'pk_description',
             'pk_price',
-            'pk_status',
+            [
+                'attribute' => 'pk_status',
+                'value' => ($model['pk_status'] == 1) ? 'Active' : 'Inactive'
+            ],
         ],
     ]) ?>
 

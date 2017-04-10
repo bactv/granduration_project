@@ -26,7 +26,7 @@ class Utility
         return trim($new_date . ' ' . $time);
     }
 
-    public static function uploadFile($folder_remote, $file)
+    public static function uploadFile($folder, $folder_remote, $file)
     {
         $ftp_server = Yii::$app->params['ftp']['ftp_server'];
         $ftp_user_name = Yii::$app->params['ftp']['ftp_user_name'];
@@ -41,8 +41,8 @@ class Utility
             return false;
         }
 
-        if (file_exists ($folder_remote)) {
-            ftp_mkdir($conn_id, $folder_remote);
+        if (!in_array(trim(str_replace('/', '', $folder)), ftp_nlist($conn_id, ""))) {
+            ftp_mkdir($conn_id, $folder);
         }
         // upload a file
         if (ftp_put($conn_id, $folder_remote, $file, FTP_BINARY)) {
@@ -107,5 +107,10 @@ class Utility
             return $bonus * $virtual / 100;
         }
         return $virtual;
+    }
+
+    public static function UR_exists($url){
+        $headers=get_headers($url);
+        return stripos($headers[0],"200 OK")?true:false;
     }
 }

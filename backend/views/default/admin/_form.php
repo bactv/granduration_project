@@ -71,7 +71,7 @@ Icon::map($this, Icon::FA);
         ],
     ]) ?>
 
-    <?= $form->field($model, 'ad_status')->textInput() ?>
+    <?= $form->field($model, 'ad_status')->checkbox(['label' => false])->label(Yii::t('cms', 'Status')) ?>
 
     <?= $form->field($model, 'avatar')->widget(FileInput::className(), [
         'options'=>[

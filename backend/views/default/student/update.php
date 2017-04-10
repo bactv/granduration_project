@@ -10,7 +10,7 @@ Icon::map($this, Icon::FA);
 
 $this->title = Yii::t('cms', 'Update {modelClass}: ', [
     'modelClass' => 'Student',
-]) . ' ' . $model->std_id;
+]) . ' ' . $model->std_full_name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('cms', 'Students'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = Yii::t('cms', 'Update');
 $this->params['title'] = Yii::t('cms', 'Update');

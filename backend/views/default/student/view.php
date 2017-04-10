@@ -9,7 +9,7 @@ Icon::map($this, Icon::FA);
 /* @var $this yii\web\View */
 /* @var $model backend\models\Student */
 
-$this->title = $model->std_id;
+$this->title = $model->std_full_name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('cms', 'Students'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -33,13 +33,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'std_id',
             'std_username',
-            'std_password',
             'std_full_name',
             'std_phone',
             'std_birthday',
             'std_school_name',
-            'std_balance',
-            'std_status',
+            [
+                'attribute' => 'std_balance',
+                'value' => number_format($model['std_balance'])
+            ],
+            [
+                'attribute' => 'std_status',
+                'value' => ($model['std_status'] == 1) ? 'Active' : 'Inactive'
+            ],
             'std_created_time',
             'std_updated_time',
         ],

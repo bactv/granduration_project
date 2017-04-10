@@ -62,6 +62,8 @@ class PackageController extends BackendController
     {
         $model = new Package();
 
+        $model->scenario = 'create';
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->pk_id]);
         } else {
@@ -100,7 +102,7 @@ class PackageController extends BackendController
     {
         //$this->findModel($id)->delete();
         $model = $this->findModel($id);
-        $model->deleted = 1;
+        $model->pk_deleted = 1;
         $model->save();
         return $this->redirect(['index']);
     }

@@ -153,7 +153,7 @@ class Admin extends \common\models\AdminBase implements IdentityInterface
         }
         if ($this->validate()) {
             $this->avatar->saveAs($path_admin . $id . '.png');
-            return Utility::uploadFile($path . $id . '.png', Yii::$app->params['cms_url'] . 'storage/' . $path . $id . '.png');
+            return Utility::uploadFile($path, $path . $id . '.png', Yii::$app->params['cms_url'] . 'storage/' . $path . $id . '.png');
         } else {
             return false;
         }

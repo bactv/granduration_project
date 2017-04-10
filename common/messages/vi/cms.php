@@ -20,6 +20,7 @@ return [
     'Last active time' => 'Hoạt động gần nhất',
     'New Password' => 'Mật khẩu mới',
     'Re-New Password' => 'Nhập lại mật khẩu mới',
+    'Pk Status' => 'Trạng thái',
 
     // admin_group
     'Admin Groups' => 'Nhóm quyền quản trị',
@@ -140,6 +141,26 @@ return [
     'Pk Code' => 'Mã gói',
     'Pk Description' => 'Mô tả',
     'Pk Price' => 'Giá gói',
-    'Packages' => 'Gói học tập'
+    'Packages' => 'Gói học tập',
 
+    // Giáo viên
+    'Teachers' => 'Giáo viên',
+    'Tch ID' => 'ID',
+    'Tch Username' => 'Tên đăng nhập',
+    'Tch Password' => 'Mật khẩu',
+    'Tch Full Name' => 'Họ và tên',
+    'Tch Gender' => 'Giới tính',
+    'Tch Intro' => 'Giới thiệu',
+    'Tch Work Place' => 'Nơi công tác',
+    'Tch Degree' => 'Học vị',
+    'Tch Email' => 'Email',
+    'Tch Status' => 'Trạng thái',
+    'Tch Created Time' => 'Ngày tạo',
+    'Tch Updated Time' => 'Ngày cập nhật',
+    'Tch Created By' => 'Người tạo',
+    'Tch Updated By' => 'Người cập nhật',
+    'Tch Avatar' => 'Ảnh đại diện',
+    'Std Status' => 'Trạng thái',
+    'Std Created Time' => 'Ngày tạo',
+    'Std Updated Time' => 'Ngày cập nhật'
 ];

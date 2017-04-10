@@ -18,6 +18,7 @@ use Yii;
  * @property string $section
  * @property integer $status
  * @property string $price
+ * @property integer $vip
  * @property string $created_time
  * @property string $updated_time
  * @property integer $created_by
@@ -41,7 +42,7 @@ class QuizDB extends \yii\db\ActiveRecord
     {
         return [
             [['quiz_name'], 'required'],
-            [['quiz_type_id', 'subject_id', 'class_level_id', 'status', 'created_by', 'updated_by', 'time'], 'integer'],
+            [['quiz_type_id', 'subject_id', 'class_level_id', 'status', 'vip', 'created_by', 'updated_by', 'time'], 'integer'],
             [['quiz_level'], 'string'],
             [['price'], 'number'],
             [['created_time', 'updated_time'], 'safe'],
@@ -66,6 +67,7 @@ class QuizDB extends \yii\db\ActiveRecord
             'section' => Yii::t('cms', 'Section'),
             'status' => Yii::t('cms', 'Status'),
             'price' => Yii::t('cms', 'Price'),
+            'vip' => Yii::t('cms', 'Vip'),
             'created_time' => Yii::t('cms', 'Created Time'),
             'updated_time' => Yii::t('cms', 'Updated Time'),
             'created_by' => Yii::t('cms', 'Created By'),

@@ -33,6 +33,10 @@ class ComposerStaticInit228e95e36c88534ba18a640dbc85d515
         array (
             'phpDocumentor\\Reflection\\' => 25,
         ),
+        'm' => 
+        array (
+            'mihaildev\\ckeditor\\' => 19,
+        ),
         'l' => 
         array (
             'leandrogehlen\\treegrid\\' => 23,
@@ -189,6 +193,10 @@ class ComposerStaticInit228e95e36c88534ba18a640dbc85d515
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+        ),
+        'mihaildev\\ckeditor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mihaildev/yii2-ckeditor',
         ),
         'leandrogehlen\\treegrid\\' => 
         array (

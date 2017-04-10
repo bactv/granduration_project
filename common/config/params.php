@@ -13,6 +13,9 @@ return [
     'img_url' => [
         'avatar_admin' => [
             'folder' => 'avatar_admin',
+        ],
+        'avatar_teacher' => [
+            'folder' => 'avatar_teacher',
         ]
     ],
     'ftp' => [
