@@ -8,6 +8,7 @@
 namespace frontend\controllers;
 
 use common\components\Utility;
+use frontend\models\Course;
 use frontend\models\Student;
 use frontend\models\Teacher;
 use frontend\models\User;
@@ -18,6 +19,20 @@ use yii\helpers\Url;
 
 class AccountController extends Controller
 {
+    protected $model;
+
+    public function init()
+    {
+        $this->model = $this->getObject();
+    }
+
+    public function actions()
+    {
+        if (empty($this->model)) {
+            throw new NotFoundHttpException("Trang bạn tìm kiếm không tồn tại");
+        }
+    }
+
     public function actionCreateAccount($type = null)
     {
         if (!Yii::$app->user->isGuest) {
@@ -70,34 +85,32 @@ class AccountController extends Controller
      */
     public function actionInfo()
     {
-        $model = $this->getObject();
-        if ($model instanceof Student) {
-            $model->std_birthday = Utility::formatDataTime($model->std_birthday, '-', '/', false);
-            return $this->render('student_info', ['model' => $model]);
+        if ($this->model instanceof Student) {
+            $this->model->std_birthday = Utility::formatDataTime($this->model->std_birthday, '-', '/', false);
+            return $this->render('student/student_info', ['model' => $this->model]);
         } else {
-            return $this->render('teacher_info', ['model' => $model]);
+            return $this->render('teacher/teacher_info', ['model' => $this->model]);
         }
     }
 
     public function actionDetailInfo()
     {
-        $model = $this->getObject();
+        $model = $this->model;
         if ($model instanceof Student) {
             $model->std_birthday = Utility::formatDataTime($model->std_birthday, '-', '/', false);
-            return $this->renderAjax('detail_student_info', ['model' => $model]);
+            return $this->renderAjax('student/detail_student_info', ['model' => $model]);
         } else {
-            return $this->renderAjax('detail_teacher_info', ['model' => $model]);
+            return $this->renderAjax('teacher/detail_teacher_info', ['model' => $model]);
         }
     }
 
     public function actionHistoryTransactionInfo()
     {
-        $user_id = Yii::$app->user->identity->id;
-        $object = $this->getObject($user_id);
+        $object = $this->model;
         if ($object instanceof Student) {
             $history_charging = [];
             $history_transaction = [];
-            return $this->renderAjax('history_transaction_info', [
+            return $this->renderAjax('student/history_transaction_info', [
                 'model' => $object,
                 'history_charging' => $history_charging,
                 'history_transaction' => $history_transaction
@@ -108,10 +121,9 @@ class AccountController extends Controller
 
     public function actionUserPackage()
     {
-        $user_id = Yii::$app->user->identity->id;
-        $object = $this->getObject($user_id);
+        $object = $this->model;
         if ($object instanceof Student) {
-            return $this->renderAjax('user_package', [
+            return $this->renderAjax('student/user_package', [
                 'model' => $object,
             ]);
         }
@@ -120,9 +132,9 @@ class AccountController extends Controller
 
     public function actionCharging()
     {
-        $model = $this->getObject();
+        $model = $this->model;
         if ($model instanceof Student) {
-            return $this->render('charging');
+            return $this->render('student/charging');
         } else {
             return new NotFoundHttpException("Not Found");
         }
@@ -181,7 +193,7 @@ class AccountController extends Controller
         if (!$request) {
             Yii::$app->end();
         }
-        $model = $this->getObject();
+        $model = $this->model;
         if ($model instanceof Student) {
             $user = User::findOne(['type' => 1, 'student_id' => $model['std_id']]);
 
@@ -214,11 +226,35 @@ class AccountController extends Controller
         }
     }
 
+    public function actionGetCourseTeacher()
+    {
+        if ($this->model instanceof Teacher) {
+            $list_course = Course::list_course_by_teacher($this->model->tch_id);
+            return $this->renderAjax('teacher/teacher_list_course', [
+                'list_course' => $list_course
+            ]);
+        }
+        return '';
+    }
+
+    public function actionCreateCourse()
+    {
+        $object = $this->model;
+        if ($object instanceof Teacher) {
+            $model = new Course();
+            return $this->render('teacher/create_course', [
+                'object' => $object,
+                'model' => $model
+            ]);
+        }
+        return '';
+    }
+
     private function getObject()
     {
         $object = Yii::$app->user->identity;
         if (empty($object)) {
-            return $this->redirect(Url::toRoute(['/account/login']));
+            return null;
         }
         if ($object['type'] == 1) {
             $model = Student::findOne(['std_id' => $object['student_id']]);

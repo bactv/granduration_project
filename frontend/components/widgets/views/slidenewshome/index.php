@@ -25,29 +25,17 @@ AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel');
     }
 </style>
 
-<div id="owl-demo" class="owl-carousel owl-theme">
-    <div class="item">
-        <img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_2/002.jpg' ?>">
+<?php if (count($list_slides) > 0) { ?>
+    <div id="owl-demo" class="owl-carousel owl-theme">
+        <?php foreach ($list_slides as $slide) { ?>
+            <div class="item">
+                <a href="<?php echo $slide['url'] ?>" target="_blank">
+                    <img src="<?php echo Yii::$app->params['storage_url'] . Yii::$app->params['img_url']['slideshow']['folder'] . '/' . $slide['id'] . '.png' ?>" alt="<?php echo $slide['alt'] ?>">
+                </a>
+            </div>
+        <?php } ?>
     </div>
-    <div class="item">
-        <img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_2/003.jpg' ?>">
-    </div>
-    <div class="item">
-        <img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_2/004.jpg' ?>">
-    </div>
-    <div class="item">
-        <img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_2/005.jpg' ?>">
-    </div>
-    <div class="item">
-        <img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_2/006.jpg' ?>">
-    </div>
-    <div class="item">
-        <img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_2/007.jpg' ?>">
-    </div>
-    <div class="item">
-        <img src="<?php echo AssetApp::getImageBaseUrl() . '/slide_2/008.jpg' ?>">
-    </div>
-</div>
+<?php } ?>
 
 <script>
     $(document).ready(function () {

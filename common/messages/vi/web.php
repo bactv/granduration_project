@@ -27,5 +27,6 @@ return [
     'Std Phone' => 'Số ĐT',
     'Std Birthday' => 'Ngày sinh',
     'Std School Name' => 'Trường',
-    ''
+
+    'Create Course' => 'Tạo khóa học mới'
 ];

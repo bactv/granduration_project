@@ -25,4 +25,9 @@ class CourseController extends Controller
     {
         return $this->render('course_detail');
     }
+
+    public function actionOnCourse()
+    {
+        
+    }
 }

@@ -8,8 +8,9 @@
 namespace frontend\controllers;
 
 use frontend\components\FrontendController;
+use yii\web\Controller;
 
-class TeacherController extends FrontendController
+class TeacherController extends Controller
 {
     public function actionIndex()
     {

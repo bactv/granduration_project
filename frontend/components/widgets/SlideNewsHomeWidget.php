@@ -8,6 +8,7 @@
 namespace frontend\components\widgets;
 
 use frontend\components\WidgetBase;
+use frontend\models\Slideshow;
 use Yii;
 
 class SlideNewsHomeWidget extends WidgetBase
@@ -23,6 +24,7 @@ class SlideNewsHomeWidget extends WidgetBase
 
     public function run()
     {
+        $this->arr_items = Slideshow::findAll(['status' => 1]);
         return $this->render($this->dir . DIRECTORY_SEPARATOR . $this->view, [
             'list_slides' => $this->arr_items,
         ]);

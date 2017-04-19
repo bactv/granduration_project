@@ -162,5 +162,7 @@ return [
     'Tch Avatar' => 'Ảnh đại diện',
     'Std Status' => 'Trạng thái',
     'Std Created Time' => 'Ngày tạo',
-    'Std Updated Time' => 'Ngày cập nhật'
+    'Std Updated Time' => 'Ngày cập nhật',
+
+    ''
 ];

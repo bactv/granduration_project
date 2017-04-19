@@ -16,6 +16,9 @@ return [
         ],
         'avatar_teacher' => [
             'folder' => 'avatar_teacher',
+        ],
+        'slideshow' => [
+            'folder' => 'slideshow',
         ]
     ],
     'ftp' => [
