@@ -8,6 +8,10 @@
 use kartik\helpers\Html;
 use kartik\icons\Icon;
 use yii\helpers\Url;
+use frontend\models\Subject;
+use frontend\models\ClassLevel;
+use frontend\models\CourseType;
+use common\components\Utility;
 
 Icon::map($this, Icon::FA);
 
@@ -39,9 +43,29 @@ Icon::map($this, Icon::FA);
         </thead>
         <tbody>
         <?php if (isset($list_course) && count($list_course) > 0) { ?>
-            <?php foreach ($list_course as $course) { ?>
+            <?php foreach ($list_course as $k => $course) { ?>
                 <tr>
-
+                    <td class="txt_center"><?php echo ($k + 1) ?></td>
+                    <td class="txt_center"><a href="#" target="_blank"><?php echo $course['course_name'] ?></a></td>
+                    <td class="txt_center"><?php echo Subject::getAttributeValue(['subject_id' => $course['subject_id']], 'subject_name') ?></td>
+                    <td class="txt_center"><?php echo ClassLevel::getAttributeValue(['class_level_id' => $course['class_level_id']], 'class_level_name') ?></td>
+                    <td class="txt_center"><?php echo CourseType::getAttributeValue(['type_id' => $course['course_type_id']], 'type_name') ?></td>
+                    <td class="txt_center"><?php echo number_format($course['price']) ?></td>
+                    <td class="txt_center"><?php echo Utility::formatDataTime($course['signed_to_date'], '-', '/') ?></td>
+                    <td class="txt_center"><?php echo Utility::formatDataTime($course['start_date'], '-', '/') ?></td>
+                    <td class="txt_center"><?php echo Utility::formatDataTime($course['end_date'], '-', '/') ?></td>
+                    <td class="txt_center"><?php echo $course['privacy'] == 1 ? 'Công khai' : 'Riêng tư' ?></td>
+                    <td class="txt_center">
+                        <?php
+                        if ($course['approved'] == 1) {
+                            echo "ĐÃ PHÊ DUYỆT";
+                        } else if ($course['approved'] == 0) {
+                            echo "ĐANG CHỜ PHÊ DUYỆT";
+                        } else if ($course['approved'] == -1) {
+                            echo "ĐÃ TỪ CHỐI";
+                        }
+                        ?>
+                    </td>
                 </tr>
             <?php } ?>
         <?php } else { ?>
@@ -54,6 +78,9 @@ Icon::map($this, Icon::FA);
 </div>
 
 <style>
+    .table > tbody > tr > td {
+        vertical-align: middle;
+    }
     .table > thead > tr > th {
         text-align: center;
         vertical-align: middle;

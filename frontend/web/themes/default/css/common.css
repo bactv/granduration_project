@@ -60,3 +60,10 @@ legend {
     padding: 5px 5px 5px 10px;
     background-color: #ffffff;
 }
+
+form .control-label {
+    text-align: left !important;
+}
+.form-horizontal .form-group {
+    margin: 0;
+}

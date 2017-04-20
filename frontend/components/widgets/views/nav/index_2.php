@@ -121,8 +121,8 @@ Icon::map($this, Icon::FA);
                     </a>
                 </li>
             <?php } else { ?>
-                <li class="pos_right"><span><a href="<?php echo Url::toRoute(['/account/create-account']) ?>" target="_blank">Đăng ký</a></span></li>
-                <li class="pos_right"><span><a href="<?php echo Url::toRoute(['/account/login']) ?>" target="_blank">Đăng nhập</a></span></li>
+                <li class="pos_right"><span><a href="<?php echo Url::toRoute(['/site/signup']) ?>" target="_blank">Đăng ký</a></span></li>
+                <li class="pos_right"><span><a href="<?php echo Url::toRoute(['/site/login']) ?>" target="_blank">Đăng nhập</a></span></li>
             <?php } ?>
         </ul>
     </div>

@@ -44,7 +44,7 @@ class CourseDB extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['course_name', 'party_id', 'course_type_id', 'class_level_id'], 'required'],
+            [['course_name', 'course_description', 'course_type_id', 'subject_id', 'class_level_id'], 'required'],
             [['course_description'], 'string'],
             [['teacher_id', 'party_id', 'course_type_id', 'subject_id', 'class_level_id', 'privacy', 'status', 'approved', 'approver', 'created_by', 'updated_by'], 'integer'],
             [['price'], 'number'],

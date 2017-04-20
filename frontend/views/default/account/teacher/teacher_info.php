@@ -9,10 +9,21 @@
 use common\components\AssetApp;
 use kartik\icons\Icon;
 use yii\helpers\Url;
+use yii\bootstrap\Alert;
 
 Icon::map($this, Icon::FA);
 
 ?>
+
+<?php
+if (Yii::$app->session->hasFlash('success')) {
+    echo Alert::widget([
+        'options' => ['class' => 'alert-info'],
+        'body' => Yii::$app->session->getFlash('success'),
+    ]);
+}
+?>
+
 <div class="user_info">
     <p class="txt_center m_color f_s_30">Thông tin cá nhân</p>
     <div class="row">

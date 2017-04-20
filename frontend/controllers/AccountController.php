@@ -16,6 +16,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Url;
+use yii\web\UploadedFile;
 
 class AccountController extends Controller
 {
@@ -31,52 +32,6 @@ class AccountController extends Controller
         if (empty($this->model)) {
             throw new NotFoundHttpException("Trang bạn tìm kiếm không tồn tại");
         }
-    }
-
-    public function actionCreateAccount($type = null)
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->redirect(['/site/index']);
-        }
-
-        $model = new Student();
-        if ($type != 'teacher') {
-            $model = new Student();
-            $model->scenario = 'create';
-        }
-        if ($type == 'teacher') {
-            $model = new Teacher();
-        }
-
-        if ($model->load(Yii::$app->request->post()) && $model->signup($model)) {
-            return $this->redirect(Url::toRoute(['/account/login', 'type' => ($type == 'teacher' ? 'teacher' : 'student')]));
-        }
-        return $this->render('create_account', [
-            'model' => $model,
-            'type' => $type
-        ]);
-    }
-
-    public function actionLogin($type = '')
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->redirect(['/site/index']);
-        }
-        $model = new User();
-        $model->scenario = 'login';
-        if ($model->load(Yii::$app->request->post()) && $model->login($type)) {
-            return $this->goBack();
-        }
-        return $this->render('login', [
-            'model' => $model,
-            'type' => $type
-        ]);
-    }
-
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-        return $this->goHome();
     }
 
     /**
@@ -242,6 +197,34 @@ class AccountController extends Controller
         $object = $this->model;
         if ($object instanceof Teacher) {
             $model = new Course();
+
+            $request = Yii::$app->request->post();
+
+            if ($model->load($request)) {
+                $model->video_intro = UploadedFile::getInstance($model, 'video_intro');
+                $model->lecture_note = UploadedFile::getInstance($model, 'lecture_note');
+
+                $model->teacher_id = $object->tch_id;
+                $model->created_time = date('Y-m-d H:i:s');
+                $model->updated_time = date('Y-m-d H:i:s');
+                $model->created_by = $object->tch_id;
+                $model->updated_by = $object->tch_id;
+                $model->signed_to_date = Utility::formatDataTime($model->signed_to_date, '/', '-');
+                $model->start_date = Utility::formatDataTime($model->start_date, '/', '-');
+                $model->end_date = Utility::formatDataTime($model->end_date, '/', '-');
+
+                if ($model->save() && $model->upload_file('video_intro', $object->tch_id, $model->course_id, 'video_intro')
+                    && $model->upload_file('lecture_note', $object->tch_id, $model->course_id, 'lecture_note')) {
+                    Yii::$app->session->setFlash('success', 'Bạn đã tạo thành công khóa học. Hệ thống sẽ xem xét và trả lời bạn trong thời gian sớm nhất.');
+                    return $this->redirect(Url::toRoute(['account/info']));
+                } else {
+                    Yii::$app->session->setFlash('error', 'Có lỗi xảy ra. Vui lòng kiểm tra lại các thông tin đã nhập.');
+                    return $this->render('teacher/create_course', [
+                        'object' => $object,
+                        'model' => $model
+                    ]);
+                }
+            }
             return $this->render('teacher/create_course', [
                 'object' => $object,
                 'model' => $model

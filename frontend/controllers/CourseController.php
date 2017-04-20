@@ -28,6 +28,6 @@ class CourseController extends Controller
 
     public function actionOnCourse()
     {
-        
+
     }
 }
