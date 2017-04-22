@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-04-21 00:47:16
+Date: 2017-04-22 18:12:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -309,7 +309,8 @@ CREATE TABLE `course` (
   `subject_id` int(11) NOT NULL,
   `class_level_id` int(11) NOT NULL,
   `privacy` tinyint(5) DEFAULT '1' COMMENT '1: public, 2: private',
-  `status` tinyint(1) DEFAULT '1' COMMENT '1: active, 0: deactive',
+  `status` tinyint(1) DEFAULT '1' COMMENT '1: dang active, 2: da dong, 3: da huy',
+  `deleted` tinyint(1) DEFAULT '0' COMMENT '1: delete, 0: not delete',
   `approved` tinyint(1) DEFAULT '0' COMMENT '0: chua duoc phe duyet, 1: da phe duyet, -1: tu choi phe duyet',
   `approver` int(11) DEFAULT '0',
   `created_time` datetime DEFAULT NULL,
@@ -322,7 +323,7 @@ CREATE TABLE `course` (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES ('1', 'Khóa Học 1', '<p>Trong b&agrave;i ph&aacute;t biểu trước thềm trận đấu với Anderlecht, HLV Mourinho tỏ ra căng thẳng khi n&oacute;i về Martial. Chiến lược gia người Bồ Đ&agrave;o Nha giải th&iacute;ch nguy&ecirc;n nh&acirc;n loại bỏ tiền đạo 36 triệu bảng thời gian qua ho&agrave;n to&agrave;n v&igrave; l&yacute; do chuy&ecirc;n m&ocirc;n.</p>\r\n\r\n<p>&quot;Ch&uacute;ng t&ocirc;i đ&atilde; c&oacute; 10 th&aacute;ng l&agrave;m việc c&ugrave;ng nhau nhưng t&ocirc;i kh&ocirc;ng nhận thấy những tiến triển từ Martial. Cậu ấy muốn ra s&acirc;n th&igrave; cần phải cho t&ocirc;i nh&igrave;n thấy những điều t&ocirc;i mong muốn. Tại MU, mọi cơ hội đều rộng mở.&nbsp;</p>\r\n\r\n<p>&quot;Rashford l&agrave; trường hợp tương tự Martial nhưng t&ocirc;i đang d&ugrave;ng cậu ấy kh&aacute; nhiều. C&oacute; thể Marcus kh&ocirc;ng ghi b&agrave;n nhưng t&ocirc;i lu&ocirc;n thấy được tinh thần tiến về ph&iacute;a trước. Đ&oacute; l&agrave; tố chất bắt buộc của một cầu thủ MU&quot;, HLV Mourinho cho biết.</p>\r\n', '6', null, '1', '10000', '2017-04-11', null, null, '1', '1', '1', '1', '0', '0', '2017-04-21 00:27:40', '2017-04-21 00:27:40', '6', '6');
+INSERT INTO `course` VALUES ('1', 'Khóa Học 1', '<p>Trong b&agrave;i ph&aacute;t biểu trước thềm trận đấu với Anderlecht, HLV Mourinho tỏ ra căng thẳng khi n&oacute;i về Martial. Chiến lược gia người Bồ Đ&agrave;o Nha giải th&iacute;ch nguy&ecirc;n nh&acirc;n loại bỏ tiền đạo 36 triệu bảng thời gian qua ho&agrave;n to&agrave;n v&igrave; l&yacute; do chuy&ecirc;n m&ocirc;n.</p>\r\n\r\n<p>&quot;Ch&uacute;ng t&ocirc;i đ&atilde; c&oacute; 10 th&aacute;ng l&agrave;m việc c&ugrave;ng nhau nhưng t&ocirc;i kh&ocirc;ng nhận thấy những tiến triển từ Martial. Cậu ấy muốn ra s&acirc;n th&igrave; cần phải cho t&ocirc;i nh&igrave;n thấy những điều t&ocirc;i mong muốn. Tại MU, mọi cơ hội đều rộng mở.&nbsp;</p>\r\n\r\n<p>&quot;Rashford l&agrave; trường hợp tương tự Martial nhưng t&ocirc;i đang d&ugrave;ng cậu ấy kh&aacute; nhiều. C&oacute; thể Marcus kh&ocirc;ng ghi b&agrave;n nhưng t&ocirc;i lu&ocirc;n thấy được tinh thần tiến về ph&iacute;a trước. Đ&oacute; l&agrave; tố chất bắt buộc của một cầu thủ MU&quot;, HLV Mourinho cho biết.</p>\r\n', '6', null, '1', '0', '2017-04-11', null, null, '1', '1', '1', '1', '0', '1', '0', '2017-04-21 00:27:40', '2017-04-21 00:27:40', '6', '6');
 
 -- ----------------------------
 -- Table structure for course_right
@@ -429,6 +430,40 @@ CREATE TABLE `feedback` (
 
 -- ----------------------------
 -- Records of feedback
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for feedback_to_teacher
+-- ----------------------------
+DROP TABLE IF EXISTS `feedback_to_teacher`;
+CREATE TABLE `feedback_to_teacher` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `teacher_id` int(11) NOT NULL,
+  `status_view` tinyint(1) DEFAULT '0' COMMENT '1: da xem, 0: chua xem',
+  `created_time` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of feedback_to_teacher
+-- ----------------------------
+INSERT INTO `feedback_to_teacher` VALUES ('1', 'Siêu kinh điển Barca-Real: Messi & Ronaldo chờ chiều tàn, Siêu kinh điển Barca-Real: Messi & Ronaldo chờ chiều tàn', '<p>Trận Siêu kinh điển La Liga giữa Real Madrid và Barcelona phải chăng cũng sẽ là lần cuối Ronaldo và Messi đối đầu nhau khi vẫn đang ở đỉnh cao phong độ?</p>\n', '6', '1', '2017-04-22 14:08:49', '1');
+
+-- ----------------------------
+-- Table structure for free_lession_on_course
+-- ----------------------------
+DROP TABLE IF EXISTS `free_lession_on_course`;
+CREATE TABLE `free_lession_on_course` (
+  `course_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `number_lession` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of free_lession_on_course
 -- ----------------------------
 
 -- ----------------------------
