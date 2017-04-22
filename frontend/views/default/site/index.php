@@ -48,6 +48,10 @@ $this->title = 'Study.EDU - Hệ thống học tập trực tuyên';
 </div>
 <div class="row list_course">
     <div class="container center-align">
-        <?php echo ListCourseWidget::widget([]) ?>
+        <!-- Khóa học miễn phí -->
+        <?php echo ListCourseWidget::widget([
+            'title' => 'Khóa học miễn phí',
+            'type' => 'free'
+        ]) ?>
     </div>
 </div>

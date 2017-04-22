@@ -102,23 +102,11 @@ Icon::map($this, Icon::FA);
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo Url::toRoute(['/default/logout']) ?>">
+                            <a href="<?php echo Url::toRoute(['/site/logout']) ?>">
                                 <?php echo Icon::show('circle-o-notch ') ?> Đăng xuất
                             </a>
                         </li>
                     </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <div onclick="notification_event()" id="notification">
-                            <span class="glyphicon glyphicon-comment" style="color: #0ead8e;font-size: 20px"></span>
-                            <span class="badge badge-notify">3</span>
-                        </div>
-                        <ul class="dropdown-menu dropdown-menu-right notification">
-                            <li><a href="">1. ABC CBD DFG HHD JDD DSD  DSJ DJS DJS DJSH DJSH DJSHJ DSJ DHSJ HDJSH JD  D </a></li>
-                            <li><a href="">2. SAD LASKDJKSAJDKLSA JKDJSA LDJKSA JDKSAJ KDLJSAK LDJKSA JKDSAJDKA SDAS S DASDASDSADS </a></li>
-                        </ul>
-                    </a>
                 </li>
             <?php } else { ?>
                 <li class="pos_right"><span><a href="<?php echo Url::toRoute(['/site/signup']) ?>" target="_blank">Đăng ký</a></span></li>

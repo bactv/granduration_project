@@ -67,5 +67,14 @@ class Teacher extends \common\models\TeacherBase
         }
     }
 
+    public static function getAttributeValue($conditions, $attribute)
+    {
+        $object = self::findOne($conditions);
+        if (!empty($object) && isset($object->{$attribute})) {
+            return $object->{$attribute};
+        }
+        return '';
+    }
+
 
 }

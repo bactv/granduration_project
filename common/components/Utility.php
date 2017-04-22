@@ -113,4 +113,55 @@ class Utility
         $headers=get_headers($url);
         return stripos($headers[0],"200 OK")?true:false;
     }
+
+    public static function get_content_static($path, $name)
+    {
+        $extensions = ['mp4', 'mp3', 'flv', 'avi', 'jpg', 'jpeg', 'gif', 'png', 'doc', 'docx', 'pdf'];
+        $url_remote = Yii::$app->params['storage_url'];
+
+        foreach ($extensions as $e) {
+            $p = $url_remote . $path . $name . '.' . $e;
+            if (self::checkRemoteFile($p)) {
+                return $p;
+            }
+        }
+        return null;
+    }
+
+    private static function checkRemoteFile($url)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$url);
+        // don't download content
+        curl_setopt($ch, CURLOPT_NOBODY, 1);
+        curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        if(curl_exec($ch) !== FALSE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function truncateStringWords($str, $maxlen) {
+        if (strlen($str) <= $maxlen) {
+            return $str;
+        }
+
+        $newstr = substr($str, 0, $maxlen);
+        if (substr($newstr, -1, 1) != ' ') {
+            $newstr = substr($newstr, 0, strrpos($newstr, " "));
+        }
+        return $newstr;
+    }
+
+    public static function encrypt_decrypt($action, $string) {
+        $key = Yii::$app->params['key_encrypt'];
+
+        if ($action == 'encrypt') {
+            return base64_encode($key . '_' . $string);
+        } else if ($action == 'decrypt'){
+            return base64_decode($string);
+        }
+    }
 }

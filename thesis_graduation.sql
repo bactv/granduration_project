@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-04-20 00:49:00
+Date: 2017-04-21 00:47:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -298,30 +298,31 @@ DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course` (
   `course_id` int(11) NOT NULL AUTO_INCREMENT,
   `course_name` varchar(255) NOT NULL,
-  `course_description` text,
+  `course_description` text NOT NULL,
   `teacher_id` int(11) DEFAULT NULL COMMENT 'giao vien day',
-  `party_id` int(11) NOT NULL COMMENT 'don vi cung cap noi dung',
+  `party_id` int(11) DEFAULT NULL COMMENT 'don vi cung cap noi dung',
   `course_type_id` int(11) NOT NULL,
   `price` decimal(11,0) DEFAULT '0',
   `signed_to_date` date DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
-  `subject_id` int(11) DEFAULT NULL,
+  `subject_id` int(11) NOT NULL,
   `class_level_id` int(11) NOT NULL,
   `privacy` tinyint(5) DEFAULT '1' COMMENT '1: public, 2: private',
   `status` tinyint(1) DEFAULT '1' COMMENT '1: active, 0: deactive',
   `approved` tinyint(1) DEFAULT '0' COMMENT '0: chua duoc phe duyet, 1: da phe duyet, -1: tu choi phe duyet',
-  `approver` int(11) DEFAULT NULL,
+  `approver` int(11) DEFAULT '0',
   `created_time` datetime DEFAULT NULL,
   `updated_time` datetime DEFAULT NULL,
   `created_by` int(11) DEFAULT '0',
   `updated_by` int(11) DEFAULT '0',
   PRIMARY KEY (`course_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of course
 -- ----------------------------
+INSERT INTO `course` VALUES ('1', 'Khóa Học 1', '<p>Trong b&agrave;i ph&aacute;t biểu trước thềm trận đấu với Anderlecht, HLV Mourinho tỏ ra căng thẳng khi n&oacute;i về Martial. Chiến lược gia người Bồ Đ&agrave;o Nha giải th&iacute;ch nguy&ecirc;n nh&acirc;n loại bỏ tiền đạo 36 triệu bảng thời gian qua ho&agrave;n to&agrave;n v&igrave; l&yacute; do chuy&ecirc;n m&ocirc;n.</p>\r\n\r\n<p>&quot;Ch&uacute;ng t&ocirc;i đ&atilde; c&oacute; 10 th&aacute;ng l&agrave;m việc c&ugrave;ng nhau nhưng t&ocirc;i kh&ocirc;ng nhận thấy những tiến triển từ Martial. Cậu ấy muốn ra s&acirc;n th&igrave; cần phải cho t&ocirc;i nh&igrave;n thấy những điều t&ocirc;i mong muốn. Tại MU, mọi cơ hội đều rộng mở.&nbsp;</p>\r\n\r\n<p>&quot;Rashford l&agrave; trường hợp tương tự Martial nhưng t&ocirc;i đang d&ugrave;ng cậu ấy kh&aacute; nhiều. C&oacute; thể Marcus kh&ocirc;ng ghi b&agrave;n nhưng t&ocirc;i lu&ocirc;n thấy được tinh thần tiến về ph&iacute;a trước. Đ&oacute; l&agrave; tố chất bắt buộc của một cầu thủ MU&quot;, HLV Mourinho cho biết.</p>\r\n', '6', null, '1', '10000', '2017-04-11', null, null, '1', '1', '1', '1', '0', '0', '2017-04-21 00:27:40', '2017-04-21 00:27:40', '6', '6');
 
 -- ----------------------------
 -- Table structure for course_right
@@ -347,7 +348,6 @@ CREATE TABLE `course_time_learning` (
   `course_id` int(11) NOT NULL,
   `weekday` int(11) DEFAULT NULL COMMENT '1: monday, 2: tuesday, ..., 7: sunday',
   `time_start` time DEFAULT NULL,
-  `course_start` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -102,4 +102,13 @@ class Teacher extends \common\models\TeacherBase
     {
         return md5($password);
     }
+
+    public static function getAttributeValue($conditions, $attribute)
+    {
+        $object = self::findOne($conditions);
+        if (!empty($object) && isset($object->{$attribute})) {
+            return $object->{$attribute};
+        }
+        return '';
+    }
 }

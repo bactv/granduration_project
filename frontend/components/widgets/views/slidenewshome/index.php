@@ -8,10 +8,10 @@
 
 use common\components\AssetApp;
 
-AssetApp::regJsFilePlugin('owl.carousel.js', 'owl-carousel');
-AssetApp::regCssFilePlugin('owl.carousel.css', 'owl-carousel');
-AssetApp::regCssFilePlugin('owl.theme.css', 'owl-carousel');
-AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel');
+AssetApp::regJsFilePlugin('owl.carousel.js', 'owl-carousel', true);
+AssetApp::regCssFilePlugin('owl.carousel.css', 'owl-carousel', true);
+AssetApp::regCssFilePlugin('owl.theme.css', 'owl-carousel', true);
+AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel', true);
 ?>
 
 <style>

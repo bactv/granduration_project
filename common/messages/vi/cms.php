@@ -164,5 +164,25 @@ return [
     'Std Created Time' => 'Ngày tạo',
     'Std Updated Time' => 'Ngày cập nhật',
 
-    ''
+    'Refuse' => 'Từ chối',
+    'Approved' => 'Chấp nhận',
+    'Courses' => 'Khóa học',
+    'Course ID' => 'ID',
+    'Party' => 'Đối tác cung cấp',
+    'Course Name' => 'Khóa học',
+    'Teacher' => 'Giáo viên',
+    'Course Type ID' => 'Hình thức khóa học',
+    'Price' => 'Học phí',
+    'Privacy' => 'Quyền riêng tư',
+    'Approved Status' => 'Tìn trạng xét duyệt',
+    'Course Description' => 'Mô tả khóa học',
+    'Start Date' => 'Ngày khai giảng',
+    'End Date' => 'Ngày bế giảng',
+    'Signed To Date' => 'Hạn đăng ký',
+    'Approver' => 'Người xét duyệt',
+    'Video Intro' => 'Video giới thiệu',
+    'Lecture Note' => 'Đề cương khóa học',
+
+    'Send' => 'Gửi',
+    'Cancel' => 'Hủy'
 ];

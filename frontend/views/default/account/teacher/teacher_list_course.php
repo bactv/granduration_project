@@ -43,10 +43,15 @@ Icon::map($this, Icon::FA);
         </thead>
         <tbody>
         <?php if (isset($list_course) && count($list_course) > 0) { ?>
-            <?php foreach ($list_course as $k => $course) { ?>
+            <?php foreach ($list_course as $k => $course) {
+                $url_on_course = '';
+                if ($course['approved'] == 1) {
+                    $url_on_course = Url::toRoute(['/course/on-course', 'id' => Utility::encrypt_decrypt('encrypt', $course['course_id'])]);
+                }
+                ?>
                 <tr>
                     <td class="txt_center"><?php echo ($k + 1) ?></td>
-                    <td class="txt_center"><a href="#" target="_blank"><?php echo $course['course_name'] ?></a></td>
+                    <td class="txt_center"><a href="<?php echo $url_on_course  ?>" target="_blank"><?php echo $course['course_name'] ?></a></td>
                     <td class="txt_center"><?php echo Subject::getAttributeValue(['subject_id' => $course['subject_id']], 'subject_name') ?></td>
                     <td class="txt_center"><?php echo ClassLevel::getAttributeValue(['class_level_id' => $course['class_level_id']], 'class_level_name') ?></td>
                     <td class="txt_center"><?php echo CourseType::getAttributeValue(['type_id' => $course['course_type_id']], 'type_name') ?></td>

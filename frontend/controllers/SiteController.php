@@ -75,7 +75,11 @@ class SiteController extends Controller
         $model = new User();
         $model->scenario = 'login';
         if ($model->load(Yii::$app->request->post()) && $model->login($type)) {
-            return $this->goBack();
+            if ($model->type == 1) {
+                return $this->redirect(Url::toRoute(['/site']));
+            } else {
+                return $this->redirect(Url::toRoute(['/account/info']));
+            }
         }
         return $this->render('login', [
             'model' => $model,

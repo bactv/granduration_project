@@ -9,6 +9,7 @@ namespace frontend\controllers;
 
 use common\components\Utility;
 use frontend\models\Course;
+use frontend\models\FeedbackToTeacher;
 use frontend\models\Student;
 use frontend\models\Teacher;
 use frontend\models\User;
@@ -231,6 +232,22 @@ class AccountController extends Controller
             ]);
         }
         return '';
+    }
+
+    public function actionUpdateNotification()
+    {
+        if (!Yii::$app->request->isAjax || !Yii::$app->request->isPost) {
+            Yii::$app->end();
+        }
+        $request = Yii::$app->request->post();
+        $feed_id = isset($request['feed_id']) ? $request['feed_id'] : '';
+        if ($feed_id == '') {
+            Yii::$app->end();
+        }
+        $model = FeedbackToTeacher::findOne(['id' => $feed_id]);
+        $model->status_view = 1;
+        $model->save();
+        Yii::$app->end();
     }
 
     private function getObject()
