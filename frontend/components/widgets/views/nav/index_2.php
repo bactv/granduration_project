@@ -115,6 +115,7 @@ Icon::map($this, Icon::FA);
         </ul>
     </div>
 </div>
+
 <script>
     function toggle_nav() {
         $(".nav2 ul").fadeToggle(300);

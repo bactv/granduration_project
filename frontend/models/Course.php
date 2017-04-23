@@ -2,8 +2,11 @@
 
 namespace frontend\models;
 
+use backend\models\Party;
 use common\components\Utility;
 use Yii;
+use yii\data\Pagination;
+use yii\db\Query;
 
 
 class Course extends \common\models\CourseBase
@@ -93,5 +96,41 @@ class Course extends \common\models\CourseBase
         } else {
             return false;
         }
+    }
+
+    public static function search_course($params = [])
+    {
+        $query = (new Query())
+            ->select('*')
+            ->from('course')
+            ->where([
+               'privacy' => 1,
+                'status' => 1,
+                'deleted' => 0,
+                'approved' => 1
+            ]);
+        if (!empty($params['class_id'])) {
+            $query->andWhere(['class_level_id' => $params['class_id']]);
+        }
+        if (!empty($params['subject_id'])) {
+            $query->andWhere(['subject_id' => $params['subject_id']]);
+        }
+        $pagination = new Pagination(['totalCount' => $query->count()]);
+        $results = $query->limit($pagination->limit)
+            ->offset($pagination->offset)
+            ->all();
+        return compact('pagination', 'results');
+    }
+
+    public static function get_course_active($course_id)
+    {
+        $object = Course::findOne([
+            'course_id' => $course_id,
+            'approved' => 1,
+            'deleted' => 0,
+            'status' => 1,
+            'privacy' => 1
+        ]);
+        return $object;
     }
 }

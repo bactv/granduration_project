@@ -108,4 +108,23 @@ class Student extends \common\models\StudentBase
     {
         return md5($password);
     }
+
+    /**
+     * Cộng / trừ tiền tài khoản
+     * @param $user_id
+     * @param int $balance
+     * @return bool
+     */
+    public static function charge_money($user_id, $balance = 0)
+    {
+        $user = Student::findOne(['std_id' => $user_id]);
+        if (empty($user)) {
+            return false;
+        }
+        $user->std_balance += $balance;
+        if ($user->save()) {
+            return true;
+        }
+        return false;
+    }
 }

@@ -6,10 +6,10 @@
  * Tìm kiếm khóa học
  */
 function search_course() {
-    var classses = $("#class").val();
-    var subject = $("#subject").val();
+    var class_id = $("#class_id").val();
+    var subject_id = $("#subject_id").val();
 
-    window.location = '/course/search-course.html?classes=' + classses + '&subject=' + subject;
+    window.location = '/course/search-course.html?class_id=' + class_id + '&subject_id=' + subject_id;
 }
 
 /**

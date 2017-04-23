@@ -5,6 +5,9 @@
 use frontend\components\widgets\SlideNewsHomeWidget;
 use frontend\components\widgets\ListCourseWidget;
 use kartik\helpers\Html;
+use frontend\models\ClassLevel;
+use frontend\models\Subject;
+use yii\helpers\ArrayHelper;
 
 $this->title = 'Study.EDU - Hệ thống học tập trực tuyên';
 ?>
@@ -20,22 +23,20 @@ $this->title = 'Study.EDU - Hệ thống học tập trực tuyên';
         <div class="col-md-2"></div>
         <div class="col-md-2">
             <div class="form-group">
-                <label for="choose-class">Chọn lớp:</label>
-                <?php echo Html::dropDownList('class', '', [1 => 'Lớp 1', 2 => 'Lớp 2', 3 => 'Lớp 3'], [
+                <label for="choose-class">Chọn môn học:</label>
+                <?php echo Html::dropDownList('class', '', ArrayHelper::map(Subject::find()->all(), 'subject_id', 'subject_name'), [
                     'class' => 'form-control',
-                    'prompt' => '-- Lớp học --',
-                    'id' => 'class',
+                    'id' => 'subject_id',
                 ]) ?>
             </div>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-2">
             <div class="form-group">
-                <label for="choose-subject">Chọn môn học:</label>
-                <?php echo Html::dropDownList('subject', '', [1 => 'Toán học', 2 => 'Văn học', 3 => 'Sinh học'], [
+                <label for="choose-subject">Chọn lớp:</label>
+                <?php echo Html::dropDownList('subject', '', ArrayHelper::map(ClassLevel::find()->all(), 'class_level_id', 'class_level_name'), [
                     'class' => 'form-control',
-                    'prompt' => '-- Môn học --',
-                    'id' => 'subject',
+                    'id' => 'class_id',
                 ]) ?>
             </div>
         </div>

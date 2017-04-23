@@ -10,6 +10,9 @@ use common\components\AssetApp;
 use kartik\icons\Icon;
 use yii\helpers\Url;
 use frontend\models\Teacher;
+use yii\widgets\LinkPager;
+use frontend\models\StudentCourse;
+use common\components\Utility;
 
 Icon::map($this, Icon::FA);
 
@@ -100,23 +103,30 @@ AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel', true);
 <div class="row course_type">
     <p id="title" class="m_color txt_left"><?php echo Icon::show('bookmark') ?> <?php echo $title ?></p>
     <div id="owl-course" class="owl-carousel owl-theme">
-        <?php foreach ($list_course as $course) { ?>
+        <?php foreach ($list_course as $course) {
+            $course_name = $course['course_name'];
+            $signed_to_date = Utility::formatDataTime($course['signed_to_date'], '-', '/');
+            $fee = number_format($course['price']) . ' VNĐ';
+            $number_signed = number_format(count(StudentCourse::findAll(['course_id' => $course['course_id']]))) . ' đăng ký';
+            $url = Url::toRoute(['/course/detail', 'id' => Utility::encrypt_decrypt('encrypt', $course['course_id'])]);
+            $teacher_name = Teacher::getAttributeValue(['tch_id' => $course['teacher_id']], 'tch_full_name');
+            ?>
             <div class="item">
-                <a href="<?php echo Url::toRoute(['/course/detail']) ?>"><img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>"></a>
+                <a href="<?php echo $url ?>"><img id="course_logo" src="<?php echo AssetApp::getImageBaseUrl() . '/slide_3/019.jpg' ?>"></a>
                 <div class="course_info">
                     <a href="<?php echo Url::toRoute(['/teacher/detail']) ?>">
                         <div class="tch_info">
                             <div class="avatar">
                                 <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/tech_1.jpg' ?>">
                             </div>
-                            <div class="tch_name"><?php echo Teacher::getAttributeValue(['tch_id' => $course['teacher_id']], 'tch_full_name') ?></div>
+                            <div class="tch_name"><?php echo $teacher_name ?></div>
                         </div>
                     </a>
-                    <div class="course_name"><a href="<?php echo Url::toRoute(['/course/course-detail']) ?>"><?php echo $course['course_name'] ?></a></div>
-                    <div class="num_std"><?php echo Icon::show('users') ?> <span id="spe">3000 đăng ký</span></div>
-                    <div class="signed_date"><?php echo Icon::show('calendar') ?> Mở đăng ký: <span id="spe">30/04/2015 - 5/07/2015</span></div>
-                    <div class="course_fee"><?php echo Icon::show('money') ?> Học phí: <span id="spe"><?php echo number_format($course['price'])  . ' VNĐ' ?></span></div>
-                    <div class="view_more"><a href="<?php echo Url::toRoute(['/course/detail']) ?>">Xem thêm >> </a></div>
+                    <div class="course_name"><a href="<?php echo Url::toRoute(['/course/course-detail']) ?>"><?php echo $course_name ?></a></div>
+                    <div class="num_std"><?php echo Icon::show('users') ?> <span id="spe"><?php echo $number_signed ?></span></div>
+                    <div class="signed_date"><?php echo Icon::show('calendar') ?> Hạn đăng ký: <span id="spe"><?php echo $signed_to_date ?></span></div>
+                    <div class="course_fee"><?php echo Icon::show('money') ?> Học phí: <span id="spe"><?php echo $fee ?></span></div>
+                    <div class="view_more"><a href="<?php echo $url ?>">Xem thêm >> </a></div>
                 </div>
             </div>
         <?php } ?>
@@ -124,7 +134,15 @@ AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel', true);
     <div class="view_more"><a href="#">Xem thêm >> </a></div>
 </div>
 
+<?php
+    if (isset($pagination)) {
+        echo LinkPager::widget([
+            'pagination' => $pagination,
+        ]);
+    }
+?>
 
+<script src="/themes/default/js/jquery.min.js"></script>
 
 <script>
     $(document).ready(function () {

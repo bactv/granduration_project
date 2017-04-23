@@ -8,14 +8,16 @@
 use frontend\components\widgets\ListCourseWidget;
 use common\components\AssetApp;
 use kartik\icons\Icon;
+use frontend\models\Teacher;
+use common\components\Utility;
+use frontend\models\StudentCourse;
+use yii\helpers\Url;
 
 $this->title = $this->params['title'] = 'Luyện thi ĐH, CĐ';
 $this->params['breadcrumbs'][] = $this->title;
 
 Icon::map($this, Icon::FA);
 ?>
-
-<?php AssetApp::regJsFile('jquery.sticky-kit.min.js') ?>
 
 <style>
     .course_detail {
@@ -91,48 +93,33 @@ Icon::map($this, Icon::FA);
     }
 </style>
 
+<?php
+    $course_name = $course['course_name'];
+    $teacher_name = Teacher::getAttributeValue(['tch_id' => $course['teacher_id']], 'tch_full_name');
+    $course_des = $course['course_description'];
+    $video = Utility::get_content_static(Yii::$app->params['img_url']['courses_assets']['folder'] .
+        '/' . $course['teacher_id'] . '/' . $course['course_id'] . '/video_intro/', 'video_intro');
+    $signed_to_date = Utility::formatDataTime($course['signed_to_date'], '-', '/');
+    $number_signed = number_format(count(StudentCourse::findAll(['course_id' => $course['course_id']]))) . ' đăng ký';
+    $fee = number_format($course['price']) . ' VNĐ';
+?>
+
 <div class="row course_detail">
     <div class="row">
-        <p id="course_name">LUYỆN THI THPT QUỐC GIA PEN-I: MÔN VẬT LÍ</p>
-        <p id="tch_name">Giáo viên: <a href="#">Đỗ Ngọc Hà</a></p>
+        <p id="course_name"><?php echo $course_name ?></p>
+        <p id="tch_name">Giáo viên: <a href="#"><?php echo $teacher_name ?></a></p>
     </div>
     <div class="row">
         <div class="col-md-8">
             <div class="video-intro">
                 <video controls>
-                    <source src="<?php echo AssetApp::getImageBaseUrl() . '/video/Tim-Mot-Nua-Co-Don-Hoa-Minzy.mp4' ?>" type="video/mp4">
+                    <source src="<?php echo $video ?>" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div class="course_description">
                 <p id="title"><b>Mô tả khóa học</b></p>
-                <div class="detail">
-                    "Hạ gục" mọi dạng bài thường gặp trong đề thi THPT quốc gia là mục tiêu của PEN-I 2017, và điều này được PEN-I thể hiện rất rõ ra 2 thành phần liên quan mật thiết trong khóa học là Đề, bài giảng chữa đề và Phòng luyện.
-
-                    15 đề thi nhận diện tất cả các dạng bài có thể gặp trong đề thi:
-                    15 đề thi được xây dựng theo ma trận dạng bài của đề thi THPT quốc gia, đảm bảo phủ hết ít nhất 1 lượt các dạng bài thường gặp.
-                    10 đề đầu được biên soạn tương đương với đề chính thức, các đề này sẽ cho học sinh thấy những góc cạnh dạng bài khi đi thi, từ đó làm quen và nắm được phương pháp giải của các dạng bài thường gặp.
-                    5 đề tiếp theo được biên soạn khó hơn với đề chính thức (giảm số câu nhận biết, thông hiểu tăng các câu vận dụng, vận dụng cao) sẽ giúp học sinh thử thách và gia tăng cơ hội đạt điểm cao trong đề thi THPT quốc gia.
-                    Bài giảng chữa đề vô cùng xúc tích, ngắn gọn, giáo viên sẽ khái quát thành dấu hiệu nhận biết, cũng như phương pháp giải tổng quát cho từng dạng bài. Bài giảng được chia thành nhiều clip nhỏ, mỗi clip sẽ chữa 1 câu hỏi trong đề thi, học sinh có thể lựa chọn câu hỏi muốn xem để có thời gian học hợp lí và hiệu quả.
-                    20000+ câu rèn phương pháp và kĩ năng làm bài
-                    Luyện theo chuyên đề hoặc luyện theo đề ở từng môn sẽ giúp Bạn kiểm tra lại lỗ hổng kiến thức hoặc rèn kĩ năng, thời gian làm đề như đề thật.
-                    100% câu hỏi trong phòng luyện đều có hướng dẫn giải sau khi Bạn làm bài xong, từ đó Bạn có thể xem lại cách làm cũng như đối chiếu lại phương pháp, cách làm.
-                    Hãy tham gia PEN-I để quá trình rèn luyện của Bạn thực sự hiệu quả nhé!
-                    Thông tin chi tiết »
-                    Các yêu cầu là gì?
-
-                    - Học sinh làm đề trước khi xem video, chú trọng các câu hỏi bị sai và tìm nguyên nhân.
-                    - Xem video giải đề, ghi lại những lưu ý cho từng dạng bài giáo viên đưa ra.
-                    - Luyện tập với phòng luyện thường xuyên để theo dõi sự tiến bộ và khả năng 'sửa chữa' lỗi sai.
-                    - Khi luyện đề, với các phần kiến thức chưa nắm vững học sinh cần phải củng cố lại để đảm bảo không bị vấp khi học các đề tiếp theo.
-                    Sẽ được gì khi tham gia học?
-
-                    - Thực hành những kiến thức đã học trong chương trình lớp 12
-                    - Từng bước rèn luyện kĩ năng làm bài thi, phát hiện và dần khắc phục nhược điểm, từ đó đạt được điểm mục tiêu theo năng lực.
-                    Đối tượng của khóa học là ai?
-
-                    Học sinh dự thi THPT quốc gia có học lực khá - giỏi.
-                </div>
+                <div class="detail"><?php echo $course_des ?></div>
             </div>
             <div class="course_lecture">
                 <p id="title"><b>Đề cương khóa học</b></p>
@@ -143,11 +130,30 @@ Icon::map($this, Icon::FA);
         </div>
         <div class="col-md-4 left">
             <div class="join_course">
-                <div class="signed_date"><?php echo Icon::show('calendar') ?> Mở đăng ký: <span id="spe">30/04/2015 - 5/07/2015</span></div>
-                <div class="num_std"><?php echo Icon::show('users') ?> Đã đăng ký: <span id="spe">3000 học sinh</span></div>
-                <div class="course_fee"><?php echo Icon::show('money') ?> Học phí: <span id="spe">Miễn phí</span></div>
+                <div class="signed_date"><?php echo Icon::show('calendar') ?> Hạn đăng ký: <span id="spe"><?php echo $signed_to_date ?></span></div>
+                <div class="num_std"><?php echo Icon::show('users') ?> Đã đăng ký: <span id="spe"><?php echo $number_signed ?></span></div>
+                <div class="course_fee"><?php echo Icon::show('money') ?> Học phí: <span id="spe"><?php echo $fee; ?></span></div>
                 <div class="btn-join">
-                    <a href="javascript:void(0)" class="btn btn-warning">Đăng ký</a>
+                    <?php
+                    $check_join_class = false;
+                    $user = Yii::$app->user->identity;
+                    if (!empty($user)) {
+                        // check teacher
+                        if ($user->teacher_id == $course['teacher_id']) {
+                            $check_join_class = true;
+                        }
+                        // check student
+                        if (!empty(StudentCourse::findOne(['student_id' => $user->student_id, 'course_id' => $course['course_id']]))) {
+                            $check_join_class = true;
+                        }
+                    }
+                    ?>
+                    <?php if ($check_join_class) { ?>
+                        <p><a href="javascript:void(0)" class="btn btn-warning" onclick="click_on_course()">Vào lớp</a></p>
+                    <?php } else { ?>
+                        <p><a href="javascript:void(0)" class="btn btn-warning" onclick="signed_course()">Đăng ký</a></p>
+                        <p><a href="javascript:void(0)" class="btn btn-info" onclick="check_lesson_free()">Học thử 2 buổi miễn phí</a></p>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -155,11 +161,71 @@ Icon::map($this, Icon::FA);
 </div>
 
 <div class="row course_relation">
-    <?php echo ListCourseWidget::widget() ?>
+    <?php /*echo ListCourseWidget::widget()*/ ?>
 </div>
+
+<script src="/themes/default/js/jquery.min.js"></script>
+<?php AssetApp::regJsFile('jquery.sticky-kit.min.js', true) ?>
+<?php AssetApp::regJsFile('bootstrap.min.js', true) ?>
+<?php AssetApp::regCssFilePlugin('dist/css/bootstrap-dialog.css', 'bootstrap3-dialog-master') ?>
+<?php AssetApp::regJsFilePlugin('dist/js/bootstrap-dialog.js', 'bootstrap3-dialog-master', true) ?>
 
 <script>
     $(document).ready(function () {
         $(".left").stick_in_parent();
     });
+    function check_lesson_free() {
+        var course_id = '<?php echo $course['course_id'] ?>';
+
+        $.ajax({
+            method: 'GET',
+            data: {'course_id' : course_id},
+            url: '<?php echo Url::toRoute(['/course/check-free-lesson']) ?>',
+            success: function (data) {
+                var res = JSON.parse(data);
+                if (res.status == 0) {
+                    BootstrapDialog.show({
+                        title: 'Có lỗi xảy ra!',
+                        message: res.message
+                    });
+                }
+            }
+        });
+    }
+    function click_on_course() {
+        window.location = '<?php echo Url::toRoute(['/course/on-course', 'id' => Utility::encrypt_decrypt('encrypt', $course['course_id'])]) ?>'
+    }
+
+    function signed_course() {
+        var course_id = '<?php echo $course['course_id'] ?>';
+        var _csrf = $("meta[name='csrf-param']").attr('content');
+
+        BootstrapDialog.show({
+            title: 'Đăng ký khóa học',
+            message: 'Bạn có muốn đăng ký khóa học này hay không?',
+            buttons: [{
+                label: 'Đăng ký',
+                action: function(dialog) {
+                    $.ajax({
+                        method: 'POST',
+                        data: {'course_id' : course_id, '_csrf' : _csrf},
+                        url: '<?php echo Url::toRoute(['/course/signed-to-course']) ?>',
+                        success: function (data) {
+                            var res = JSON.parse(data);
+                            BootstrapDialog.show({
+                                title: 'Info',
+                                message: res.message
+                            });
+                        }
+                    });
+                    dialog.close();
+                }
+            }, {
+                label: 'Hủy',
+                action: function(dialog) {
+                    dialog.close();
+                }
+            }]
+        });
+    }
 </script>

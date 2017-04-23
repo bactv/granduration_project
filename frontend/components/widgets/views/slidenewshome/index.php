@@ -37,6 +37,8 @@ AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel', true);
     </div>
 <?php } ?>
 
+<script src="/themes/default/js/jquery.min.js"></script>
+
 <script>
     $(document).ready(function () {
         $("#owl-demo").owlCarousel({
