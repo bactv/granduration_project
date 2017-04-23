@@ -13,6 +13,16 @@ function search_course() {
 }
 
 /**
+ * Tìm kiếm đề thi
+ */
+function search_list_quiz() {
+    var class_id = $("#class_id").val();
+    var subject_id = $("#subject_id").val();
+
+    window.location = '/quiz/list-contest.html?class_id=' + class_id + '&subject_id=' + subject_id;
+}
+
+/**
  * Cập nhật thông tin tài khoản học sinh
  */
 function update_account_student() {

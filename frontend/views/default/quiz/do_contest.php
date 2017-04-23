@@ -112,7 +112,7 @@ use common\components\AssetApp;
 <div class="row">
     <div class="time_run time_run_mobile" style="display: none">
         <p>Kết thúc bài thi</p>
-        <p id="time_run">
+        <p id="time_run_2">
             <?php echo $quiz['time'] . ':00' ?>
         </p>
     </div>
@@ -165,7 +165,7 @@ use common\components\AssetApp;
     </div>
 </div>
 
-<div class="row" style="text-align: center;margin-top: 30px">
+<div class="row" style="text-align: center;margin: 30px 0 30px 0">
     <?php echo Html::a('Nộp bài', 'javascript:void(0)', ['class' => 'btn btn-primary']) ?>
     <?php echo Html::a('Hủy', 'javascript:void(0)', ['class' => 'btn btn-danger']) ?>
 </div>

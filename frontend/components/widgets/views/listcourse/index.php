@@ -100,6 +100,7 @@ AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel', true);
     }
 </style>
 
+<?php if (isset($list_course) && count($list_course) > 0) { ?>
 <div class="row course_type">
     <p id="title" class="m_color txt_left"><?php echo Icon::show('bookmark') ?> <?php echo $title ?></p>
     <div id="owl-course" class="owl-carousel owl-theme">
@@ -133,6 +134,7 @@ AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel', true);
     </div>
     <div class="view_more"><a href="#">Xem thêm >> </a></div>
 </div>
+<?php } ?>
 
 <?php
     if (isset($pagination)) {

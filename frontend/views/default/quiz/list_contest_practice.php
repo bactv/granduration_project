@@ -9,15 +9,18 @@ use kartik\helpers\Html;
 use kartik\icons\Icon;
 use common\components\AssetApp;
 use yii\helpers\Url;
+use frontend\models\Subject;
+use frontend\models\ClassLevel;
+use yii\helpers\ArrayHelper;
+use frontend\models\QuizType;
+use common\components\Utility;
+use frontend\models\StudentQuiz;
 
 Icon::map($this, Icon::FA);
 
 $this->title = $this->params['title'] = 'Luyện thi trắc nghiệm online';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-<?php AssetApp::regJsFilePlugin('jquery.rateyo.js', 'rateyo') ?>
-<?php AssetApp::regCssFilePlugin('jquery.rateyo.css', 'rateyo') ?>
 
 <style>
     .search_contest {
@@ -39,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
     .list_contest .item  p#title {
         color: orange;
         font-size: 16px;
-        text-align: center;
+        text-align: left;
     }
     .list_contest .item a {
     }
@@ -49,125 +52,71 @@ $this->params['breadcrumbs'][] = $this->title;
     td#rate {
         line-height: 43px;
     }
+    .table > tbody > tr > td {
+        vertical-align: middle;
+    }
 </style>
 
 <div class="row search_contest">
     <div class="col-md-3">
-        <?php echo Html::dropDownList('class', '', [1 => 'Lớp 1', 2 => 'Lớp 2', 3 => 'Lớp 3'], [
+        <?php echo Html::dropDownList('class_id', $class_id, ArrayHelper::map(ClassLevel::find()->orderBy('class_level_id ASC')->all(), 'class_level_id', 'class_level_name'), [
             'class' => 'form-control',
-            'prompt' => 'Chọn lớp',
-            'style' => 'width: 90%;'
+            'style' => 'width: 90%;',
+            'id' => 'class_id'
         ]) ?>
     </div>
     <div class="col-md-3">
-        <?php echo Html::dropDownList('subject', '', [1 => 'Toán học', 2 => 'Văn học', 3 => 'Sinh học'], [
+        <?php echo Html::dropDownList('subject_id', $subject_id, ArrayHelper::map(Subject::find()->all(), 'subject_id', 'subject_name'), [
             'class' => 'form-control',
-            'prompt' => 'Chọn môn',
-            'style' => 'width: 90%;'
+            'prompt' => '-- Chọn môn --',
+            'style' => 'width: 90%;',
+            'id' => 'subject_id'
         ]) ?>
     </div>
     <div class="col-md-3">
-        <button type="submit" class="btn btn-default" onclick="search_course()">Tìm kiếm</button>
+        <button type="submit" class="btn btn-success" onclick="search_list_quiz()"><?php echo Icon::show('search') ?>Tìm kiếm</button>
     </div>
 </div>
 
 <div class="row list_contest">
-    <div class="row" style="border: 1px solid #ccc;margin-bottom: 20px">
-        <p id="title">Toán học</p>
-        <div class="row item">
-            <table class="table table-striped table-hover table-bordered table-condensed">
-                <tr>
-                    <td colspan="5"><p id="title"><?php echo Icon::show('clock-o') ?>Kiểm tra 15 phút</p></td>
-                </tr>
-                <tr>
-                    <th>Chủ đề</th>
-                    <th>Số câu hỏi</th>
-                    <th>Số người tham gia</th>
-                    <th>Đánh giá</th>
-                    <th>Phí</th>
-                </tr>
-                <tr>
-                    <td><a href="<?php echo Url::toRoute(['/quiz/detail']) ?>"><?php echo Icon::show('address-card-o') ?> Dao động điều hòa</a></td>
-                    <td>33 câu hỏi</td>
-                    <td>300 người</td>
-                    <td id="rate"><div id="rateYo1" class="rateYoYo"></div> (300 lượt)</td>
-                    <td>300 xu</td>
-                </tr>
-                <tr>
-                    <td><a href=""><?php echo Icon::show('address-card-o') ?> Dao động điều hòa</a></td>
-                    <td>33 câu hỏi</td>
-                    <td>300 người</td>
-                    <td id="rate"><div id="rateYo2" class="rateYoYo"></div></td>
-                    <td>300 xu</td>
-                </tr>
-                <tr>
-                    <td><a href=""><?php echo Icon::show('address-card-o') ?> Dao động điều hòa</a></td>
-                    <td>33 câu hỏi</td>
-                    <td>300 người</td>
-                    <td id="rate"><div id="rateYo3" class="rateYoYo"></div></td>
-                    <td>300 xu</td>
-                </tr>
-            </table>
+    <?php foreach ($results as $k => $subjects) {
+        $subject_name = Subject::getAttributeValue(['subject_id' => $k], 'subject_name');
+        ?>
+        <div class="row" style="border: 1px solid #ccc;margin-bottom: 20px">
+            <p id="title"><?php echo $subject_name ?></p>
+            <?php foreach ($subjects as $k2 => $q_types) {
+                $quiz_type_name = QuizType::getAttributeValue(['quiz_type_id' => $k2], 'quiz_type_name');
+                ?>
+                <div class="row item">
+                    <table class="table table-striped table-hover table-bordered table-condensed">
+                        <tr>
+                            <td colspan="5"><p id="title"><?php echo Icon::show('clock-o') ?><?php echo $quiz_type_name ?></p></td>
+                        </tr>
+                        <tr>
+                            <th style="width: 40%;text-align: center">Chủ đề</th>
+                            <th style="width: 9%;text-align: center">Số câu hỏi</th>
+                            <th style="width: 15%;text-align: center">Số người tham gia</th>
+                            <th style="text-align: center">Đánh giá</th>
+                            <th style="width: 9%;text-align: center">Phí</th>
+                        </tr>
+                        <?php foreach ($q_types as $quiz) {
+                            $info = StudentQuiz::get_info($quiz['quiz_id']);
+                            $rate = (number_format($info['total_point_rate'] / 10, 1));
+                            ?>
+                            <tr>
+                                <td><a href="<?php echo Url::toRoute(['/quiz/detail', 'id' => Utility::encrypt_decrypt('encrypt', $quiz['quiz_id'])]) ?>"><?php echo Icon::show('address-card-o') ?> <?php echo $quiz['quiz_name'] ?></a></td>
+                                <td style="text-align: center;"><?php echo count(json_decode($quiz['question_ids'])) ?></td>
+                                <td style="text-align: center"><?php echo number_format($info['total_student']) ?></td>
+                                <td style="text-align: center"><b><?php echo $rate ?>/10</b> <i style="font-size: 11px;"> (<?php echo number_format(intval($info['total_student_rate'])) ?> người)</i></td>
+                                <td style="text-align: center"><?php echo number_format($quiz['price']) . ' VNĐ' ?></td>
+                            </tr>
+                        <?php } ?>
+                        <tr>
+                            <td colspan="5" style="text-align: right"><a href="<?php echo Url::toRoute(['/quiz/list-contest', 'subject_id' => $k, 'class_id' => $class_id, 'quiz_type_id' => $k2]) ?>"><b><i style="font-size: 12px;">Xem thêm >></i></b></a></td>
+                        </tr>
+                    </table>
+                </div>
+            <?php } ?>
         </div>
-
-
-        <div class="row item">
-            <table class="table table-striped table-hover table-bordered table-condensed">
-                <tr>
-                    <td colspan="5"><p id="title"><?php echo Icon::show('clock-o') ?>Kiểm tra 15 phút</p></td>
-                </tr>
-                <tr>
-                    <th>Chủ đề</th>
-                    <th>Số câu hỏi</th>
-                    <th>Số người tham gia</th>
-                    <th>Đánh giá</th>
-                    <th>Phí</th>
-                </tr>
-                <tr>
-                    <td><a href=""><?php echo Icon::show('address-card-o') ?> Dao động điều hòa</a></td>
-                    <td>33 câu hỏi</td>
-                    <td>300 người</td>
-                    <td id="rate"><div id="rateYo4" class="rateYoYo"></div></td>
-                    <td>300 xu</td>
-                </tr>
-                <tr>
-                    <td><a href=""><?php echo Icon::show('address-card-o') ?> Dao động điều hòa</a></td>
-                    <td>33 câu hỏi</td>
-                    <td>300 người</td>
-                    <td id="rate"><div id="rateYo5" class="rateYoYo"></div></td>
-                    <td>300 xu</td>
-                </tr>
-                <tr>
-                    <td><a href=""><?php echo Icon::show('address-card-o') ?> Dao động điều hòa</a></td>
-                    <td>33 câu hỏi</td>
-                    <td>300 người</td>
-                    <td id="rate"><div id="rateYo6" class="rateYoYo"></div></td>
-                    <td>300 xu</td>
-                </tr>
-            </table>
-        </div>
-    </div>
+    <?php } ?>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $("#rateYo1").rateYo({
-            rating: 3.6
-        });
-        $("#rateYo2").rateYo({
-            rating: 4
-        });
-        $("#rateYo3").rateYo({
-            rating: 6
-        });
-        $("#rateYo4").rateYo({
-            rating: 5
-        });
-        $("#rateYo5").rateYo({
-            rating: 2
-        });
-        $("#rateYo6").rateYo({
-            rating: 1
-        });
-    });
-</script>
