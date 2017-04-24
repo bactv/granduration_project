@@ -40,6 +40,8 @@ Icon::map($this, Icon::FA);
     }
 </style>
 
+<script src="/themes/default/js/bootstrap.min.js"></script>
+
 <ul>
     <?php foreach ($menus as $menu) { ?>
         <li><a href="<?php echo Url::toRoute([$menu['url']]) ?>"><?php echo $menu['name'] ?></a></li>

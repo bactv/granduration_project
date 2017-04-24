@@ -7,10 +7,14 @@
  */
 namespace frontend\controllers;
 
+use backend\models\Package;
 use common\components\Utility;
 use frontend\models\Course;
 use frontend\models\FeedbackToTeacher;
+use frontend\models\FreeLessonOnCourse;
 use frontend\models\Student;
+use frontend\models\StudentCourse;
+use frontend\models\StudentPackage;
 use frontend\models\Teacher;
 use frontend\models\User;
 use Yii;
@@ -79,11 +83,55 @@ class AccountController extends Controller
     {
         $object = $this->model;
         if ($object instanceof Student) {
+            $packages = Package::findAll(['pk_status' => 1, 'pk_deleted' => 0]);
+            $user_package = StudentPackage::find()->where(['student_id' => $object->std_id])->andWhere('expire_date >= "' . date('Y-m-d H:i:s') . '"')->all();
             return $this->renderAjax('student/user_package', [
                 'model' => $object,
+                'packages' => $packages,
+                'user_package' => $user_package
             ]);
         }
         return '';
+    }
+
+    public function actionRegisterPackage()
+    {
+        if (!Yii::$app->request->isAjax || !Yii::$app->request->isPost) {
+            echo json_encode(['status' => -1, 'message' => 'Có lỗi xảy ra 1']);
+            Yii::$app->end();
+        }
+        $request = Yii::$app->request->post();
+        $student_id = isset($request['student_id']) ? $request['student_id'] : '';
+        $package_id = isset($request['package_id']) ? $request['package_id'] : '';
+
+        $student = Student::findOne(['std_id' => $student_id]);
+        $package = Package::findOne(['pk_id' => $package_id]);
+
+        if (empty($student) || empty($package)) {
+            echo json_encode(['status' => -1, 'message' => 'Có lỗi xảy ra 2']);
+            Yii::$app->end();
+        }
+
+        // kiểm tra gói cước học sinh đã đăng ký trước đó và vẫn còn hạn hay chưa
+        if (StudentPackage::check_package_active_student($student_id, $package_id)) {
+            echo json_encode(['status' => 0, 'message' => 'Bạn vẫn đang sử dụng gói cước này.']);
+            Yii::$app->end();
+        }
+
+        // kiểm tra tài khoản học sinh
+        if ($student['std_balance'] < $package['pk_price']) {
+            echo json_encode(['status' => 0, 'message' => 'Tài khoản của bạn không đủ để thực hiện đăng ký gói cước này. Hãy nạp thêm tiền vào tài khoản']);
+            Yii::$app->end();
+        } else {
+            $check = StudentPackage::register_package($student, $package);
+            if ($check) {
+                $obj = StudentPackage::find()->where(['student_id' => $student_id, 'package_id' => $package_id])->andWhere('expire_date >= "' . date('Y-m-d H:i:s') . '"')->one();
+                echo json_encode(['status' => 1, 'message' => 'Bạn đã đăng ký thành công gói ' . $package->pk_code . '. Hạn sử dụng: ' . Utility::formatDataTime($obj['expire_date'], '-', '/', true)]);
+                Yii::$app->end();
+            }
+        }
+
+
     }
 
     public function actionCharging()
@@ -248,6 +296,39 @@ class AccountController extends Controller
         $model->status_view = 1;
         $model->save();
         Yii::$app->end();
+    }
+
+    public function actionListCourseStudent()
+    {
+        $user = Yii::$app->user->identity;
+        if (empty($user) || ($user->type == 2)) {
+            Yii::$app->end();
+        }
+        $student_id = $user->student_id;
+        $arr_results_signed = [];
+        $arr_results_not_signed = [];
+
+        // lấy danh sách khóa học đã đăng ký
+        $data = StudentCourse::find()->where(['student_id' => $student_id])->orderBy('student_signed_date DESC')->asArray()->all();
+        foreach ($data as $dt) {
+            $arr_results_signed[$dt['course_id']] = [
+                'course_id' => $dt['course_id'],
+                'signed_date' => $dt['student_signed_date']
+            ];
+        }
+        // lấy danh sách khóa học đã học thử
+        $data = FreeLessonOnCourse::find()->where(['student_id' => $student_id])->orderBy('course_id DESC')->asArray()->all();
+        foreach ($data as $dt) {
+            if (!isset($arr_results_signed[$dt['course_id']])) {
+                $arr_results_not_signed[$dt['course_id']] = [
+                    'course_id' => $dt['course_id'],
+                ];
+            }
+        }
+        return $this->renderAjax('student/list_course', [
+            'arr_results_signed' => $arr_results_signed,
+            'arr_results_not_signed' => $arr_results_not_signed
+        ]);
     }
 
     private function getObject()

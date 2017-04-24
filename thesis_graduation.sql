@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-04-24 01:19:50
+Date: 2017-04-25 00:48:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -5723,7 +5723,7 @@ INSERT INTO `quiz` VALUES ('9', 'Quod omnis corporis ipsa omnis est reprehenderi
 INSERT INTO `quiz` VALUES ('10', 'Nam deleniti est sed.', 'Exercitationem corrupti aut facere et consequuntur at velit et ullam eum impedit sed corrupti libero voluptatibus debitis quis aut ratione.', '4', 'hard', '2', '3', '[936,484,641,503,785,17,702,578,613,13,29,370,832,944,4,891,322,866,419,119,910,756,856,827,882,168,655,938,103,19,607,494,760,605,736,188,778,401,255,839,216,724,694,956,617,439,10,400,27,98]', 'Dolores sequi animi nobis aut.', '1', '911', '0', null, null, null, null, '98');
 INSERT INTO `quiz` VALUES ('11', 'Quo eligendi dolore ab sunt minima suscipit laboriosam placeat.', 'Et quos rem aut tenetur tempore voluptates officia quia rerum dolor expedita vero error quod est praesentium atque maxime similique.', '3', 'hard', '3', '11', '[57,54,502,484,376,674,975,620,873,906,786,87,894,660,880,379,309,112,43,442,27,241,986,571,440,269,849,295,831,931,551,248,458,439,987,568,92,412,434,131,428,221,815,371,800,776,507,635,828,373]', 'Officia dolore voluptatum esse dignissimos quia.', '1', '297', '0', null, null, null, null, '79');
 INSERT INTO `quiz` VALUES ('12', 'Voluptates sit est minus quam quia a est sit.', 'Repellat non eveniet fuga nobis asperiores debitis consequatur qui voluptates accusantium nobis aspernatur voluptatem illo ex quia dolor similique blanditiis laudantium ab sunt quo.', '3', 'easy', '5', '10', '[119,322,129,501,587,201,220,821,936,113,884,107,67,728,335,525,132,200,397,957,44,175,244,831,582,377,491,447,118,815,743,637,424,615,940,880,348,972,531,178,246,268,571,800,166,321,649,344,775,618]', 'Et sunt quo beatae quia id.', '1', '276', '0', null, null, null, null, '3');
-INSERT INTO `quiz` VALUES ('13', 'Consectetur beatae explicabo similique qui natus nihil enim.', 'Perferendis tempore repudiandae blanditiis nam et quaerat et quaerat deleniti fugiat minima error sit numquam sunt dolores iusto omnis accusantium sed magni incidunt iure ullam numquam numquam.', '1', 'hard', '1', '7', '[196,839,102,875,394,270,778,93,113,368,526,240,229,322,67,444,688,518,933,854]', 'In rem sunt et.', '1', '735', '0', null, null, null, null, '75');
+INSERT INTO `quiz` VALUES ('13', 'Consectetur beatae explicabo similique qui natus nihil enim.', 'Perferendis tempore repudiandae blanditiis nam et quaerat et quaerat deleniti fugiat minima error sit numquam sunt dolores iusto omnis accusantium sed magni incidunt iure ullam numquam numquam.', '1', 'hard', '1', '7', '[196,839,102,875,394,270,778,93,113,368,526,240,229,322,67,444,688,518,933,854]', 'In rem sunt et.', '1', '735', '1', null, null, null, null, '75');
 INSERT INTO `quiz` VALUES ('14', 'Qui dolor vero saepe inventore dolores magni similique.', 'Perferendis cum sit eaque nihil nam impedit vel consequatur voluptatem tempore nihil dolor beatae magnam autem.', '4', 'normal', '6', '7', '[991,593,396,984,785,439,225,352,360,171,664,649,638,672,816,507,741,128,95,87,395,231,523,359,835,992,687,699,665,386,680,264,744,822,873,127,348,117,947,671,422,287,534,663,975,86,552,570,74,353]', 'Cupiditate maiores et et sint est.', '1', '566', '0', null, null, null, null, '68');
 INSERT INTO `quiz` VALUES ('15', 'Voluptas dolor omnis est rem doloremque porro.', 'Et consequuntur quos ab enim est molestiae perspiciatis suscipit doloribus saepe dolorem ab cum eos autem.', '6', 'hard', '1', '1', '[509,743,998,239,990,310,124,706,267,283,519,642,899,801,49,162,120,888,86,625,269,833,558,680,337,544,271,919,949,464,376,634,441,763,230,735,71,331,116,48,288,68,225,479,445,223,121,244,527,935]', 'Eos molestiae est dolorem doloremque.', '1', '29', '0', null, null, null, null, '16');
 INSERT INTO `quiz` VALUES ('16', 'Voluptatibus distinctio repellendus minima dolore veritatis.', 'Ab enim nihil perspiciatis consectetur dignissimos est esse molestiae voluptatibus vero voluptas ad voluptas at non dolores aut omnis fugit qui nulla.', '4', 'hard', '8', '7', '[886,524,66,117,717,750,192,874,692,694,447,700,265,320,880,932,89,755,97,728,889,648,476,751,540,883,985,363,8,453,971,595,530,560,975,370,436,891,737,165,104,32,302,466,563,610,41,954,842,144]', 'Sit quo nesciunt quam.', '1', '386', '0', null, null, null, null, '75');
@@ -5901,7 +5901,7 @@ INSERT INTO `student` VALUES ('2', 'howard', '$2y$13$EE0QRWGVq3xIQy35abC5QOVkeFr
 INSERT INTO `student` VALUES ('3', 'gaylord', '$2y$13$.PupBg/nTqKeDjaOML0YcuQDZPx/DqeX.yffW1iVhpfFdfMjc6Q9a', 'Maritza Spencer DVM', null, null, null, '0', '1', null, null);
 INSERT INTO `student` VALUES ('4', 'elmore', '$2y$13$sJ.gc6ipomY8E0xAGmkzz.5t7iI9CUQ1waVnhQ2lXdNcKGZxDjyXK', 'Eli Schamberger', null, null, null, '0', '1', null, null);
 INSERT INTO `student` VALUES ('5', 'jovanny', '$2y$13$1ylz6at7jCCn3Y7SVXeaC.ixD0FfyMkdtObc6U3aneRuFqofYaYUW', 'Madison Watsica', null, null, null, '0', '1', null, null);
-INSERT INTO `student` VALUES ('6', 'student1', '96e79218965eb72c92a549dd5a330112', 'Student111', '', '1970-01-01', '', '22000', '1', null, '2017-04-23 17:57:13');
+INSERT INTO `student` VALUES ('6', 'student1', '96e79218965eb72c92a549dd5a330112', 'Student111', '', '1970-01-01', '', '7000', '1', null, '2017-04-25 00:15:15');
 
 -- ----------------------------
 -- Table structure for student_course
@@ -5932,11 +5932,13 @@ CREATE TABLE `student_package` (
   `expire_date` datetime DEFAULT NULL,
   `created_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of student_package
 -- ----------------------------
+INSERT INTO `student_package` VALUES ('1', '6', '1', '2017-04-25 23:28:16', '2017-04-24 23:28:16');
+INSERT INTO `student_package` VALUES ('2', '6', '4', '2017-05-05 00:15:15', '2017-04-25 00:15:15');
 
 -- ----------------------------
 -- Table structure for student_quiz

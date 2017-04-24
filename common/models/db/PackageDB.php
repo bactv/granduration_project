@@ -10,6 +10,7 @@ use Yii;
  * @property integer $pk_id
  * @property string $pk_name
  * @property string $pk_code
+ * @property integer $pk_duration
  * @property string $pk_description
  * @property string $pk_price
  * @property integer $pk_status
@@ -32,8 +33,8 @@ class PackageDB extends \yii\db\ActiveRecord
     {
         return [
             [['pk_name', 'pk_code'], 'required'],
+            [['pk_duration', 'pk_status', 'pk_deleted'], 'integer'],
             [['pk_price'], 'number'],
-            [['pk_status', 'pk_deleted'], 'integer'],
             [['pk_name', 'pk_code', 'pk_description'], 'string', 'max' => 255]
         ];
     }
@@ -47,6 +48,7 @@ class PackageDB extends \yii\db\ActiveRecord
             'pk_id' => Yii::t('cms', 'Pk ID'),
             'pk_name' => Yii::t('cms', 'Pk Name'),
             'pk_code' => Yii::t('cms', 'Pk Code'),
+            'pk_duration' => Yii::t('cms', 'Pk Duration'),
             'pk_description' => Yii::t('cms', 'Pk Description'),
             'pk_price' => Yii::t('cms', 'Pk Price'),
             'pk_status' => Yii::t('cms', 'Pk Status'),

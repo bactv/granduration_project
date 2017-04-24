@@ -9,9 +9,11 @@ namespace frontend\controllers;
 
 use common\components\Utility;
 use frontend\models\Quiz;
+use frontend\models\StudentPackage;
 use Yii;
 use frontend\components\FrontendController;
 use yii\base\Controller;
+use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 
 class QuizController extends Controller
@@ -105,7 +107,29 @@ class QuizController extends Controller
         }
 
         $user = Yii::$app->user->identity;
+        // nếu là tài khoản giáo viên
+        if (!empty($user) && $user->type == 2 && $user->teacher_id != '') {
+            if ($quiz['price'] > 0 || $quiz['vip'] > 0) {
+                echo json_encode(['status' => 0, 'message' => 'Tài khoản của bạn không có quyền để làm bài thi này.']);
+                Yii::$app->end();
+            }
+        }
+
         // nếu đề thi bắt đăng nhập
+        if (($quiz['price'] > 0 || $quiz['vip'] > 0) && empty($user)) {
+            echo json_encode(['status' => 0, 'message' => 'Bạn phải <a href="' . Url::toRoute(['/site/login']) . '">đăng nhập</a> để làm bài thi.']);
+            Yii::$app->end();
+        }
+
+        // check đề thi VIP
+        if ($quiz['vip'] > 0 && (!empty($user)) && $user->student_id != '') {
+            // kiêm tra học sinh có đăng ký gói VIP (10, 30, 365)
+            $check_vip = StudentPackage::check_student_vip($user->student_id);
+            if (!$check_vip) {
+                echo json_encode(['status' => 0, 'message' => 'Đây là đề thi VIP, hãy <a href="' . Url::toRoute(['/site/login']) . '"><i>đăng ký</i></a> ngay gói cước VIP để làm bài thi này.']);
+                Yii::$app->end();
+            }
+        }
 
         echo json_encode(['status' => 1, 'message' => 'OK']);
         Yii::$app->end();

@@ -60,7 +60,7 @@ $info = StudentQuiz::get_info($quiz['quiz_id']);
         <p class="f_st_italic">Số câu hỏi: <?php echo count(json_decode($quiz['question_ids'])) ?> câu</p>
         <p class="f_st_italic">Thời gian làm bài: <?php echo intval($quiz['time']) ?> phút</p>
         <p class="f_st_italic">Số người tham gia: <?php echo number_format($info['total_student']) ?></p>
-        <p id="btn-start"><a href="<?php echo Url::toRoute(['quiz/do-contest']) ?>" onclick="start_quiz()"><?php echo Icon::show('clock-o ') ?> Bắt đầu</a></p>
+        <p id="btn-start"><a href="javascript:void(0)" onclick="start_quiz()"><?php echo Icon::show('clock-o ') ?> Bắt đầu</a></p>
     </div>
 </div>
 
@@ -74,6 +74,8 @@ $info = StudentQuiz::get_info($quiz['quiz_id']);
     function start_quiz() {
         var quiz_id = '<?php echo $quiz['quiz_id'] ?>';
         var _csrf = $("meta[name='csrf_params']").attr('content');
+
+        console.log(quiz_id);
 
         $.ajax({
             method: 'POST',

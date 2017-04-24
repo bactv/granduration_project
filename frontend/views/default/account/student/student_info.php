@@ -34,7 +34,7 @@ Icon::map($this, Icon::FA);
         <div class="col-md-9">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#detail_info" onclick="get_user_detail_info()">Thông tin chi tiết</a></li>
-                <li><a data-toggle="tab" href="#list_course">Các khóa học tham gia</a></li>
+                <li><a data-toggle="tab" href="#list_course" onclick="get_list_course_student()">Các khóa học tham gia</a></li>
                 <li><a data-toggle="tab" href="#history_transaction" onclick="get_history_transaction_info()">Lịch sử giao dịch</a></li>
                 <li><a data-toggle="tab" href="#user_package" onclick="get_user_package()">Đăng ký gói cước</a></li>
             </ul>
@@ -79,6 +79,15 @@ Icon::map($this, Icon::FA);
             url: '<?php echo Url::toRoute(['/account/user-package']) ?>',
             success: function (data) {
                 $("#user_package").html(data);
+            }
+        });
+    }
+    function get_list_course_student() {
+        $.ajax({
+            method: 'GET',
+            url: '<?php echo Url::toRoute(['/account/list-course-student']) ?>',
+            success: function (data) {
+                $("#list_course").html(data);
             }
         });
     }

@@ -11,7 +11,7 @@ use frontend\models\QuestionAnswer;
 use common\components\AssetApp;
 
 ?>
-<?php AssetApp::regJsFile('jquery.sticky-kit.min.js') ?>
+
 <style>
     .quiz_title {
         text-align: center;
@@ -169,14 +169,11 @@ use common\components\AssetApp;
     <?php echo Html::a('Nộp bài', 'javascript:void(0)', ['class' => 'btn btn-primary']) ?>
     <?php echo Html::a('Hủy', 'javascript:void(0)', ['class' => 'btn btn-danger']) ?>
 </div>
-
+<script src="/themes/default/js/jquery.sticky-kit.min.js"></script>
 <script>
     $(document).ready(function () {
         $('.form-answer').stick_in_parent();
     });
-</script>
-
-<script>
     function startTimer(duration, display) {
         var timer = duration, minutes, seconds;
         setInterval(function () {
@@ -199,4 +196,5 @@ use common\components\AssetApp;
         var display = document.querySelector('#time_run');
         startTimer(minus, display);
     };
+
 </script>

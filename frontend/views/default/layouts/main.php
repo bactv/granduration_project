@@ -5,6 +5,7 @@
 
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
+use common\components\AssetApp;
 
 AppAsset::register($this);
 ?>
@@ -16,6 +17,12 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+
+    <script src="/themes/default/js/jquery.min.js"></script>
+    <script src="/themes/default/js/jquery.sticky-kit.min.js"></script>
+    <?php AssetApp::regJsFile('bootstrap.min.js') ?>
+    <?php AssetApp::regCssFilePlugin('dist/css/bootstrap-dialog.css', 'bootstrap3-dialog-master') ?>
+    <?php AssetApp::regJsFilePlugin('dist/js/bootstrap-dialog.js', 'bootstrap3-dialog-master') ?>
     <?php $this->head() ?>
 </head>
 <body>
