@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-04-25 00:48:13
+Date: 2017-04-28 00:51:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -318,12 +318,13 @@ CREATE TABLE `course` (
   `created_by` int(11) DEFAULT '0',
   `updated_by` int(11) DEFAULT '0',
   PRIMARY KEY (`course_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES ('1', 'Khóa Học 1', '<p>Trong b&agrave;i ph&aacute;t biểu trước thềm trận đấu với Anderlecht, HLV Mourinho tỏ ra căng thẳng khi n&oacute;i về Martial. Chiến lược gia người Bồ Đ&agrave;o Nha giải th&iacute;ch nguy&ecirc;n nh&acirc;n loại bỏ tiền đạo 36 triệu bảng thời gian qua ho&agrave;n to&agrave;n v&igrave; l&yacute; do chuy&ecirc;n m&ocirc;n.</p>\r\n\r\n<p>&quot;Ch&uacute;ng t&ocirc;i đ&atilde; c&oacute; 10 th&aacute;ng l&agrave;m việc c&ugrave;ng nhau nhưng t&ocirc;i kh&ocirc;ng nhận thấy những tiến triển từ Martial. Cậu ấy muốn ra s&acirc;n th&igrave; cần phải cho t&ocirc;i nh&igrave;n thấy những điều t&ocirc;i mong muốn. Tại MU, mọi cơ hội đều rộng mở.&nbsp;</p>\r\n\r\n<p>&quot;Rashford l&agrave; trường hợp tương tự Martial nhưng t&ocirc;i đang d&ugrave;ng cậu ấy kh&aacute; nhiều. C&oacute; thể Marcus kh&ocirc;ng ghi b&agrave;n nhưng t&ocirc;i lu&ocirc;n thấy được tinh thần tiến về ph&iacute;a trước. Đ&oacute; l&agrave; tố chất bắt buộc của một cầu thủ MU&quot;, HLV Mourinho cho biết.</p>\r\n', '6', null, '1', '15000', '2017-04-11', null, null, '1', '1', '1', '1', '0', '1', '0', '2017-04-21 00:27:40', '2017-04-21 00:27:40', '6', '6');
+INSERT INTO `course` VALUES ('1', 'Khóa Học 1', '<p>Trong b&agrave;i ph&aacute;t biểu trước thềm trận đấu với Anderlecht, HLV Mourinho tỏ ra căng thẳng khi n&oacute;i về Martial. Chiến lược gia người Bồ Đ&agrave;o Nha giải th&iacute;ch nguy&ecirc;n nh&acirc;n loại bỏ tiền đạo 36 triệu bảng thời gian qua ho&agrave;n to&agrave;n v&igrave; l&yacute; do chuy&ecirc;n m&ocirc;n.</p>\r\n\r\n<p>&quot;Ch&uacute;ng t&ocirc;i đ&atilde; c&oacute; 10 th&aacute;ng l&agrave;m việc c&ugrave;ng nhau nhưng t&ocirc;i kh&ocirc;ng nhận thấy những tiến triển từ Martial. Cậu ấy muốn ra s&acirc;n th&igrave; cần phải cho t&ocirc;i nh&igrave;n thấy những điều t&ocirc;i mong muốn. Tại MU, mọi cơ hội đều rộng mở.&nbsp;</p>\r\n\r\n<p>&quot;Rashford l&agrave; trường hợp tương tự Martial nhưng t&ocirc;i đang d&ugrave;ng cậu ấy kh&aacute; nhiều. C&oacute; thể Marcus kh&ocirc;ng ghi b&agrave;n nhưng t&ocirc;i lu&ocirc;n thấy được tinh thần tiến về ph&iacute;a trước. Đ&oacute; l&agrave; tố chất bắt buộc của một cầu thủ MU&quot;, HLV Mourinho cho biết.</p>\r\n', '6', null, '2', '15000', '2017-05-22', null, null, '1', '1', '1', '1', '0', '1', '0', '2017-04-21 00:27:40', '2017-04-21 00:27:40', '6', '6');
+INSERT INTO `course` VALUES ('2', 'Khóa Học 2', '<p>Trong b&agrave;i ph&aacute;t biểu trước thềm trận đấu với Anderlecht, HLV Mourinho tỏ ra căng thẳng khi n&oacute;i về Martial. Chiến lược gia người Bồ Đ&agrave;o Nha giải th&iacute;ch nguy&ecirc;n nh&acirc;n loại bỏ tiền đạo 36 triệu bảng thời gian qua ho&agrave;n to&agrave;n v&igrave; l&yacute; do chuy&ecirc;n m&ocirc;n.</p>\r\n\r\n<p>&quot;Ch&uacute;ng t&ocirc;i đ&atilde; c&oacute; 10 th&aacute;ng l&agrave;m việc c&ugrave;ng nhau nhưng t&ocirc;i kh&ocirc;ng nhận thấy những tiến triển từ Martial. Cậu ấy muốn ra s&acirc;n th&igrave; cần phải cho t&ocirc;i nh&igrave;n thấy những điều t&ocirc;i mong muốn. Tại MU, mọi cơ hội đều rộng mở.&nbsp;</p>\r\n\r\n<p>&quot;Rashford l&agrave; trường hợp tương tự Martial nhưng t&ocirc;i đang d&ugrave;ng cậu ấy kh&aacute; nhiều. C&oacute; thể Marcus kh&ocirc;ng ghi b&agrave;n nhưng t&ocirc;i lu&ocirc;n thấy được tinh thần tiến về ph&iacute;a trước. Đ&oacute; l&agrave; tố chất bắt buộc của một cầu thủ MU&quot;, HLV Mourinho cho biết.</p>\r\n', '6', null, '1', '0', '2017-05-30', '0000-00-00', '0000-00-00', '1', '12', '1', '1', '0', '1', '0', '2017-04-21 00:27:40', '2017-04-21 00:27:40', '6', '6');
 
 -- ----------------------------
 -- Table structure for course_right
@@ -488,19 +489,19 @@ CREATE TABLE `import_file` (
 INSERT INTO `import_file` VALUES ('2', 'test_agreement_1', '1', 'agreement', '2017-03-25 10:26:42', '2017-03-25 10:26:42', '1', '1');
 
 -- ----------------------------
--- Table structure for lession_course
+-- Table structure for lesson_course
 -- ----------------------------
-DROP TABLE IF EXISTS `lession_course`;
-CREATE TABLE `lession_course` (
+DROP TABLE IF EXISTS `lesson_course`;
+CREATE TABLE `lesson_course` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `course_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `lesson_name` varchar(255) NOT NULL,
+  `lesson_desc` text,
   `link_video` varchar(255) DEFAULT NULL,
   `time_length` int(11) DEFAULT '0',
   `sort` tinyint(5) DEFAULT '1',
   `number_view` int(11) DEFAULT '0',
   `status` tinyint(1) DEFAULT '1' COMMENT '1: active, 0: deactive',
-  `free` tinyint(1) DEFAULT '0',
   `created_time` datetime DEFAULT NULL,
   `updated_time` datetime DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
@@ -509,7 +510,7 @@ CREATE TABLE `lession_course` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of lession_course
+-- Records of lesson_course
 -- ----------------------------
 
 -- ----------------------------
@@ -5901,7 +5902,7 @@ INSERT INTO `student` VALUES ('2', 'howard', '$2y$13$EE0QRWGVq3xIQy35abC5QOVkeFr
 INSERT INTO `student` VALUES ('3', 'gaylord', '$2y$13$.PupBg/nTqKeDjaOML0YcuQDZPx/DqeX.yffW1iVhpfFdfMjc6Q9a', 'Maritza Spencer DVM', null, null, null, '0', '1', null, null);
 INSERT INTO `student` VALUES ('4', 'elmore', '$2y$13$sJ.gc6ipomY8E0xAGmkzz.5t7iI9CUQ1waVnhQ2lXdNcKGZxDjyXK', 'Eli Schamberger', null, null, null, '0', '1', null, null);
 INSERT INTO `student` VALUES ('5', 'jovanny', '$2y$13$1ylz6at7jCCn3Y7SVXeaC.ixD0FfyMkdtObc6U3aneRuFqofYaYUW', 'Madison Watsica', null, null, null, '0', '1', null, null);
-INSERT INTO `student` VALUES ('6', 'student1', '96e79218965eb72c92a549dd5a330112', 'Student111', '', '1970-01-01', '', '7000', '1', null, '2017-04-25 00:15:15');
+INSERT INTO `student` VALUES ('6', 'student1', '96e79218965eb72c92a549dd5a330112', 'Student111', '', '1970-01-01', '', '2000', '1', null, '2017-04-26 09:11:49');
 
 -- ----------------------------
 -- Table structure for student_course
@@ -5920,6 +5921,7 @@ CREATE TABLE `student_course` (
 -- Records of student_course
 -- ----------------------------
 INSERT INTO `student_course` VALUES ('1', 'Khóa Học 1', '6', 'Student111', '2017-04-23 17:57:13');
+INSERT INTO `student_course` VALUES ('2', 'Khóa Học 2', '6', 'Student111', '2017-04-26 09:15:19');
 
 -- ----------------------------
 -- Table structure for student_package
@@ -5932,13 +5934,14 @@ CREATE TABLE `student_package` (
   `expire_date` datetime DEFAULT NULL,
   `created_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of student_package
 -- ----------------------------
 INSERT INTO `student_package` VALUES ('1', '6', '1', '2017-04-25 23:28:16', '2017-04-24 23:28:16');
 INSERT INTO `student_package` VALUES ('2', '6', '4', '2017-05-05 00:15:15', '2017-04-25 00:15:15');
+INSERT INTO `student_package` VALUES ('3', '6', '1', '2017-04-27 09:11:49', '2017-04-26 09:11:49');
 
 -- ----------------------------
 -- Table structure for student_quiz
@@ -5993,7 +5996,7 @@ CREATE TABLE `teacher` (
   `tch_gender` tinyint(1) DEFAULT '1' COMMENT '1: nam, 0: nu',
   `tch_intro` text,
   `tch_work_place` varchar(255) DEFAULT NULL,
-  `tch_degree` varchar(255) DEFAULT NULL,
+  `tch_degree` int(11) DEFAULT NULL,
   `tch_email` varchar(255) DEFAULT NULL,
   `tch_status` tinyint(1) DEFAULT '1' COMMENT '1: active, 0: deactive',
   `tch_avatar` tinyint(1) DEFAULT '0' COMMENT '0: khong co avatar, 1: co avatar',
@@ -6002,13 +6005,23 @@ CREATE TABLE `teacher` (
   `tch_created_by` int(11) DEFAULT NULL,
   `tch_updated_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`tch_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
-INSERT INTO `teacher` VALUES ('6', 'teacher1', '41c8949aa55b8cb5dbec662f34b62df3', 'Teacher 1', '1', null, null, null, 'teacher1@gmail.com', '1', '0', '2017-04-09 15:33:11', '2017-04-09 15:33:11', null, null);
+INSERT INTO `teacher` VALUES ('6', 'teacher1', '41c8949aa55b8cb5dbec662f34b62df3', 'Teacher 1', '1', null, 'ĐH Bách Khoa Hà Nội', '21', 'teacher1@gmail.com', '1', '0', '2017-04-09 15:33:11', '2017-04-09 15:33:11', null, null);
 INSERT INTO `teacher` VALUES ('7', '', '', 'Lê Văn Lan', '1', '<p><span style=\"color:rgb(34, 34, 34)\">- Gi&aacute;o sư sử học.</span></p>\r\n\r\n<p><span style=\"color:rgb(34, 34, 34)\">- C</span><span style=\"color:rgb(34, 34, 34)\">huy&ecirc;n ng&agrave;nh cổ sử. </span></p>\r\n\r\n<p><span style=\"color:rgb(34, 34, 34)\">- Ph&oacute; chủ tịch Hội đồng khoa học Khu di t&iacute;ch lịch sử Đền H&ugrave;ng</span><span style=\"color:rgb(34, 34, 34)\">&nbsp;</span></p>\r\n\r\n<p><span style=\"color:rgb(34, 34, 34)\">- L&agrave; một trong những người s&aacute;ng lập Viện Sử Học Việt Nam</span></p>\r\n', 'Ban cổ sử Viện Sử Học Việt Nam', '7', '', '1', '1', '2017-04-10 22:20:18', '2017-04-10 22:53:28', '1', '1');
+INSERT INTO `teacher` VALUES ('8', null, null, 'Korbin Buckridge I', '1', 'Aliquam ullam ut eius magni consequatur quo quos culpa.', 'Eligendi fugiat et est ducimus.', '5', null, '1', '0', '2017-04-26 08:46:49', '2017-04-26 08:46:49', null, null);
+INSERT INTO `teacher` VALUES ('9', null, null, 'Patricia Braun II', '0', 'Accusamus debitis natus aut doloribus consectetur ea placeat nisi ducimus porro.', 'Labore blanditiis consequatur at dolores minus error aspernatur.', '1', null, '1', '0', '2017-04-26 08:46:49', '2017-04-26 08:46:49', null, null);
+INSERT INTO `teacher` VALUES ('10', null, null, 'Dr. Lisandro Gislason', '1', 'Odio magnam rerum minima in consequuntur facilis amet amet debitis.', 'Ut fuga nisi nesciunt qui amet.', '10', null, '1', '0', '2017-04-26 08:46:49', '2017-04-26 08:46:49', null, null);
+INSERT INTO `teacher` VALUES ('11', null, null, 'Chyna Abernathy', '0', 'Laboriosam libero eaque officiis culpa assumenda voluptatem inventore commodi quod assumenda.', 'Occaecati deleniti consequuntur nobis ut blanditiis.', '22', null, '1', '0', '2017-04-26 08:46:50', '2017-04-26 08:46:50', null, null);
+INSERT INTO `teacher` VALUES ('12', null, null, 'Estefania Sauer Sr.', '0', 'Sunt libero possimus expedita soluta consequatur reprehenderit dolore praesentium praesentium placeat laboriosam deserunt.', 'Et temporibus error consequatur beatae.', '14', null, '1', '0', '2017-04-26 08:46:50', '2017-04-26 08:46:50', null, null);
+INSERT INTO `teacher` VALUES ('13', null, null, 'Timmy Roob', '1', 'Eveniet natus tempora excepturi ipsa voluptates unde dolor tempora sed animi dolor id sequi sit.', 'Aut qui animi qui qui.', '16', null, '1', '0', '2017-04-26 08:46:50', '2017-04-26 08:46:50', null, null);
+INSERT INTO `teacher` VALUES ('14', null, null, 'Russ Conn', '1', 'Laborum quod corporis sit quis voluptate dolor.', 'Sed nulla aut voluptas consequuntur maxime praesentium.', '14', null, '1', '0', '2017-04-26 08:46:50', '2017-04-26 08:46:50', null, null);
+INSERT INTO `teacher` VALUES ('15', null, null, 'Patsy Cummerata', '0', 'Voluptates sit consequatur nostrum doloremque aperiam amet necessitatibus placeat ut hic quam.', 'Voluptate doloremque ut velit qui mollitia magni.', '11', null, '1', '0', '2017-04-26 08:46:50', '2017-04-26 08:46:50', null, null);
+INSERT INTO `teacher` VALUES ('16', null, null, 'Prof. Tristin Jacobson', '1', 'Voluptas quasi velit sit molestiae amet consequatur.', 'Qui ducimus non sapiente enim unde inventore.', '11', null, '1', '0', '2017-04-26 08:46:50', '2017-04-26 08:46:50', null, null);
+INSERT INTO `teacher` VALUES ('17', null, null, 'Christiana Stroman', '0', 'Hic quibusdam tempore voluptatem ut voluptas sapiente sunt quam minima similique.', 'Provident impedit qui magni.', '5', null, '1', '0', '2017-04-26 08:46:50', '2017-04-26 08:46:50', null, null);
 
 -- ----------------------------
 -- Table structure for transaction
@@ -6021,6 +6034,12 @@ CREATE TABLE `transaction` (
   `action` varchar(255) DEFAULT NULL COMMENT 'subscribe',
   `package_id` int(11) DEFAULT '0' COMMENT '0: le',
   `price` decimal(10,0) DEFAULT '0',
+  `request_status` tinyint(3) DEFAULT NULL,
+  `request_body` varchar(255) DEFAULT NULL,
+  `response_status` tinyint(3) DEFAULT NULL,
+  `response_body` varchar(255) DEFAULT NULL,
+  `request_time` datetime DEFAULT NULL,
+  `response_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_action` (`action`),
   KEY `idx_package_id` (`package_id`),
