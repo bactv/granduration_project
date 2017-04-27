@@ -13,11 +13,17 @@ use Yii;
 
 class FrontendController extends Controller
 {
-    public function beforeAction($action)
+    public function init()
     {
-        if (empty(Yii::$app->user->identity)) {
-            return false;
-        }
-        return true;
+//        echo "XXX";
+    }
+
+    private function logSession()
+    {
+//        $logSession = isset($_SESSION['logSession']) ? $_SESSION['logSession'] : 0;
+//        $logSessionTime = time();
+//        if ($logSessionTime > 180) {
+//            $logSessionTime = 0;
+//        }
     }
 }

@@ -8,6 +8,9 @@ use kartik\helpers\Html;
 use frontend\models\ClassLevel;
 use frontend\models\Subject;
 use yii\helpers\ArrayHelper;
+use kartik\icons\Icon;
+
+Icon::map($this, Icon::FA);
 
 $this->title = 'Study.EDU - Hệ thống học tập trực tuyên';
 ?>
@@ -42,7 +45,7 @@ $this->title = 'Study.EDU - Hệ thống học tập trực tuyên';
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-2" style="height: 74px;line-height: 80px;text-align: left;">
-            <button type="submit" class="btn btn-default" onclick="search_course()">Tìm kiếm</button>
+            <button type="submit" class="btn btn-success" onclick="search_course()"><?php echo Icon::show('search') ?> Tìm kiếm</button>
         </div>
         <div class="col-md-2"></div>
     </div>
@@ -53,6 +56,12 @@ $this->title = 'Study.EDU - Hệ thống học tập trực tuyên';
         <?php echo ListCourseWidget::widget([
             'title' => 'Khóa học miễn phí',
             'type' => 'free'
+        ]) ?>
+
+        <!-- Khóa học miễn phí -->
+        <?php echo ListCourseWidget::widget([
+            'title' => 'Khóa học hot nhất',
+            'type' => 'hot'
         ]) ?>
     </div>
 </div>

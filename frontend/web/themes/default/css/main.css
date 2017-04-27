@@ -156,7 +156,7 @@ footer.footer p.copy_right {
 
 /* ========================= TRANG CHỦ ========================= */
 .search_course {
-    /*margin-bottom: 30px;*/
+    margin-bottom: 30px;
     text-align: center;
     padding-bottom: 30px;
     border-bottom: 2px solid #ddd;

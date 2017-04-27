@@ -33,7 +33,7 @@ use yii\helpers\Url;
             <td><?php echo $i ?></td>
             <td><?php echo $course['course_name'] ?></td>
             <td><?php echo $teacher['tch_full_name'] ?></td>
-            <td><?php echo Utility::formatDataTime($v['signed_date'], '-', '/') ?></td>
+            <td><?php echo Utility::formatDataTime($v['signed_date'], '-', '/', true) ?></td>
             <td>
                 <?php
                 if ($course['status'] == 1) {
@@ -51,7 +51,7 @@ use yii\helpers\Url;
                 <a href="<?php echo Url::toRoute(['/course/on-course', 'id' => Utility::encrypt_decrypt('encrypt', $course['course_id'])]) ?>" role="button" class="btn btn-success" target="_blank">Vào lớp</a>
             </td>
         </tr>
-    <?php } ?>
+    <?php $i++; } ?>
     </tbody>
 </table>
 

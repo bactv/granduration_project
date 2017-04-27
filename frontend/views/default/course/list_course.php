@@ -7,6 +7,12 @@
  */
 use kartik\helpers\Html;
 use frontend\components\widgets\ListCourseWidget;
+use kartik\icons\Icon;
+use frontend\models\Subject;
+use frontend\models\ClassLevel;
+use yii\helpers\ArrayHelper;
+
+Icon::map($this, Icon::FA);
 
 $this->title = $this->params['title'] = 'Danh sách khóa học';
 $this->params['breadcrumbs'][] = $this->title;
@@ -18,10 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-2">
             <div class="form-group">
                 <label for="choose-class">Chọn lớp:</label>
-                <?php echo Html::dropDownList('class', '', [1 => 'Lớp 1', 2 => 'Lớp 2', 3 => 'Lớp 3'], [
+                <?php echo Html::dropDownList('class', '', ArrayHelper::map(ClassLevel::find()->all(), 'class_level_id', 'class_level_name'), [
                     'class' => 'form-control',
-                    'prompt' => '-- Lớp học --',
-                    'id' => 'class',
+                    'id' => 'class_id',
                 ]) ?>
             </div>
         </div>
@@ -29,18 +34,19 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-2">
             <div class="form-group">
                 <label for="choose-subject">Chọn môn học:</label>
-                <?php echo Html::dropDownList('subject', '', [1 => 'Toán học', 2 => 'Văn học', 3 => 'Sinh học'], [
+                <?php echo Html::dropDownList('subject', '', ArrayHelper::map(Subject::find()->all(), 'subject_id', 'subject_name'), [
                     'class' => 'form-control',
-                    'prompt' => '-- Môn học --',
-                    'id' => 'subject',
+                    'id' => 'subject_id',
                 ]) ?>
             </div>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-2" style="height: 74px;line-height: 80px;text-align: left;">
-            <button type="submit" class="btn btn-default" onclick="search_course()">Tìm kiếm</button>
+            <button type="submit" class="btn btn-success" onclick="search_course()"><?php echo Icon::show('search') ?> Tìm kiếm</button>
         </div>
         <div class="col-md-2"></div>
     </div>
 </div>
-<?php echo ListCourseWidget::widget() ?>
+<?php echo ListCourseWidget::widget([
+    'type' => $type
+]) ?>

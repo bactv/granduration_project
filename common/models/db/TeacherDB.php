@@ -14,7 +14,7 @@ use Yii;
  * @property integer $tch_gender
  * @property string $tch_intro
  * @property string $tch_work_place
- * @property string $tch_degree
+ * @property integer $tch_degree
  * @property string $tch_email
  * @property integer $tch_status
  * @property integer $tch_avatar
@@ -40,10 +40,10 @@ class TeacherDB extends \yii\db\ActiveRecord
     {
         return [
             [['tch_full_name'], 'required'],
-            [['tch_gender', 'tch_status', 'tch_avatar', 'tch_created_by', 'tch_updated_by'], 'integer'],
+            [['tch_gender', 'tch_degree', 'tch_status', 'tch_avatar', 'tch_created_by', 'tch_updated_by'], 'integer'],
             [['tch_intro'], 'string'],
             [['tch_created_time', 'tch_updated_time'], 'safe'],
-            [['tch_username', 'tch_password', 'tch_full_name', 'tch_work_place', 'tch_degree', 'tch_email'], 'string', 'max' => 255]
+            [['tch_username', 'tch_password', 'tch_full_name', 'tch_work_place', 'tch_email'], 'string', 'max' => 255]
         ];
     }
 

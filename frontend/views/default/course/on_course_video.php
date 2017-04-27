@@ -13,4 +13,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-
+<h1>Đây là khóa học sử dụng hình thức là các video</h1>

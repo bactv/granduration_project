@@ -9,6 +9,12 @@ use kartik\helpers\Html;
 use common\components\AssetApp;
 use kartik\icons\Icon;
 use yii\helpers\Url;
+use frontend\models\ClassLevel;
+use frontend\models\Subject;
+use yii\helpers\ArrayHelper;
+use frontend\models\Degree;
+use frontend\models\Teacher;
+use common\components\Utility;
 
 Icon::map($this, Icon::FA);
 
@@ -43,6 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
     .list_teacher .item .tch_info {
         border: 1px solid #ccc;
         padding: 10px 5px;
+        height: 180px;
     }
     .list_teacher .item .tch_info #tch_name {
         color: blue;
@@ -59,88 +66,56 @@ $this->params['breadcrumbs'][] = $this->title;
         text-align: right;
         font-style: italic;
         color: blueviolet;
+        position: absolute;
+        bottom: 0;
+        right: 10px;
+        font-size: 12px;
     }
 
 </style>
 
 <div class="row search_teacher">
     <div class="col-md-3">
-        <?php echo Html::dropDownList('class', '', [1 => 'Lớp 1', 2 => 'Lớp 2', 3 => 'Lớp 3'], [
+        <?php echo Html::dropDownList('class', '', ArrayHelper::map(ClassLevel::find()->all(), 'class_level_id', 'class_level_name'), [
             'class' => 'form-control',
-            'prompt' => 'Chọn lớp',
-            'style' => 'width: 90%;'
+            'style' => 'width: 90%;',
+            'id' => 'class_id'
         ]) ?>
     </div>
     <div class="col-md-3">
-        <?php echo Html::dropDownList('subject', '', [1 => 'Toán học', 2 => 'Văn học', 3 => 'Sinh học'], [
+        <?php echo Html::dropDownList('subject', '', ArrayHelper::map(Subject::find()->all(), 'subject_id', 'subject_name'), [
             'class' => 'form-control',
-            'prompt' => 'Chọn môn',
-            'style' => 'width: 90%;'
+            'style' => 'width: 90%;',
+            'id' => 'subject_id'
         ]) ?>
     </div>
     <div class="col-md-6">
-        <button type="submit" class="btn btn-default" onclick="search_course()">Tìm kiếm</button>
+        <button type="submit" class="btn btn-success" onclick="search_teacher()"><?php echo Icon::show('search') ?> Tìm kiếm</button>
     </div>
 </div>
 
+<?php if (isset($lists) && count($lists) > 0) { ?>
 <div class="row list_teacher">
-    <div class="col-md-4 item">
-        <div class="avatar">
-            <a href="<?php echo Url::toRoute(['/teacher/detail']) ?>"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/Phan_huy_khai.JPG' ?>"></a>
+    <?php foreach ($lists as $teacher) {
+        $img = Utility::get_content_static(Yii::$app->params['img_url']['avatar_teacher']['folder'] .
+            '/', $teacher['tch_id']);
+        if ($img == null) {
+            $img = AssetApp::getImageBaseUrl() . '/avatar/Phan_huy_khai_2.JPG';
+        }
+        ?>
+        <div class="col-md-4 item">
+            <div class="avatar">
+                <a href="<?php echo Url::toRoute(['/teacher/detail', 'id' => $teacher['tch_id']]) ?>"><img src="<?php echo $img ?>"></a>
+            </div>
+            <div class="tch_info">
+                <p id="tch_name"><?php echo Degree::getAttributeValue($teacher['tch_degree'], 'abb_name') . ': ' . $teacher['tch_full_name'] ?></p>
+                <p id="tch_work_place"><?php echo $teacher['tch_work_place'] ?></p>
+                <p id="tch_intro"><?php echo Utility::truncateStringWords($teacher['tch_work_place'], 70) ?></p>
+                <p id="tch_detail"><a href="<?php echo Url::toRoute(['/teacher/detail', 'id' => $teacher['tch_id']]) ?>">Chi tiết >> </a></p>
+            </div>
         </div>
-        <div class="tch_info">
-            <p id="tch_name">Thầy: Phan Huy Khải</p>
-            <p id="tch_work_place">Viện Toán Học Việt Nam</p>
-            <p id="tch_intro">Tác giả hơn 115 đầu sách tham khảo về Toán học. </p>
-            <p id="tch_detail"><a href="<?php echo Url::toRoute(['/teacher/detail']) ?>">Chi tiết >> </a></p>
-        </div>
-    </div>
-
-    <div class="col-md-4 item">
-        <div class="avatar">
-            <a href="<?php echo Url::toRoute(['/teacher/detail']) ?>"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/Phan_huy_khai_2.JPG' ?>"></a>
-        </div>
-        <div class="tch_info">
-            <p id="tch_name">Thầy: Phan Huy Khải</p>
-            <p id="tch_work_place">Viện Toán Học Việt Nam</p>
-            <p id="tch_intro">Tác giả hơn 115 đầu sách tham khảo về Toán học. </p>
-            <p id="tch_detail"><a href="<?php echo Url::toRoute(['/teacher/detail']) ?>">Chi tiết >> </a></p>
-        </div>
-    </div>
-
-    <div class="col-md-4 item">
-        <div class="avatar">
-            <a href="<?php echo Url::toRoute(['/teacher/detail']) ?>"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/Phan_huy_khai_3.JPG' ?>"></a>
-        </div>
-        <div class="tch_info">
-            <p id="tch_name">Thầy: Phan Huy Khải</p>
-            <p id="tch_work_place">Viện Toán Học Việt Nam</p>
-            <p id="tch_intro">Tác giả hơn 115 đầu sách tham khảo về Toán học. </p>
-            <p id="tch_detail"><a href="<?php echo Url::toRoute(['/teacher/detail']) ?>">Chi tiết >> </a></p>
-        </div>
-    </div>
-
-    <div class="col-md-4 item">
-        <div class="avatar">
-            <a href="<?php echo Url::toRoute(['/teacher/detail']) ?>"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/Phan_huy_khai_4.JPG' ?>"></a>
-        </div>
-        <div class="tch_info">
-            <p id="tch_name">Thầy: Phan Huy Khải</p>
-            <p id="tch_work_place">Viện Toán Học Việt Nam</p>
-            <p id="tch_intro">Tác giả hơn 115 đầu sách tham khảo về Toán học. </p>
-            <p id="tch_detail"><a href="<?php echo Url::toRoute(['/teacher/detail']) ?>">Chi tiết >> </a></p>
-        </div>
-    </div>
-
-    <div class="col-md-4 item">
-        <div class="avatar">
-            <a href="<?php echo Url::toRoute(['/teacher/detail']) ?>"><img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar/Phan_huy_khai.JPG' ?>"></a>
-        </div>
-        <div class="tch_info">
-            <p id="tch_name">Thầy: Phan Huy Khải</p>
-            <p id="tch_work_place">Viện Toán Học Việt Nam</p>
-            <p id="tch_intro">Tác giả hơn 115 đầu sách tham khảo về Toán học. </p>
-            <p id="tch_detail"><a href="<?php echo Url::toRoute(['/teacher/detail']) ?>">Chi tiết >> </a></p>
-        </div>
-    </div>
+    <?php } ?>
 </div>
+<?php }else { ?>
+    <p>Không có giáo viên nào</p>
+<?php } ?>

@@ -3,6 +3,16 @@
  */
 
 /**
+ * Tìm kiếm giáo viên theo các khóa học đã mở
+ */
+function search_teacher() {
+    var class_id = $("#class_id").val();
+    var subject_id = $("#subject_id").val();
+
+    window.location = '/teacher/index.html?class_id=' + class_id + '&subject_id=' + subject_id;
+}
+
+/**
  * Tìm kiếm khóa học
  */
 function search_course() {

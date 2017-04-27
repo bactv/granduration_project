@@ -40,7 +40,7 @@ class Teacher extends \common\models\TeacherBase
             [['tch_gender', 'tch_status', 'tch_avatar', 'tch_created_by', 'tch_updated_by'], 'integer'],
             [['tch_intro'], 'string'],
             [['tch_created_time', 'tch_updated_time'], 'safe'],
-            [['tch_username', 'tch_password', 'tch_full_name', 'tch_work_place', 'tch_degree', 'tch_email'], 'string', 'max' => 255]
+            [['tch_username', 'tch_password', 'tch_full_name', 'tch_work_place', 'tch_email'], 'string', 'max' => 255]
         ];
     }
 

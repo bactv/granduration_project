@@ -16,7 +16,7 @@ use yii\base\Controller;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 
-class QuizController extends Controller
+class QuizController extends FrontendController
 {
     /**
      * List contest

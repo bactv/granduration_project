@@ -8,6 +8,7 @@
 namespace frontend\controllers;
 
 use common\components\Utility;
+use frontend\components\FrontendController;
 use frontend\models\ClassLevel;
 use frontend\models\Course;
 use frontend\models\FreeLessonOnCourse;
@@ -21,7 +22,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use Yii;
 
-class CourseController extends Controller
+class CourseController extends FrontendController
 {
     /**
      * Danh sách khóa học
@@ -29,7 +30,11 @@ class CourseController extends Controller
      */
     public function actionListCourse()
     {
-        return $this->render('list_course');
+        $request = Yii::$app->request->get();
+        $type = isset($request['type']) ? $request['type'] : '';
+        return $this->render('list_course', [
+            'type' => $type
+        ]);
     }
 
     /**
@@ -186,9 +191,15 @@ class CourseController extends Controller
             throw new NotFoundHttpException("Bạn không có quyền truy cập");
         }
 
-        return $this->render('on_course', [
-            'course' => $course
-        ]);
+        if ($course['course_type_id'] == 1) {
+            return $this->render('on_course_video', [
+                'course' => $course
+            ]);
+        } else if ($course['course_type_id'] == 2) {
+            return $this->render('on_course_live_stream', [
+                'course' => $course
+            ]);
+        }
     }
 
     private function check_permission(Course $course)

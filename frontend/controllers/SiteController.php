@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\components\FrontendController;
 use frontend\models\Student;
 use frontend\models\Teacher;
 use frontend\models\User;
@@ -11,7 +12,7 @@ use Yii;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends FrontendController
 {
     /**
      * @inheritdoc

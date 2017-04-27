@@ -55,7 +55,7 @@ class Teacher extends \common\models\TeacherBase
             [['tch_gender', 'tch_status', 'tch_created_by', 'tch_updated_by'], 'integer'],
             [['tch_intro'], 'string'],
             [['tch_created_time', 'tch_updated_time'], 'safe'],
-            [['tch_username', 'tch_password', 'tch_full_name', 'tch_work_place', 'tch_degree', 'tch_email'], 'string', 'max' => 255],
+            [['tch_username', 'tch_password', 'tch_full_name', 'tch_work_place', 'tch_email'], 'string', 'max' => 255],
             ['tch_username', 'validateTchUsername'],
             ['tch_email', 'validateEmail']
         ];
@@ -110,5 +110,28 @@ class Teacher extends \common\models\TeacherBase
             return $object->{$attribute};
         }
         return '';
+    }
+
+    public static function get_list_teacher($params = [])
+    {
+        $lists = Teacher::find()->where(['tch_status' => 1]);
+        if (!empty($params['class_id'])) {
+            $courses = Course::findAll(['class_level_id' => $params['class_id']]);
+            $arr_tch_ids = [];
+            foreach ($courses as $c) {
+                $arr_tch_ids[] = $c->teacher_id;
+            }
+            $lists->andWhere(['tch_id' => $arr_tch_ids]);
+        }
+        if (!empty($params['subject_id'])) {
+            $courses = Course::findAll(['subject_id' => $params['subject_id']]);
+            $arr_tch_ids = [];
+            foreach ($courses as $c) {
+                $arr_tch_ids[] = $c->teacher_id;
+            }
+            $lists->andWhere(['tch_id' => $arr_tch_ids]);
+        }
+        $lists = $lists->all();
+        return $lists;
     }
 }

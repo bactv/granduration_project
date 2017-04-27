@@ -9,6 +9,7 @@ namespace frontend\controllers;
 
 use backend\models\Package;
 use common\components\Utility;
+use frontend\components\FrontendController;
 use frontend\models\Course;
 use frontend\models\FeedbackToTeacher;
 use frontend\models\FreeLessonOnCourse;
@@ -23,7 +24,7 @@ use yii\web\NotFoundHttpException;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
 
-class AccountController extends Controller
+class AccountController extends FrontendController
 {
     protected $model;
 

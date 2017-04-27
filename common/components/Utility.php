@@ -152,7 +152,7 @@ class Utility
         if (substr($newstr, -1, 1) != ' ') {
             $newstr = substr($newstr, 0, strrpos($newstr, " "));
         }
-        return $newstr;
+        return $newstr . ' ...';
     }
 
     public static function encrypt_decrypt($action, $string) {

@@ -14,6 +14,7 @@ use backend\models\Question;
 use backend\models\QuestionAnswer;
 use backend\models\Quiz;
 use backend\models\Student;
+use backend\models\Teacher;
 use Yii;
 use yii\console\Controller;
 
@@ -150,5 +151,24 @@ class FakerTestController extends Controller
             $model->std_full_name = $faker->name;
             $model->save();
         }
+    }
+
+    public function actionTestTeacher($count = 10)
+    {
+        $faker = \Faker\Factory::create();
+
+        for ($i = 0; $i < $count; $i++) {
+            $model = new Teacher();
+            $model->tch_full_name = $faker->name;
+            $model->tch_gender = mt_rand(0, 1);
+            $model->tch_intro = $faker->sentence(10);
+            $model->tch_work_place = $faker->sentence(5);
+            $model->tch_degree = mt_rand(1, 22);
+            $model->tch_created_time = date('Y-m-d H:i:s');
+            $model->tch_updated_time = date('Y-m-d H:i:s');
+            $model->save();
+            var_dump($model->getErrors());
+        }
+        echo "DONE";
     }
 }

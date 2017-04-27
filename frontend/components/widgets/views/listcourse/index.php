@@ -26,7 +26,7 @@ AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel', true);
 
 <style>
     .course_type {
-
+        margin-bottom: 20px;
     }
     .course_type > #title {
         font-size: 20px;
@@ -102,8 +102,8 @@ AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel', true);
 
 <?php if (isset($list_course) && count($list_course) > 0) { ?>
 <div class="row course_type">
-    <p id="title" class="m_color txt_left"><?php echo Icon::show('bookmark') ?> <?php echo $title ?></p>
-    <div id="owl-course" class="owl-carousel owl-theme">
+    <p id="title" class="m_color txt_left"><?php echo ($title != '') ? Icon::show('bookmark') . ' ' . $title : '' ?> </p>
+    <div id="owl-course-<?php echo $type ?>" class="owl-carousel owl-theme">
         <?php foreach ($list_course as $course) {
             $course_name = $course['course_name'];
             $signed_to_date = Utility::formatDataTime($course['signed_to_date'], '-', '/');
@@ -132,7 +132,9 @@ AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel', true);
             </div>
         <?php } ?>
     </div>
-    <div class="view_more"><a href="#">Xem thêm >> </a></div>
+    <?php if ($type != '') { ?>
+        <div class="view_more"><a href="<?php echo Url::toRoute(['/course/list-course', 'type' => $type]) ?>">Xem thêm >> </a></div>
+    <?php } ?>
 </div>
 <?php } ?>
 
@@ -148,7 +150,7 @@ AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel', true);
 
 <script>
     $(document).ready(function () {
-        $("#owl-course").owlCarousel({
+        $("#owl-course-").owlCarousel({
 
             autoPlay: 3000, //Set AutoPlay to 3 seconds
 
@@ -158,7 +160,17 @@ AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel', true);
 
         });
 
-        $("#owl-course-2").owlCarousel({
+        $("#owl-course-hot").owlCarousel({
+
+            autoPlay: 3000, //Set AutoPlay to 3 seconds
+
+            items : 4,
+            itemsDesktop : [1199,4],
+            itemsDesktopSmall : [979,3]
+
+        });
+
+        $("#owl-course-free").owlCarousel({
 
             autoPlay: 3000, //Set AutoPlay to 3 seconds
 
