@@ -15,4 +15,9 @@ class Subject extends \common\models\SubjectBase
         }
         return '';
     }
+
+    public static function get_all_subjects()
+    {
+        return self::find()->all();
+    }
 }

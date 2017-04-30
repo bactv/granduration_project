@@ -1,6 +1,7 @@
 /* ===  NAV WIDGET === */
 .header .nav {
     height: 120px;
+    width: 88%;
 }
 
 .header .nav ul {

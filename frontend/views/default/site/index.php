@@ -27,7 +27,7 @@ $this->title = 'Study.EDU - Hệ thống học tập trực tuyên';
         <div class="col-md-2">
             <div class="form-group">
                 <label for="choose-class">Chọn môn học:</label>
-                <?php echo Html::dropDownList('class', '', ArrayHelper::map(Subject::find()->all(), 'subject_id', 'subject_name'), [
+                <?php echo Html::dropDownList('class', '', ArrayHelper::map(Subject::get_all_subjects(), 'subject_id', 'subject_name'), [
                     'class' => 'form-control',
                     'id' => 'subject_id',
                 ]) ?>
@@ -37,7 +37,7 @@ $this->title = 'Study.EDU - Hệ thống học tập trực tuyên';
         <div class="col-md-2">
             <div class="form-group">
                 <label for="choose-subject">Chọn lớp:</label>
-                <?php echo Html::dropDownList('subject', '', ArrayHelper::map(ClassLevel::find()->all(), 'class_level_id', 'class_level_name'), [
+                <?php echo Html::dropDownList('subject', '', ArrayHelper::map(ClassLevel::get_all_class(), 'class_level_id', 'class_level_name'), [
                     'class' => 'form-control',
                     'id' => 'class_id',
                 ]) ?>

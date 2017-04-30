@@ -12,6 +12,7 @@ use Yii;
  * @property string $question_content
  * @property string $ans_content
  * @property integer $is_true
+ * @property string $soluion
  */
 class QuestionAnswerDB extends \yii\db\ActiveRecord
 {
@@ -31,6 +32,7 @@ class QuestionAnswerDB extends \yii\db\ActiveRecord
         return [
             [['question_id'], 'required'],
             [['question_id', 'is_true'], 'integer'],
+            [['soluion'], 'string'],
             [['question_content'], 'string', 'max' => 500],
             [['ans_content'], 'string', 'max' => 255]
         ];
@@ -47,6 +49,7 @@ class QuestionAnswerDB extends \yii\db\ActiveRecord
             'question_content' => Yii::t('cms', 'Question Content'),
             'ans_content' => Yii::t('cms', 'Ans Content'),
             'is_true' => Yii::t('cms', 'Is True'),
+            'soluion' => Yii::t('cms', 'Soluion'),
         ];
     }
 }

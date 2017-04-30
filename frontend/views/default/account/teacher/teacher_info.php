@@ -10,6 +10,7 @@ use common\components\AssetApp;
 use kartik\icons\Icon;
 use yii\helpers\Url;
 use yii\bootstrap\Alert;
+use common\components\Utility;
 
 Icon::map($this, Icon::FA);
 
@@ -29,16 +30,29 @@ if (Yii::$app->session->hasFlash('success')) {
     <div class="row">
         <div class="col-md-3">
             <div class="avatar">
-                <img src="<?php echo AssetApp::getImageBaseUrl() . '/avatar_icon.png' ?>">
-                <a href="javascript:void(0)">
+                <?php
+                $avatar = Utility::get_content_static(Yii::$app->params['img_url']['avatar_teacher']['folder'] .
+                    '/', $model['tch_id']);
+                if (empty($avatar)) {
+                    if ($model['tch_gender'] == 0) {
+                        $avatar = AssetApp::getImageBaseUrl() . '/avatar/teacher_female_icon.png';
+                    } else {
+                        $avatar = AssetApp::getImageBaseUrl() . '/avatar/teacher_male_icon.png';
+                    }
+                }
+                ?>
+                <img src="<?php echo $avatar ?>">
+                <a href="javascript:void(0)" data-toggle="modal" data-target="#change_avatar">
                     <div class="change_avatar c_white">
                         <?php echo Icon::show('camera') ?> <div id="text">Đổi ảnh đại diện</div>
                     </div>
                 </a>
+
             </div>
             <div class="info">
                 <p id="username" class="m_color txt_center"><?php echo $model['tch_username'] ?></p>
             </div>
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#change_avatar">Open Modal</button>
         </div>
 
         <div class="col-md-9">
@@ -60,7 +74,33 @@ if (Yii::$app->session->hasFlash('success')) {
     </div>
 </div>
 
+
+<!-- Modal -->
+<div id="change_avatar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
 <script>
+    function change_avatar() {
+
+    }
     function get_user_detail_info() {
         $.ajax({
             method: 'GET',
@@ -81,17 +121,3 @@ if (Yii::$app->session->hasFlash('success')) {
         });
     }
 </script>
-
-<style>
-    .nav-tabs { border-bottom: 2px solid #DDD; }
-    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
-    .nav-tabs > li > a { border: none; color: #666; }
-    .nav-tabs > li.active > a, .nav-tabs > li > a:hover { border: none; color: #4285F4 !important; background: transparent; }
-    .nav-tabs > li > a::after { content: ""; background: #4285F4; height: 2px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
-    .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }
-    .tab-nav > li > a::after { background: #21527d none repeat scroll 0% 0%; color: #fff; }
-    .tab-pane { padding: 15px 0; }
-    .tab-content{padding:20px}
-
-    .card {background: #FFF none repeat scroll 0% 0%; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3); margin-bottom: 30px; }
-</style>

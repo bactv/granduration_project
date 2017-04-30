@@ -332,6 +332,17 @@ class AccountController extends FrontendController
         ]);
     }
 
+    public function actionChangeAvatar()
+    {
+        if (!Yii::$app->request->isAjax || !Yii::$app->request->isPost) {
+            Yii::$app->end();
+        }
+        $model = $this->getObject();
+        if ($model instanceof Teacher) {
+
+        }
+    }
+
     private function getObject()
     {
         $object = Yii::$app->user->identity;

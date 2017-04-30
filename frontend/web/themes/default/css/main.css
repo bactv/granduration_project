@@ -19,12 +19,12 @@ div.main_content, footer.footer {
 }
 
 header.header {
-    margin: 0 auto 20px auto;
+    margin: 10px auto 20px auto;
     height: 120px;
 }
 
 header.header .logo {
-
+    width: 12%;
 }
 
 header.header .logo img {
@@ -157,7 +157,6 @@ footer.footer p.copy_right {
 /* ========================= TRANG CHỦ ========================= */
 .search_course {
     margin-bottom: 30px;
-    text-align: center;
     padding-bottom: 30px;
     border-bottom: 2px solid #ddd;
     box-shadow: 0 4px 6px -6px #ccc;
@@ -165,6 +164,16 @@ footer.footer p.copy_right {
 .search_course p#title {
     font-size: 30px;
 }
+
+.search_course .form-control {
+    border-radius: 4px;
+    height: 40px;
+}
+
+.search_course button[type='submit'] {
+    padding: 9px 15px;
+}
+
 
 .list_course {
     /*background: #e9ebee;*/

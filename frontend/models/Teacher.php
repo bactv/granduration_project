@@ -11,6 +11,7 @@ class Teacher extends \common\models\TeacherBase
     public $rememberMe;
     public $new_password;
     public $re_new_password;
+    public $avatar;
 
     public function behaviors()
     {
@@ -133,5 +134,10 @@ class Teacher extends \common\models\TeacherBase
         }
         $lists = $lists->all();
         return $lists;
+    }
+
+    public function upload_avatar()
+    {
+
     }
 }

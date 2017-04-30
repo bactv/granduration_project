@@ -90,13 +90,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="row item">
                     <table class="table table-striped table-hover table-bordered table-condensed">
                         <tr>
-                            <td colspan="5"><p id="title"><?php echo Icon::show('clock-o') ?><?php echo $quiz_type_name ?></p></td>
+                            <td colspan="6"><p id="title"><?php echo Icon::show('clock-o') ?><?php echo $quiz_type_name ?></p></td>
                         </tr>
                         <tr>
                             <th style="width: 40%;text-align: center">Chủ đề</th>
                             <th style="width: 9%;text-align: center">Số câu hỏi</th>
                             <th style="width: 15%;text-align: center">Số người tham gia</th>
                             <th style="text-align: center">Đánh giá</th>
+                            <th style="text-align: center">VIP</th>
                             <th style="width: 9%;text-align: center">Phí</th>
                         </tr>
                         <?php foreach ($q_types as $quiz) {
@@ -108,11 +109,20 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <td style="text-align: center;"><?php echo count(json_decode($quiz['question_ids'])) ?></td>
                                 <td style="text-align: center"><?php echo number_format($info['total_student']) ?></td>
                                 <td style="text-align: center"><b><?php echo $rate ?>/10</b> <i style="font-size: 11px;"> (<?php echo number_format(intval($info['total_student_rate'])) ?> người)</i></td>
+                                <td style="text-align: center">
+                                    <?php
+                                    if ($quiz['vip'] == 1) {
+                                        echo Icon::show('check', ['style' => 'color: blue']);
+                                    } else {
+                                        echo Icon::show('close', ['style' => 'color: red']);
+                                    }
+                                    ?>
+                                </td>
                                 <td style="text-align: center"><?php echo number_format($quiz['price']) . ' VNĐ' ?></td>
                             </tr>
                         <?php } ?>
                         <tr>
-                            <td colspan="5" style="text-align: right"><a href="<?php echo Url::toRoute(['/quiz/list-contest', 'subject_id' => $k, 'class_id' => $class_id, 'quiz_type_id' => $k2]) ?>"><b><i style="font-size: 12px;">Xem thêm >></i></b></a></td>
+                            <td colspan="6" style="text-align: right"><a href="<?php echo Url::toRoute(['/quiz/list-contest', 'subject_id' => $k, 'class_id' => $class_id, 'quiz_type_id' => $k2]) ?>"><b><i style="font-size: 12px;">Xem thêm >></i></b></a></td>
                         </tr>
                     </table>
                 </div>

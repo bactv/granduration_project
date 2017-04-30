@@ -15,4 +15,9 @@ class ClassLevel extends \common\models\ClassLevelBase
         }
         return '';
     }
+
+    public static function get_all_class()
+    {
+        return self::find()->orderBy('class_level_id ASC')->all();
+    }
 }

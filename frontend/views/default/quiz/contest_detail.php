@@ -75,8 +75,6 @@ $info = StudentQuiz::get_info($quiz['quiz_id']);
         var quiz_id = '<?php echo $quiz['quiz_id'] ?>';
         var _csrf = $("meta[name='csrf_params']").attr('content');
 
-        console.log(quiz_id);
-
         $.ajax({
             method: 'POST',
             data: {'quiz_id' : quiz_id, '_csrf' : _csrf},

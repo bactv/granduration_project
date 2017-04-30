@@ -9,6 +9,8 @@ use yii\helpers\Html;
 use frontend\models\Question;
 use frontend\models\QuestionAnswer;
 use common\components\AssetApp;
+use yii\helpers\Url;
+use common\components\Utility;
 
 ?>
 
@@ -28,7 +30,6 @@ use common\components\AssetApp;
 
     }
     .list_questions {
-        width: 70%;
         float: left;
         padding: 10px;
         border: 1px solid #ccc;
@@ -96,6 +97,8 @@ use common\components\AssetApp;
         padding: 7px 0;
         background: #0ead8e;
         color: #ffffff;
+        width: 10%;
+        float: right;
     }
     .time_run #time_run {
         font-size: 20px;
@@ -104,75 +107,61 @@ use common\components\AssetApp;
 
 </style>
 
-<div class="quiz_title">
-    <p id="name"><?php echo $quiz['quiz_name'] ?></p>
-    <p id="time"><i>Thời gian: <?php echo $quiz['time'] . ' phút' ?></i></p>
+<style>
+    .do_contest {
+        width: 80%;
+        margin: 0 auto;
+    }
+</style>
+
+<div class="time_run">
+    <p>Kết thúc bài thi</p>
+    <p id="time_run">
+        <?php echo $quiz['time'] . ':00' ?>
+    </p>
 </div>
-
-<div class="row">
-    <div class="time_run time_run_mobile" style="display: none">
-        <p>Kết thúc bài thi</p>
-        <p id="time_run_2">
-            <?php echo $quiz['time'] . ':00' ?>
-        </p>
-    </div>
-    <div class="list_questions">
-        <?php
-        $question_ids = json_decode($quiz['question_ids']);
-        foreach ($question_ids as $k => $question_id) {
-            $question = Question::find()->where(['question_id' => $question_id])->one();
-            $answers = QuestionAnswer::find()->where(['question_id' => $question_id])->all();
-        ?>
-            <div class="box_question">
-                <p id="question_content"><?php echo ($k + 1) . ". " . $question['question_content'] ?></p>
-                <ol class="box_answer" type="A">
-                <?php foreach ($answers as $ans) { ?>
-                    <li id="ans">
-                        <input type="radio" class="form-check-input" name="ans_<?php echo $question_id ?>" value="<?php echo $ans['ans_id'] ?>">
-                        <?php echo $ans['ans_content'] ?>
-                    </li>
-                <?php } ?>
-                </ol>
-            </div>
-        <?php } ?>
+<div class="do_contest">
+    <div class="quiz_title">
+        <p id="name"><?php echo $quiz['quiz_name'] ?></p>
+        <p id="time"><i>Thời gian: <?php echo $quiz['time'] . ' phút' ?></i></p>
     </div>
 
-    <div class="form-answer">
-        <div class="time_run">
-            <p>Kết thúc bài thi</p>
-            <p id="time_run">
-                <?php echo $quiz['time'] . ':00' ?>
-            </p>
+    <div class="row">
+        <div class="list_questions">
+            <?php
+            $question_ids = json_decode($quiz['question_ids']);
+            foreach ($question_ids as $k => $question_id) {
+                $question = Question::find()->where(['question_id' => $question_id])->one();
+                $answers = QuestionAnswer::find()->where(['question_id' => $question_id])->all();
+                ?>
+                <div class="box_question">
+                    <p id="question_content"><?php echo ($k + 1) . ". " . $question['question_content'] ?></p>
+                    <ol class="box_answer" type="A">
+                        <?php foreach ($answers as $ans) { ?>
+                            <li id="ans">
+                                <input type="radio" class="form-check-input" name="<?php echo $question_id ?>" value="<?php echo $ans['ans_id'] ?>">
+                                <?php echo $ans['ans_content'] ?>
+                            </li>
+                        <?php } ?>
+                    </ol>
+                </div>
+            <?php } ?>
         </div>
-       <?php
-           $question_ids = json_decode($quiz['question_ids']);
-           foreach ($question_ids as $k => $question_id) {
-               $answers = QuestionAnswer::find()->where(['question_id' => $question_id])->all();
-           ?>
-               <div class="box_answer">
-                   <span id="ques_number"><?php echo ($k + 1) ?></span>
-                   <div class="list_ans">
-                       <ol type="A">
-                           <?php foreach ($answers as $ans) { ?>
-                               <li>
-                                   <input type="radio" class="form-check-input" name="ans_<?php echo $question_id ?>" value="<?php echo $ans['ans_id'] ?>">
-                               </li>
-                           <?php } ?>
-                       </ol>
-                   </div>
-               </div>
-       <?php } ?>
+    </div>
+
+    <div class="row" style="text-align: center;margin: 30px 0 30px 0">
+        <?php echo Html::a('Nộp bài', 'javascript:void(0)', ['class' => 'btn btn-primary', 'onclick' => 'submit_quiz()']) ?>
+        <?php echo Html::a('Hủy', 'javascript:void(0)', ['class' => 'btn btn-danger']) ?>
     </div>
 </div>
 
-<div class="row" style="text-align: center;margin: 30px 0 30px 0">
-    <?php echo Html::a('Nộp bài', 'javascript:void(0)', ['class' => 'btn btn-primary']) ?>
-    <?php echo Html::a('Hủy', 'javascript:void(0)', ['class' => 'btn btn-danger']) ?>
-</div>
+
+<?php $time_start = time(); // thời gian bắt đầu làm bài ?>
+
 <script src="/themes/default/js/jquery.sticky-kit.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('.form-answer').stick_in_parent();
+        $('.time_run').stick_in_parent();
     });
     function startTimer(duration, display) {
         var timer = duration, minutes, seconds;
@@ -196,5 +185,67 @@ use common\components\AssetApp;
         var display = document.querySelector('#time_run');
         startTimer(minus, display);
     };
+    
+    function submit_quiz() {
+        var time_start = '<?php echo $time_start; ?>';
+
+        var arr_radio = [];
+        $("input[type='radio']").each(function () {
+            arr_radio.push($(this).attr('name'));
+        });
+        arr_radio = jQuery.unique(arr_radio);
+        var arr_selected = [];
+        for (var i = 0; i < arr_radio.length; i++) {
+            arr_selected[i] = {'question_id' : arr_radio[i], 'ans_id' : ''};
+        }
+
+        var count_ans = 0;
+        for (var j = 0; j < arr_radio.length; j++) {
+            $("input:radio[name='" + arr_radio[j] + "']").each(function () {
+                if ($(this).is(':checked')) {
+                    arr_selected[j].ans_id = $(this).attr('value');
+                    count_ans++;
+                }
+            });
+        }
+
+        var total_ques = '<?php echo intval(count($question_ids)) ?>';
+        if (count_ans < total_ques) {
+            var message = "Bài thi chưa hoàn thiện, bạn có muốn nộp bài ngay hay không?";
+        } else {
+            message = "Bạn có muốn nộp bài hay không?";
+        }
+
+        var _csrf = $("meta[name='csrf-param']").attr('content');
+        var data = {'_csrf' : _csrf, 'time_start' : time_start, 'data' : arr_selected};
+
+        BootstrapDialog.show({
+            title: 'Nộp bài',
+            message: message,
+            buttons: [{
+                label: 'Nộp bài',
+                cssClass: 'btn-success',
+                action: function(dialog) {
+                    $.ajax({
+                        method: 'POST',
+                        data: data,
+                        url: '<?php echo Url::toRoute(['/quiz/check-contest']) ?>',
+                        success: function (data) {
+                            var res = JSON.parse(data);
+                            var attempt_id = res.attempt_id;
+                            window.location = '<?php echo Url::toRoute(['/quiz/review-contest']) ?>' + '?attempt_id=' + attempt_id;
+                        }
+                    });
+                    dialog.close();
+                }
+            }, {
+                label: 'Hủy',
+                cssClass: 'btn-warning',
+                action: function(dialog) {
+                    dialog.close();
+                }
+            }]
+        });
+    }
 
 </script>

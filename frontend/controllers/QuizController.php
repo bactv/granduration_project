@@ -8,11 +8,14 @@
 namespace frontend\controllers;
 
 use common\components\Utility;
+use frontend\models\QuestionAnswer;
 use frontend\models\Quiz;
+use frontend\models\QuizAttempt;
 use frontend\models\StudentPackage;
 use Yii;
 use frontend\components\FrontendController;
 use yii\base\Controller;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 
@@ -86,11 +89,80 @@ class QuizController extends FrontendController
         if (empty($quiz_id)) {
             throw new NotFoundHttpException("Không tìm thấy trang này.");
         }
+
+        $user_id = isset(Yii::$app->user->identity->id) ? Yii::$app->user->identity->id : null;
+        $check = Quiz::check_user_permission($quiz_id, $user_id);
+        $info = json_decode($check);
+        if ($info->{'status'} == 0) {
+            throw new NotFoundHttpException($info->{'message'});
+        }
+
         return $this->render('do_contest', [
             'quiz' => $quiz
         ]);
     }
 
+    public function actionCheckContest()
+    {
+        $request = Yii::$app->request->post();
+        $datas = isset($request['data']) ? $request['data'] : [];
+        $time_start = isset($request['time_start']) ? $request['time_start'] : '';
+        $time_submit = time();
+
+        $arr_results = [
+            'info' => [
+                'time_start' => date('Y-m-d H:i:s', $time_start),
+                'time_submit' => date('Y-m-d H:i:s', $time_submit),
+                'total_true' => 0,
+                'total_questions' => 0
+            ],
+            'results' => [],
+        ];
+        foreach ($datas as $dt) {
+            $obj = QuestionAnswer::check_answer($dt['question_id'], $dt['ans_id']);
+            $arr_results['results'][] = [
+                'question_id' => $dt['question_id'],
+                'ans_id' => $dt['ans_id'],
+                'check' => ($obj['check'] == true) ? 1 : 0,
+                'solution' => $obj['solution']
+            ];
+            if ($obj['check'] == true) {
+                $arr_results['info']['total_true'] += 1;
+            }
+            $arr_results['info']['total_questions'] += 1;
+        }
+        $attempt = new QuizAttempt();
+        $attempt->content = json_encode($arr_results);
+        $attempt->created_time = date('Y-m-d H:i:s');
+        $attempt->save();
+        return json_encode(['attempt_id' => Utility::encrypt_decrypt("encrypt", $attempt->id)]);
+    }
+
+    public function actionReviewContest($attempt_id = '')
+    {
+        $att_str = Utility::encrypt_decrypt("decrypt", $attempt_id);
+        $ex = explode('_', $att_str);
+        if (!isset($ex[1]) || trim($ex[1] == '')) {
+            throw new NotFoundHttpException("Trang bạn tìm kiếm không tồn tại.");
+        }
+
+        $attempt = QuizAttempt::findOne(['id' => trim($ex[1])]);
+        if (empty($attempt)) {
+            throw new NotFoundHttpException("Trang bạn tìm kiếm không tồn tại.");
+        }
+        $data = (array)json_decode($attempt->content);
+        return $this->render('review_contest', [
+            'data' => $data
+        ]);
+    }
+
+    /**
+     * Kiểm tra tài khoản có đủ tiền để tham gia bài kiểm tra hay không:
+     * + Nếu bài kiểm tra 0 đồng và không phải vip => không cần đăng nhập (giáo viên có thể làm)
+     * + Nếu bài kiểm tra VIP => cần user vip
+     * + Chỉ học sinh mới được quyền tham gia làm bài thi
+     *
+     */
     public function actionCheckQuiz()
     {
         if (!Yii::$app->request->isAjax || !Yii::$app->request->isPost) {
@@ -100,38 +172,9 @@ class QuizController extends FrontendController
         $request = Yii::$app->request->post();
         $quiz_id = isset($request['quiz_id']) ? $request['quiz_id'] : '';
 
-        $quiz = Quiz::findOne(['quiz_id' => $quiz_id, 'status' => 1]);
-        if (empty($quiz)) {
-            echo json_encode(['status' => 0, 'message' => 'Có lỗi xảy ra.']);
-            Yii::$app->end();
-        }
-
-        $user = Yii::$app->user->identity;
-        // nếu là tài khoản giáo viên
-        if (!empty($user) && $user->type == 2 && $user->teacher_id != '') {
-            if ($quiz['price'] > 0 || $quiz['vip'] > 0) {
-                echo json_encode(['status' => 0, 'message' => 'Tài khoản của bạn không có quyền để làm bài thi này.']);
-                Yii::$app->end();
-            }
-        }
-
-        // nếu đề thi bắt đăng nhập
-        if (($quiz['price'] > 0 || $quiz['vip'] > 0) && empty($user)) {
-            echo json_encode(['status' => 0, 'message' => 'Bạn phải <a href="' . Url::toRoute(['/site/login']) . '">đăng nhập</a> để làm bài thi.']);
-            Yii::$app->end();
-        }
-
-        // check đề thi VIP
-        if ($quiz['vip'] > 0 && (!empty($user)) && $user->student_id != '') {
-            // kiêm tra học sinh có đăng ký gói VIP (10, 30, 365)
-            $check_vip = StudentPackage::check_student_vip($user->student_id);
-            if (!$check_vip) {
-                echo json_encode(['status' => 0, 'message' => 'Đây là đề thi VIP, hãy <a href="' . Url::toRoute(['/site/login']) . '"><i>đăng ký</i></a> ngay gói cước VIP để làm bài thi này.']);
-                Yii::$app->end();
-            }
-        }
-
-        echo json_encode(['status' => 1, 'message' => 'OK']);
+        $user_id = isset(Yii::$app->user->identity->id) ? Yii::$app->user->identity->id : null;
+        $check = Quiz::check_user_permission($quiz_id, $user_id);
+        echo $check;
         Yii::$app->end();
     }
 }

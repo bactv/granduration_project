@@ -6,7 +6,6 @@ use frontend\models\Student;
 use frontend\models\Teacher;
 use frontend\models\User;
 use yii\helpers\Url;
-use yii\web\Controller;
 use Yii;
 
 /**
