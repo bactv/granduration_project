@@ -63,6 +63,10 @@ class Quiz extends QuizBase
             return json_encode(['status' => 0, 'message' => 'Đề thi không tồn tại.']);
         }
 
+        if ($quiz['price'] == 0 && $quiz['vip'] == 0) {
+            return json_encode(['status' => 1, 'message' => 'OK']);
+        }
+
         // nếu bài thi phải trả phí hoặc VIP => cần user đăng nhập và là tài khoản học sinh
         if ($quiz['price'] > 0 || $quiz['vip'] == 1) {
             if (empty($user)) {

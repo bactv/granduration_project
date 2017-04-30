@@ -9,27 +9,51 @@ use common\components\Utility;
 use frontend\models\QuestionAnswer;
 use frontend\models\Question;
 use kartik\icons\Icon;
+use frontend\components\DetectClient;
+use yii\helpers\Url;
+use frontend\models\QuizRating;
 
 Icon::map($this, Icon::FA);
+
+$info = QuizRating::get_info($quiz_id)
 
 ?>
 
 
 <div class="review_contest">
-    <div class="box_results">
-        <p id="title">Kết quả</p>
-        <div class="info">
-            <div class="row">
-                <div class="col-md-6" id="key">Thời gian làm bài: </div>
-                <div class="col-md-6" id="val"><?php echo Utility::formatDataTime($data['info']->{'time_start'}, '-', '/', true) ?></div>
+    <div class="row">
+        <div class="col-md-5 box_results">
+            <p id="title">Kết quả</p>
+            <div class="info">
+                <div class="row">
+                    <div class="col-md-6" id="key">Thời gian làm bài: </div>
+                    <div class="col-md-6" id="val"><?php echo Utility::formatDataTime($data['info']->{'time_start'}, '-', '/', true) ?></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" id="key">Thời gian nộp bài: </div>
+                    <div class="col-md-6" id="val"><?php echo Utility::formatDataTime($data['info']->{'time_submit'}, '-', '/', true) ?></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" id="key">Số đáp án đúng: </div>
+                    <div class="col-md-6" id="val"><?php echo $data['info']->{'total_true'} . '/' . $data['info']->{'total_questions'} ?></div>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-md-6" id="key">Thời gian nộp bài: </div>
-                <div class="col-md-6" id="val"><?php echo Utility::formatDataTime($data['info']->{'time_submit'}, '-', '/', true) ?></div>
-            </div>
-            <div class="row">
-                <div class="col-md-6" id="key">Số đáp án đúng: </div>
-                <div class="col-md-6" id="val"><?php echo $data['info']->{'total_true'} . '/' . $data['info']->{'total_questions'} ?></div>
+        </div>
+
+        <div class="col-md-2"></div>
+
+        <div class="col-md-5 rate_contest">
+            <p id="title">Đánh giá đề thi</p>
+            <div class="box_rate_contest">
+                <p><b>Vui lòng dành thời gian đánh giá đề thi này: </b></p>
+                <select id="rating">
+                    <option value="2">1</option>
+                    <option value="4">2</option>
+                    <option value="6">3</option>
+                    <option value="8">4</option>
+                    <option value="10">5</option>
+                </select>
+                <p>Điểm đánh giá: <b><?php echo $info['point'] ?>/10</b> <i>(<?php echo $info['total_rating'] ?> lượt)</i></p>
             </div>
         </div>
     </div>
@@ -84,7 +108,6 @@ Icon::map($this, Icon::FA);
     }
     .review_contest .box_results {
         text-align: center;
-        width: 50%;
         margin: 0 auto 30px auto;
         box-shadow: 0 0 10px #ccc;
         padding-bottom: 10px;
@@ -111,6 +134,22 @@ Icon::map($this, Icon::FA);
         text-align: left;
         padding: 5px;
     }
+
+    .review_contest .rate_contest {
+        text-align: center;
+        margin: 0 auto 30px auto;
+        box-shadow: 0 0 10px #ccc;
+        padding-bottom: 10px;
+    }
+    .review_contest .rate_contest p#title {
+        background: #0ead8e;
+        padding: 10px;
+        color: #FFF;
+        font-size: 18px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
 
 
     .review_contest .box_solution {
@@ -172,7 +211,35 @@ Icon::map($this, Icon::FA);
 
 </style>
 
+<script src="/themes/default/js/jquery.barrating.min.js"></script>
 <script>
+    $(function() {
+        $('#rating').barrating({
+            theme: 'fontawesome-stars',
+            initialRating: '<?php echo $info['point'] ?>',
+            onSelect:function(value, text, event) {
+                var student_id = '<?php echo isset(Yii::$app->user->identity->student_id) ? Yii::$app->user->identity->student_id : "" ?>';
+                var ip = '<?php echo DetectClient::get_ip_client() ?>';
+
+                var _csrf = $("meta[name='csrf-param']").attr('content');
+                var data = {'_csrf' : _csrf, 'student_id' : student_id, 'ip' : ip, 'rate_value' : value, 'quiz_id' : '<?php echo $quiz_id ?>'};
+                $.ajax({
+                    method: 'POST',
+                    data: data,
+                    url: '<?php echo Url::toRoute(['/quiz/rating-quiz']) ?>',
+                    success: function (data) {
+                        var res = JSON.parse(data);
+                        BootstrapDialog.show({
+                            title: res.info,
+                            message: res.message,
+                        });
+                    }
+                });
+            }
+        });
+
+
+    });
     $(document).on('click', '#btn_show_solution', function () {
         var qs_id = $(this).data('ques');
         $("p#slt_" + qs_id).toggle(500);

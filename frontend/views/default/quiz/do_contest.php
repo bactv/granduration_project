@@ -175,7 +175,9 @@ use common\components\Utility;
             display.textContent = minutes + ":" + seconds;
 
             if (--timer < 0) {
-                timer = duration;
+//                timer = duration;
+                submit_quiz(false);
+                return true;
             }
         }, 1000);
     }
@@ -186,7 +188,7 @@ use common\components\Utility;
         startTimer(minus, display);
     };
     
-    function submit_quiz() {
+    function submit_quiz(ck = true) {
         var time_start = '<?php echo $time_start; ?>';
 
         var arr_radio = [];
@@ -209,42 +211,53 @@ use common\components\Utility;
             });
         }
 
-        var total_ques = '<?php echo intval(count($question_ids)) ?>';
-        if (count_ans < total_ques) {
-            var message = "Bài thi chưa hoàn thiện, bạn có muốn nộp bài ngay hay không?";
-        } else {
-            message = "Bạn có muốn nộp bài hay không?";
-        }
-
         var _csrf = $("meta[name='csrf-param']").attr('content');
-        var data = {'_csrf' : _csrf, 'time_start' : time_start, 'data' : arr_selected};
+        var student_id = '<?php echo (isset(Yii::$app->user->identity->student_id) ? Yii::$app->user->identity->student_id : '') ?>';
+        var data = {'_csrf' : _csrf, 'time_start' : time_start, 'data' : arr_selected, 'quiz_id' : '<?php echo $quiz['quiz_id'] ?>',
+        'student_id' : student_id};
 
-        BootstrapDialog.show({
-            title: 'Nộp bài',
-            message: message,
-            buttons: [{
-                label: 'Nộp bài',
-                cssClass: 'btn-success',
-                action: function(dialog) {
-                    $.ajax({
-                        method: 'POST',
-                        data: data,
-                        url: '<?php echo Url::toRoute(['/quiz/check-contest']) ?>',
-                        success: function (data) {
-                            var res = JSON.parse(data);
-                            var attempt_id = res.attempt_id;
-                            window.location = '<?php echo Url::toRoute(['/quiz/review-contest']) ?>' + '?attempt_id=' + attempt_id;
-                        }
-                    });
-                    dialog.close();
-                }
-            }, {
-                label: 'Hủy',
-                cssClass: 'btn-warning',
-                action: function(dialog) {
-                    dialog.close();
-                }
-            }]
+        if (ck) {
+            var total_ques = '<?php echo intval(count($question_ids)) ?>';
+            if (count_ans < total_ques) {
+                var message = "Bài thi chưa hoàn thiện, bạn có muốn nộp bài ngay hay không?";
+            } else {
+                message = "Bạn có muốn nộp bài hay không?";
+            }
+
+            BootstrapDialog.show({
+                title: 'Nộp bài',
+                message: message,
+                buttons: [{
+                    label: 'Nộp bài',
+                    cssClass: 'btn-success',
+                    action: function(dialog) {
+                        ajax_submit(data);
+                        dialog.close();
+                    }
+                }, {
+                    label: 'Hủy',
+                    cssClass: 'btn-warning',
+                    action: function(dialog) {
+                        dialog.close();
+                    }
+                }]
+            });
+        } else {
+            ajax_submit(data);
+        }
+    }
+
+    function ajax_submit(data) {
+        $.ajax({
+            method: 'POST',
+            data: data,
+            url: '<?php echo Url::toRoute(['/quiz/check-contest']) ?>',
+            success: function (data) {
+                var res = JSON.parse(data);
+                var attempt_id = res.attempt_id;
+                var quiz_id = res.quiz_id;
+                window.location = '<?php echo Url::toRoute(['/quiz/review-contest']) ?>' + '?attempt_id=' + attempt_id + '&quiz_id=' + quiz_id;
+            }
         });
     }
 

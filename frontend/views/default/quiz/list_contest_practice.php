@@ -15,6 +15,8 @@ use yii\helpers\ArrayHelper;
 use frontend\models\QuizType;
 use common\components\Utility;
 use frontend\models\StudentQuiz;
+use frontend\models\QuizRating;
+use frontend\models\QuizAttempt;
 
 Icon::map($this, Icon::FA);
 
@@ -95,20 +97,20 @@ $this->params['breadcrumbs'][] = $this->title;
                         <tr>
                             <th style="width: 40%;text-align: center">Chủ đề</th>
                             <th style="width: 9%;text-align: center">Số câu hỏi</th>
-                            <th style="width: 15%;text-align: center">Số người tham gia</th>
+                            <th style="width: 15%;text-align: center">Số lượt tham gia</th>
                             <th style="text-align: center">Đánh giá</th>
                             <th style="text-align: center">VIP</th>
                             <th style="width: 9%;text-align: center">Phí</th>
                         </tr>
                         <?php foreach ($q_types as $quiz) {
-                            $info = StudentQuiz::get_info($quiz['quiz_id']);
-                            $rate = (number_format($info['total_point_rate'] / 10, 1));
+                            $info = QuizRating::get_info($quiz['quiz_id']);
+                            $info2 = QuizAttempt::findAll(['quiz_id' => $quiz['quiz_id']]);
                             ?>
                             <tr>
                                 <td><a href="<?php echo Url::toRoute(['/quiz/detail', 'id' => Utility::encrypt_decrypt('encrypt', $quiz['quiz_id'])]) ?>"><?php echo Icon::show('address-card-o') ?> <?php echo $quiz['quiz_name'] ?></a></td>
                                 <td style="text-align: center;"><?php echo count(json_decode($quiz['question_ids'])) ?></td>
-                                <td style="text-align: center"><?php echo number_format($info['total_student']) ?></td>
-                                <td style="text-align: center"><b><?php echo $rate ?>/10</b> <i style="font-size: 11px;"> (<?php echo number_format(intval($info['total_student_rate'])) ?> người)</i></td>
+                                <td style="text-align: center"><?php echo number_format(count($info2)) ?></td>
+                                <td style="text-align: center"><b><?php echo $info['point'] ?>/10</b> <i style="font-size: 11px;"> (<?php echo number_format(intval($info['total_rating'])) ?> lượt)</i></td>
                                 <td style="text-align: center">
                                     <?php
                                     if ($quiz['vip'] == 1) {

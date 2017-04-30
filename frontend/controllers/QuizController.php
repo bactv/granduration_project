@@ -11,7 +11,9 @@ use common\components\Utility;
 use frontend\models\QuestionAnswer;
 use frontend\models\Quiz;
 use frontend\models\QuizAttempt;
+use frontend\models\QuizRating;
 use frontend\models\StudentPackage;
+use frontend\models\StudentQuiz;
 use Yii;
 use frontend\components\FrontendController;
 use yii\base\Controller;
@@ -104,9 +106,14 @@ class QuizController extends FrontendController
 
     public function actionCheckContest()
     {
+        if (!Yii::$app->request->isAjax || !Yii::$app->request->isPost) {
+            Yii::$app->end();
+        }
         $request = Yii::$app->request->post();
         $datas = isset($request['data']) ? $request['data'] : [];
         $time_start = isset($request['time_start']) ? $request['time_start'] : '';
+        $quiz_id = isset($request['quiz_id']) ? $request['quiz_id'] : '';
+        $student_id = isset($request['student_id']) ? $request['student_id'] : '';
         $time_submit = time();
 
         $arr_results = [
@@ -132,17 +139,31 @@ class QuizController extends FrontendController
             $arr_results['info']['total_questions'] += 1;
         }
         $attempt = new QuizAttempt();
+        $attempt->quiz_id = $quiz_id;
         $attempt->content = json_encode($arr_results);
         $attempt->created_time = date('Y-m-d H:i:s');
         $attempt->save();
-        return json_encode(['attempt_id' => Utility::encrypt_decrypt("encrypt", $attempt->id)]);
+
+        if ($student_id != '') {
+            $student_quiz = new StudentQuiz();
+            $student_quiz->quiz_id = $quiz_id;
+            $student_quiz->student_id = $student_id;
+            $student_quiz->mark = $arr_results['info']['total_true'];
+            $student_quiz->test_date = date('Y-m-d');
+            $student_quiz->save(false);
+        }
+
+        return json_encode(['attempt_id' => Utility::encrypt_decrypt("encrypt", $attempt->id), 'quiz_id' => Utility::encrypt_decrypt("encrypt", $quiz_id)]);
     }
 
-    public function actionReviewContest($attempt_id = '')
+    public function actionReviewContest($attempt_id = '', $quiz_id = '')
     {
         $att_str = Utility::encrypt_decrypt("decrypt", $attempt_id);
+        $quiz_id_str = Utility::encrypt_decrypt("decrypt", $quiz_id);
+
         $ex = explode('_', $att_str);
-        if (!isset($ex[1]) || trim($ex[1] == '')) {
+        $ex2 = explode('_', $quiz_id_str);
+        if ((!isset($ex[1]) || trim($ex[1] == '')) || (!isset($ex2[1]) || trim($ex2[1] == ''))) {
             throw new NotFoundHttpException("Trang bạn tìm kiếm không tồn tại.");
         }
 
@@ -152,7 +173,8 @@ class QuizController extends FrontendController
         }
         $data = (array)json_decode($attempt->content);
         return $this->render('review_contest', [
-            'data' => $data
+            'data' => $data,
+            'quiz_id' => $ex2[1]
         ]);
     }
 
@@ -175,6 +197,41 @@ class QuizController extends FrontendController
         $user_id = isset(Yii::$app->user->identity->id) ? Yii::$app->user->identity->id : null;
         $check = Quiz::check_user_permission($quiz_id, $user_id);
         echo $check;
+        Yii::$app->end();
+    }
+
+    public function actionRatingQuiz()
+    {
+        if (!Yii::$app->request->isAjax || !Yii::$app->request->isPost) {
+            Yii::$app->end();
+        }
+        $request = Yii::$app->request->post();
+        $quiz_id = isset($request['quiz_id']) ? $request['quiz_id'] : '';
+        $student_id = isset($request['student_id']) ? $request['student_id'] : '';
+        $ip = isset($request['ip']) ? $request['ip'] : '';
+        $rate_value = isset($request['rate_value']) ? $request['rate_value'] : '';
+
+        $model = QuizRating::find()->where(['quiz_id' => $quiz_id])
+            ->andWhere('student_id="' . $student_id . '" OR user_ip="' . $ip . '"')
+            ->andWhere(['date' => date('Y-m-d')])
+            ->one();
+        if (empty($model)) {
+            $model = new QuizRating();
+        } else {
+            echo json_encode(['status' => 0, 'info' => 'Info!', 'message' => 'Bạn đã đánh giá bài thi ày rồi. Xin cảm ơn']);
+            Yii::$app->end();
+        }
+        $model->quiz_id = $quiz_id;
+        $model->student_id = $student_id;
+        $model->user_ip = $ip;
+        $model->rate = $rate_value;
+        $model->date = date('Y-m-d');
+
+        if ($model->save()) {
+            echo json_encode(['status' => 1, 'info' => 'Success', 'message' => 'Cảm ơn bạn đã dành thời gian.']);
+        } else {
+            echo json_encode(['status' => 0, 'info' => 'Error!', 'message' => 'Có lỗi xả ra, vui lòng tử lại sau.']);
+        }
         Yii::$app->end();
     }
 }

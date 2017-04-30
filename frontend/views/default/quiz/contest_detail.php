@@ -11,6 +11,7 @@ use frontend\models\StudentQuiz;
 use frontend\models\Subject;
 use common\components\AssetApp;
 use common\components\Utility;
+use frontend\models\QuizRating;
 
 Icon::map($this, Icon::FA);
 
@@ -23,52 +24,114 @@ $this->params['breadcrumbs'] = [
     ['label' => $quiz['quiz_name']],
 ];
 
-$info = StudentQuiz::get_info($quiz['quiz_id']);
+$info = QuizRating::findAll(['quiz_id' => $quiz['quiz_id']]);
 
 ?>
 
+<div class="row quiz_detail">
+    <div class="col-md-6 contest_detail">
+        <p id="title"><?php echo $quiz['quiz_name'] ?></p>
+        <div class="detail">
+            <p class="f_st_italic">Số câu hỏi: <?php echo count(json_decode($quiz['question_ids'])) ?> câu</p>
+            <p class="f_st_italic">Thời gian làm bài: <?php echo intval($quiz['time']) ?> phút</p>
+            <p class="f_st_italic">Số lượt tham gia: <?php echo number_format(count($info)) ?></p>
+            <p id="btn-start"><a href="javascript:void(0)" onclick="start_quiz()"><?php echo Icon::show('clock-o ') ?> Bắt đầu</a></p>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3 leaderboard">
+        <p id="title">Bảng xếp hạng</p>
+        <ul class="nav nav-tabs">
+            <li class="active" style="width: 50%;"><a data-toggle="tab" href="#leaderboard_week">Tuần</a></li>
+            <li style="width: 50%;"><a data-toggle="tab" href="#leaderboard_month">Tháng</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="leaderboard_week" class="tab-pane fade in active">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Họ và tên</th>
+                        <th>Điểm trung bình</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>XXX1</td>
+                        <td>5.7</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>XXX1</td>
+                        <td>5.7</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>XXX1</td>
+                        <td>5.7</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">...</td>
+                    </tr>
+                    <tr>
+                        <td>25</td>
+                        <td>XXX1</td>
+                        <td>5.7</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="leaderboard_month" class="tab-pane fade">
+                <h3>Menu 1</h3>
+                <p>Some content in menu 1.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
-    .contest_detail {
-        width: 50%;
+    .quiz_detail {}
+    .quiz_detail .contest_detail {
         margin: 0 auto 150px auto;
         text-align: center;
         border: 1px solid #ccc;
     }
-    .contest_detail > p#title {
+    .quiz_detail .contest_detail > p#title {
         background: #0ead8e;
         padding: 10px;
         color: #fff;
         font-size: 17px;
     }
-    .contest_detail .detail {
+    .quiz_detail .contest_detail .detail {
 
     }
-    .contest_detail .detail p#btn-start {
+    .quiz_detail .contest_detail .detail p#btn-start {
         margin: 30px;
     }
-    .contest_detail .detail p#btn-start a {
+    .quiz_detail .contest_detail .detail p#btn-start a {
         color: #fff;
         background: #337ab7;
         padding: 10px 15px;
     }
 
+    .quiz_detail .leaderboard {
+        margin: 0 auto 150px auto;
+        text-align: center;
+        border: 1px solid #ccc;
+    }
+    .quiz_detail .leaderboard p#title {
+        background: #0ead8e;
+        padding: 10px;
+        color: #fff;
+        font-size: 17px;
+    }
+
 </style>
 
-<div class="row contest_detail">
-    <p id="title"><?php echo $quiz['quiz_name'] ?></p>
-    <div class="detail">
-        <p class="f_st_italic">Số câu hỏi: <?php echo count(json_decode($quiz['question_ids'])) ?> câu</p>
-        <p class="f_st_italic">Thời gian làm bài: <?php echo intval($quiz['time']) ?> phút</p>
-        <p class="f_st_italic">Số người tham gia: <?php echo number_format($info['total_student']) ?></p>
-        <p id="btn-start"><a href="javascript:void(0)" onclick="start_quiz()"><?php echo Icon::show('clock-o ') ?> Bắt đầu</a></p>
-    </div>
-</div>
 
-<script src="/themes/default/js/jquery.min.js"></script>
-<?php AssetApp::regJsFile('jquery.sticky-kit.min.js', true) ?>
-<?php AssetApp::regJsFile('bootstrap.min.js', true) ?>
-<?php AssetApp::regCssFilePlugin('dist/css/bootstrap-dialog.css', 'bootstrap3-dialog-master') ?>
-<?php AssetApp::regJsFilePlugin('dist/js/bootstrap-dialog.js', 'bootstrap3-dialog-master', true) ?>
+
 
 <script>
     function start_quiz() {
