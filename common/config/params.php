@@ -35,5 +35,6 @@ return [
             'viettel' => 'http://api.viettel.vn/api/controllers/ApiContoller.php/action_charge'
         ]
     ],
-    'key_encrypt' => 'bactv'
+    'key_encrypt' => 'bactv',
+    'number_free_lesson' => 2,
 ];

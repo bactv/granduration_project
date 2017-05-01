@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-05-01 00:44:33
+Date: 2017-05-02 01:00:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -327,6 +327,44 @@ INSERT INTO `course` VALUES ('1', 'Khóa Học 1', '<p>Trong b&agrave;i ph&aacut
 INSERT INTO `course` VALUES ('2', 'Khóa Học 2', '<p>Trong b&agrave;i ph&aacute;t biểu trước thềm trận đấu với Anderlecht, HLV Mourinho tỏ ra căng thẳng khi n&oacute;i về Martial. Chiến lược gia người Bồ Đ&agrave;o Nha giải th&iacute;ch nguy&ecirc;n nh&acirc;n loại bỏ tiền đạo 36 triệu bảng thời gian qua ho&agrave;n to&agrave;n v&igrave; l&yacute; do chuy&ecirc;n m&ocirc;n.</p>\r\n\r\n<p>&quot;Ch&uacute;ng t&ocirc;i đ&atilde; c&oacute; 10 th&aacute;ng l&agrave;m việc c&ugrave;ng nhau nhưng t&ocirc;i kh&ocirc;ng nhận thấy những tiến triển từ Martial. Cậu ấy muốn ra s&acirc;n th&igrave; cần phải cho t&ocirc;i nh&igrave;n thấy những điều t&ocirc;i mong muốn. Tại MU, mọi cơ hội đều rộng mở.&nbsp;</p>\r\n\r\n<p>&quot;Rashford l&agrave; trường hợp tương tự Martial nhưng t&ocirc;i đang d&ugrave;ng cậu ấy kh&aacute; nhiều. C&oacute; thể Marcus kh&ocirc;ng ghi b&agrave;n nhưng t&ocirc;i lu&ocirc;n thấy được tinh thần tiến về ph&iacute;a trước. Đ&oacute; l&agrave; tố chất bắt buộc của một cầu thủ MU&quot;, HLV Mourinho cho biết.</p>\r\n', '6', null, '1', '0', '2017-05-30', '0000-00-00', '0000-00-00', '1', '12', '1', '1', '0', '1', '0', '2017-04-21 00:27:40', '2017-04-21 00:27:40', '6', '6');
 
 -- ----------------------------
+-- Table structure for course_discussion
+-- ----------------------------
+DROP TABLE IF EXISTS `course_discussion`;
+CREATE TABLE `course_discussion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `course_id` int(11) NOT NULL,
+  `lesson_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `created_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of course_discussion
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for course_news
+-- ----------------------------
+DROP TABLE IF EXISTS `course_news`;
+CREATE TABLE `course_news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '1' COMMENT '1: active, 0: deactive',
+  `created_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of course_news
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for course_right
 -- ----------------------------
 DROP TABLE IF EXISTS `course_right`;
@@ -507,11 +545,21 @@ CREATE TABLE `lesson_course` (
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of lesson_course
 -- ----------------------------
+INSERT INTO `lesson_course` VALUES ('1', '2', 'Exercitationem quisquam ut illo deserunt.', 'Consectetur totam cupiditate dolores impedit voluptates et et expedita fugit iure possimus commodi at dolorem maiores cupiditate veniam tempore.', null, '0', '1', '0', '1', '2017-05-01 20:57:51', '2017-05-01 20:57:51', null, null);
+INSERT INTO `lesson_course` VALUES ('2', '2', 'Delectus et voluptatem facere quod.', 'At et voluptatibus veniam et architecto eos explicabo ipsa ea et corrupti error quo omnis ullam voluptas iure.', null, '0', '2', '0', '1', '2017-05-01 20:57:51', '2017-05-01 20:57:51', null, null);
+INSERT INTO `lesson_course` VALUES ('3', '2', 'Architecto laboriosam consequatur in quas.', 'Rerum corporis sed ad aut nulla ex explicabo deserunt excepturi cumque rem enim quam.', null, '0', '3', '0', '1', '2017-05-01 20:57:51', '2017-05-01 20:57:51', null, null);
+INSERT INTO `lesson_course` VALUES ('4', '1', 'Quod perspiciatis adipisci excepturi voluptas quia.', 'Ducimus voluptatibus aut animi beatae dolorem sint quo et provident hic maiores et itaque ipsam.', null, '0', '4', '0', '1', '2017-05-01 20:57:51', '2017-05-01 20:57:51', null, null);
+INSERT INTO `lesson_course` VALUES ('5', '1', 'Maiores quia temporibus saepe iste.', 'Culpa nam qui cum quas aut enim modi sunt culpa fugiat alias ullam consequatur minima doloribus iste quod aut.', null, '0', '5', '0', '1', '2017-05-01 20:57:51', '2017-05-01 20:57:51', null, null);
+INSERT INTO `lesson_course` VALUES ('6', '2', 'Natus unde sed ut.', 'Sit et a recusandae nulla ullam velit minus atque qui laborum neque iusto accusamus velit exercitationem consequatur.', null, '0', '6', '0', '1', '2017-05-01 20:57:51', '2017-05-01 20:57:51', null, null);
+INSERT INTO `lesson_course` VALUES ('7', '2', 'Assumenda odio odit ut est.', 'Sed autem odit consequatur et voluptate tenetur perferendis aut nostrum hic voluptas laborum occaecati est sit eum sit sapiente.', null, '0', '7', '0', '1', '2017-05-01 20:57:51', '2017-05-01 20:57:51', null, null);
+INSERT INTO `lesson_course` VALUES ('8', '2', 'Enim molestias quia ut.', 'Rerum quia veritatis dolores neque voluptatem architecto consequatur itaque nesciunt rerum et ad alias placeat dolor incidunt laborum.', null, '0', '8', '0', '1', '2017-05-01 20:57:51', '2017-05-01 20:57:51', null, null);
+INSERT INTO `lesson_course` VALUES ('9', '2', 'Voluptas nemo harum est omnis.', 'Voluptates aliquam omnis adipisci soluta dolore eaque aut voluptates architecto enim explicabo consectetur dolorem explicabo quisquam et sed.', null, '0', '9', '0', '1', '2017-05-01 20:57:51', '2017-05-01 20:57:51', null, null);
+INSERT INTO `lesson_course` VALUES ('10', '2', 'Amet minima vero ipsa error minima.', 'Aut nisi non autem commodi porro est reiciendis aliquid tenetur ab eius in quae sed minima autem.', null, '0', '10', '0', '1', '2017-05-01 20:57:51', '2017-05-01 20:57:51', null, null);
 
 -- ----------------------------
 -- Table structure for menu
@@ -5824,7 +5872,7 @@ CREATE TABLE `quiz_attempt` (
   `content` text NOT NULL,
   `created_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of quiz_attempt
@@ -5846,6 +5894,7 @@ INSERT INTO `quiz_attempt` VALUES ('14', null, '{\"info\":{\"time_start\":\"2017
 INSERT INTO `quiz_attempt` VALUES ('15', null, '{\"info\":{\"time_start\":\"2017-04-30 23:46:53\",\"time_submit\":\"2017-04-30 23:47:40\",\"total_true\":9,\"total_questions\":40},\"results\":[{\"question_id\":\"706\",\"ans_id\":\"2821\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"378\",\"ans_id\":\"1509\",\"check\":1,\"solution\":null},{\"question_id\":\"258\",\"ans_id\":\"1029\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"926\",\"ans_id\":\"3701\",\"check\":1,\"solution\":null},{\"question_id\":\"328\",\"ans_id\":\"1309\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"886\",\"ans_id\":\"3541\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"633\",\"ans_id\":\"2529\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"240\",\"ans_id\":\"957\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"111\",\"ans_id\":\"441\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"468\",\"ans_id\":\"1869\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"435\",\"ans_id\":\"1737\",\"check\":1,\"solution\":null},{\"question_id\":\"415\",\"ans_id\":\"1657\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"110\",\"ans_id\":\"437\",\"check\":1,\"solution\":null},{\"question_id\":\"567\",\"ans_id\":\"2265\",\"check\":1,\"solution\":null},{\"question_id\":\"868\",\"ans_id\":\"3469\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"365\",\"ans_id\":\"1457\",\"check\":1,\"solution\":null},{\"question_id\":\"40\",\"ans_id\":\"157\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"357\",\"ans_id\":\"1425\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"966\",\"ans_id\":\"3861\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"546\",\"ans_id\":\"2181\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"466\",\"ans_id\":\"1861\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"271\",\"ans_id\":\"1081\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"892\",\"ans_id\":\"3565\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"469\",\"ans_id\":\"1873\",\"check\":1,\"solution\":null},{\"question_id\":\"522\",\"ans_id\":\"2085\",\"check\":1,\"solution\":null},{\"question_id\":\"592\",\"ans_id\":\"2365\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"174\",\"ans_id\":\"693\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"184\",\"ans_id\":\"733\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"202\",\"ans_id\":\"805\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"832\",\"ans_id\":\"3325\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"9\",\"ans_id\":\"33\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"943\",\"ans_id\":\"3769\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"501\",\"ans_id\":\"2001\",\"check\":1,\"solution\":null},{\"question_id\":\"183\",\"ans_id\":\"729\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"946\",\"ans_id\":\"3781\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"275\",\"ans_id\":\"1097\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"399\",\"ans_id\":\"1593\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"753\",\"ans_id\":\"3009\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"817\",\"ans_id\":\"3265\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"61\",\"ans_id\":\"241\",\"check\":0,\"solution\":\"\"}]}', '2017-04-30 23:47:40');
 INSERT INTO `quiz_attempt` VALUES ('16', null, '{\"info\":{\"time_start\":\"2017-05-01 00:04:05\",\"time_submit\":\"2017-05-01 00:04:29\",\"total_true\":3,\"total_questions\":20},\"results\":[{\"question_id\":\"196\",\"ans_id\":\"781\",\"check\":1,\"solution\":\"sadasdasd\"},{\"question_id\":\"839\",\"ans_id\":\"3353\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"102\",\"ans_id\":\"405\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"875\",\"ans_id\":\"3497\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"394\",\"ans_id\":\"1573\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"270\",\"ans_id\":\"1077\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"778\",\"ans_id\":\"3109\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"93\",\"ans_id\":\"369\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"113\",\"ans_id\":\"449\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"368\",\"ans_id\":\"1469\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"526\",\"ans_id\":\"2101\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"240\",\"ans_id\":\"957\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"229\",\"ans_id\":\"913\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"322\",\"ans_id\":\"1285\",\"check\":1,\"solution\":null},{\"question_id\":\"67\",\"ans_id\":\"265\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"444\",\"ans_id\":\"1773\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"688\",\"ans_id\":\"2749\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"518\",\"ans_id\":\"2069\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"933\",\"ans_id\":\"3729\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"854\",\"ans_id\":\"3413\",\"check\":1,\"solution\":null}]}', '2017-05-01 00:04:30');
 INSERT INTO `quiz_attempt` VALUES ('17', '13', '{\"info\":{\"time_start\":\"2017-05-01 00:05:19\",\"time_submit\":\"2017-05-01 00:05:52\",\"total_true\":3,\"total_questions\":20},\"results\":[{\"question_id\":\"196\",\"ans_id\":\"781\",\"check\":1,\"solution\":\"sadasdasd\"},{\"question_id\":\"839\",\"ans_id\":\"3353\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"102\",\"ans_id\":\"405\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"875\",\"ans_id\":\"3497\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"394\",\"ans_id\":\"1573\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"270\",\"ans_id\":\"1077\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"778\",\"ans_id\":\"3109\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"93\",\"ans_id\":\"369\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"113\",\"ans_id\":\"449\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"368\",\"ans_id\":\"1469\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"526\",\"ans_id\":\"2101\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"240\",\"ans_id\":\"957\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"229\",\"ans_id\":\"913\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"322\",\"ans_id\":\"1285\",\"check\":1,\"solution\":null},{\"question_id\":\"67\",\"ans_id\":\"265\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"444\",\"ans_id\":\"1773\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"688\",\"ans_id\":\"2749\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"518\",\"ans_id\":\"2069\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"933\",\"ans_id\":\"3729\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"854\",\"ans_id\":\"3413\",\"check\":1,\"solution\":null}]}', '2017-05-01 00:05:52');
+INSERT INTO `quiz_attempt` VALUES ('18', '13', '{\"info\":{\"time_start\":\"2017-05-01 15:30:08\",\"time_submit\":\"2017-05-01 15:30:45\",\"total_true\":4,\"total_questions\":20},\"results\":[{\"question_id\":\"196\",\"ans_id\":\"781\",\"check\":1,\"solution\":\"sadasdasd\"},{\"question_id\":\"839\",\"ans_id\":\"3353\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"102\",\"ans_id\":\"406\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"875\",\"ans_id\":\"3498\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"394\",\"ans_id\":\"1575\",\"check\":1,\"solution\":null},{\"question_id\":\"270\",\"ans_id\":\"1079\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"778\",\"ans_id\":\"3112\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"93\",\"ans_id\":\"372\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"113\",\"ans_id\":\"449\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"368\",\"ans_id\":\"1469\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"526\",\"ans_id\":\"2102\",\"check\":1,\"solution\":null},{\"question_id\":\"240\",\"ans_id\":\"958\",\"check\":1,\"solution\":null},{\"question_id\":\"229\",\"ans_id\":\"915\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"322\",\"ans_id\":\"1287\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"67\",\"ans_id\":\"268\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"444\",\"ans_id\":\"1776\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"688\",\"ans_id\":\"2749\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"518\",\"ans_id\":\"2069\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"933\",\"ans_id\":\"3730\",\"check\":0,\"solution\":\"\"},{\"question_id\":\"854\",\"ans_id\":\"3414\",\"check\":0,\"solution\":\"\"}]}', '2017-05-01 15:30:45');
 
 -- ----------------------------
 -- Table structure for quiz_rating
@@ -6009,7 +6058,7 @@ CREATE TABLE `student_quiz` (
   `mark` int(11) DEFAULT NULL,
   `test_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of student_quiz
@@ -6018,6 +6067,7 @@ INSERT INTO `student_quiz` VALUES ('1', '9', '6', '1', '2017-04-30');
 INSERT INTO `student_quiz` VALUES ('2', '2', '6', '9', '2017-04-30');
 INSERT INTO `student_quiz` VALUES ('3', '13', '6', '3', '2017-05-01');
 INSERT INTO `student_quiz` VALUES ('4', '13', '6', '3', '2017-05-01');
+INSERT INTO `student_quiz` VALUES ('5', '13', '6', '4', '2017-05-01');
 
 -- ----------------------------
 -- Table structure for subject

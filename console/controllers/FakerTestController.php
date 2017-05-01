@@ -15,6 +15,7 @@ use backend\models\QuestionAnswer;
 use backend\models\Quiz;
 use backend\models\Student;
 use backend\models\Teacher;
+use frontend\models\LessonCourse;
 use Yii;
 use yii\console\Controller;
 
@@ -166,6 +167,24 @@ class FakerTestController extends Controller
             $model->tch_degree = mt_rand(1, 22);
             $model->tch_created_time = date('Y-m-d H:i:s');
             $model->tch_updated_time = date('Y-m-d H:i:s');
+            $model->save();
+            var_dump($model->getErrors());
+        }
+        echo "DONE";
+    }
+
+    public function actionTestLessonCourse($count = 10)
+    {
+        $faker = \Faker\Factory::create();
+
+        for ($i = 0; $i < $count; $i++) {
+            $model = new LessonCourse();
+            $model->course_id = 1;
+            $model->lesson_name = $faker->sentence(5);
+            $model->lesson_desc = $faker->sentence(15);
+            $model->sort = ($i + 1);
+            $model->created_time = date('Y-m-d H:i:s');
+            $model->updated_time = date('Y-m-d H:i:s');
             $model->save();
             var_dump($model->getErrors());
         }

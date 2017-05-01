@@ -12,6 +12,7 @@ use frontend\components\FrontendController;
 use frontend\models\ClassLevel;
 use frontend\models\Course;
 use frontend\models\FreeLessonOnCourse;
+use frontend\models\LessonCourse;
 use frontend\models\Student;
 use frontend\models\StudentCourse;
 use frontend\models\Subject;
@@ -191,15 +192,41 @@ class CourseController extends FrontendController
             throw new NotFoundHttpException("Bạn không có quyền truy cập");
         }
 
+        $arr_lessons = LessonCourse::get_all_lesson_by_course($course_id);
+
         if ($course['course_type_id'] == 1) {
             return $this->render('on_course_video', [
-                'course' => $course
+                'course' => $course,
+                'arr_lessons' => $arr_lessons
             ]);
         } else if ($course['course_type_id'] == 2) {
             return $this->render('on_course_live_stream', [
-                'course' => $course
+                'course' => $course,
+                'arr_lessons' => $arr_lessons
             ]);
         }
+    }
+
+    public function actionLessonDetail($id)
+    {
+        $enc = Utility::encrypt_decrypt('decrypt', $id);
+        $ex = explode('_', $enc);
+        if (!isset($ex[1]) || !is_numeric($ex[1])) {
+            throw new NotFoundHttpException("Bạn không có quyền truy cập");
+        }
+        $lesson_id = $ex[1];
+        $lesson = LessonCourse::findOne(['id' => $lesson_id]);
+        if (empty($lesson)) {
+            throw new NotFoundHttpException("Trang bạn yêu cầu không tìm thấy");
+        }
+        $course = Course::findOne(['course_id' => $lesson['course_id']]);
+        $check = $this->check_permission($course);
+        if (!$check) {
+            throw new NotFoundHttpException("Bạn không có quyền truy cập");
+        }
+        return $this->render('lesson_detail', [
+            'lesson' => $lesson
+        ]);
     }
 
     private function check_permission(Course $course)

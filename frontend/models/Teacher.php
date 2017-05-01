@@ -140,4 +140,9 @@ class Teacher extends \common\models\TeacherBase
     {
 
     }
+
+    public static function get_teacher($teacher_id)
+    {
+        return self::findOne(['tch_id' => $teacher_id, 'tch_status' => 1]);
+    }
 }

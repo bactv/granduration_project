@@ -10,6 +10,7 @@ use frontend\models\Teacher;
 use common\components\AssetApp;
 use common\components\Utility;
 use kartik\icons\Icon;
+use yii\helpers\Url;
 
 Icon::map($this, Icon::FA);
 
@@ -17,6 +18,7 @@ $this->title = $this->params['title'] = $course['course_name'] . ' - ' . Teacher
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
+<a href="<?php echo Url::toRoute(['/cms-course-manager', 'course_id' => Utility::encrypt_decrypt('encrypt', $course['course_id'])]) ?>" target="_blank" role="button" class="btn btn-success" style="margin-bottom: 20px">Quản lý khóa học  <?php echo Icon::show('forward') ?></a>
 
 <div class="row on_course_video">
     <div class="col-md-8 lessons">
@@ -37,33 +39,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 <a href="javascript:void(0)" id="show_panel_list_lessons" class="panel-info"><div class="panel-heading"><?php echo Icon::show('list') ?> Danh sách bài giảng <?php echo Icon::show('angle-double-right ') ?></div></a>
                 <div class="panel-body panel_list_lessons" style="display: none">
 
-                    <div class="box_lesson">
-                        <a href="javascript:void(0)" id="play_video"><p id="lesson_name">Bài 1: Real Madrid tung bom tiền 300 triệu euro xây “Galacticos 3.0</p></a>
-                        <p id="lesson_desc">4 năm một lần, Real lại tái cấu trúc đội hình. Lần này, “dải ngân hà 3.0” của đội bóng Hoàng gia là những thương vụ bom tấn như De Gea, Hazard, Hummels hay Bonucci...</p>
-                        <p id="lesson_info">
-                            <span id="time_video"><?php echo Icon::show('play-circle') ?> 30 phút</span>
-                            <span id="number_view"><?php echo Icon::show('users') ?> 5000 lượt xem</span>
-                        </p>
-                    </div>
-
-                    <div class="box_lesson">
-                        <a href="#"><p id="lesson_name">Bài 1: Real Madrid tung bom tiền 300 triệu euro xây “Galacticos 3.0</p></a>
-                        <p id="lesson_desc">4 năm một lần, Real lại tái cấu trúc đội hình. Lần này, “dải ngân hà 3.0” của đội bóng Hoàng gia là những thương vụ bom tấn như De Gea, Hazard, Hummels hay Bonucci...</p>
-                        <p id="lesson_info">
-                            <span id="time_video"><?php echo Icon::show('play-circle') ?> 30 phút</span>
-                            <span id="number_view"><?php echo Icon::show('users') ?> 5000 lượt xem</span>
-                        </p>
-                    </div>
-
-                    <div class="box_lesson">
-                        <a href="#"><p id="lesson_name">Bài 1: Real Madrid tung bom tiền 300 triệu euro xây “Galacticos 3.0</p></a>
-                        <p id="lesson_desc">4 năm một lần, Real lại tái cấu trúc đội hình. Lần này, “dải ngân hà 3.0” của đội bóng Hoàng gia là những thương vụ bom tấn như De Gea, Hazard, Hummels hay Bonucci...</p>
-                        <p id="lesson_info">
-                            <span id="time_video"><?php echo Icon::show('play-circle') ?> 30 phút</span>
-                            <span id="number_view"><?php echo Icon::show('users') ?> 5000 lượt xem</span>
-                        </p>
-                    </div>
-
+                    <?php foreach ($arr_lessons as $k => $lesson) { ?>
+                        <div class="box_lesson">
+                            <a href="<?php echo Url::toRoute(['/lesson/lesson-detail', 'course_id' => Utility::encrypt_decrypt('encrypt', $lesson['course_id']), 'lesson_id' => Utility::encrypt_decrypt('encrypt', $lesson['id'])]) ?>" id="play_video" target="_blank"><p id="lesson_name">Bài <?php echo ($k + 1) ?>: <?php echo $lesson['lesson_name'] ?></p></a>
+                            <p id="lesson_desc"><?php echo Utility::truncateStringWords($lesson['lesson_desc'], 300) ?></p>
+                            <p id="lesson_info">
+                                <span id="time_video"><?php echo Icon::show('play-circle') ?> <?php echo $lesson['time_length'] ?> phút</span>
+                                <span id="number_view"><?php echo Icon::show('users') ?> <?php echo number_format($lesson['number_view']) ?> lượt xem</span>
+                            </p>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -134,16 +119,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 </li>
             </ul>
         </div>
-    </div>
-</div>
-
-<div class="overlay" style="display: none">
-    <div class="box_video_play">
-        <div id="close_video"><a href="javascript:void(0)"><?php echo Icon::show('close') ?></a></div>
-        <video controls>
-            <source src="http://static.study.edu.vn/courses_assets/6/1/video_intro/video_intro.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
     </div>
 </div>
 
@@ -224,32 +199,6 @@ $this->params['breadcrumbs'][] = $this->title;
         margin-right: 20px;
     }
     .on_course_video .lessons .list_lessons .box_lesson #lesson_info #number_view {}
-    .overlay {
-        background-color: #444; /*or semitransparent image*/
-        display: none;
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 100;
-    }
-    .box_video_play {
-        margin: 0 auto;
-        text-align: center;
-        padding-top: 5%;
-    }
-    .box_video_play video {
-        background: #FFF;
-    }
-    #close_video {
-        text-align: right;
-        padding-right: 18%;
-        font-size: 20px;
-    }
-    #close_video a {
-        color: #FFF;
-    }
 </style>
 
 <script>
