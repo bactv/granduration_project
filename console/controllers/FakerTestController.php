@@ -15,6 +15,7 @@ use backend\models\QuestionAnswer;
 use backend\models\Quiz;
 use backend\models\Student;
 use backend\models\Teacher;
+use frontend\models\CourseNews;
 use frontend\models\LessonCourse;
 use Yii;
 use yii\console\Controller;
@@ -183,6 +184,24 @@ class FakerTestController extends Controller
             $model->lesson_name = $faker->sentence(5);
             $model->lesson_desc = $faker->sentence(15);
             $model->sort = ($i + 1);
+            $model->created_time = date('Y-m-d H:i:s');
+            $model->updated_time = date('Y-m-d H:i:s');
+            $model->save();
+            var_dump($model->getErrors());
+        }
+        echo "DONE";
+    }
+
+    public function actionTestCourseNews($count = 1000)
+    {
+        $faker = \Faker\Factory::create();
+
+        for ($i = 0; $i < $count; $i++) {
+            $model = new CourseNews();
+            $model->course_id = mt_rand(1, 10);
+            $model->title = $faker->sentence(6);
+            $model->content = $faker->sentence(300);
+            $model->status = mt_rand(0, 1);
             $model->created_time = date('Y-m-d H:i:s');
             $model->updated_time = date('Y-m-d H:i:s');
             $model->save();

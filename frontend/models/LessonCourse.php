@@ -8,6 +8,8 @@ use Yii;
 class LessonCourse extends \common\models\LessonCourseBase
 {
     public $video;
+    public $home_work;
+
     public static function get_all_lesson_by_course($course_id)
     {
         return self::find()->where(['course_id' => $course_id, 'status' => 1])->orderBy('sort ASC')->asArray()->all();

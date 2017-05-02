@@ -143,6 +143,26 @@ class Utility
         }
     }
 
+    public static function get_all_remote_file_in_folder($folder)
+    {
+        $ftp_server = Yii::$app->params['ftp']['ftp_server'];
+        $ftp_user_name = Yii::$app->params['ftp']['ftp_user_name'];
+        $ftp_user_pass = Yii::$app->params['ftp']['ftp_user_pass'];
+
+        // set up basic connection
+        $conn_id = ftp_connect($ftp_server);
+
+        // login with username and password
+        $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+        if (!$login_result) {
+            return false;
+        }
+
+        // get contents of the current directory
+        $contents = ftp_nlist($conn_id, $folder);
+        return $contents;
+    }
+
     public static function truncateStringWords($str, $maxlen) {
         if (strlen($str) <= $maxlen) {
             return $str;

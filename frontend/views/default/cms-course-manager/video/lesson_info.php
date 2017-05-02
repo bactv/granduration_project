@@ -49,6 +49,12 @@ Icon::map($this, Icon::FA);
             </video>
         </div>
 
+        <?php echo $form->field($lesson, 'home_work')->widget(FileInput::className(), [
+            'options' => [
+                'multiple' => true
+            ]
+        ]) ?>
+
         <div class="form-group">
             <?= Html::submitButton(Icon::show('floppy-o') . " " . Yii::t('cms', 'Update'), ['class' => 'btn btn-primary']) ?>
             <?= Html::resetButton(Icon::show('undo') . " " .  Yii::t('cms', 'Reset'), ['class' => 'btn btn-default']); ?>

@@ -13,6 +13,7 @@ use Yii;
  * @property string $content
  * @property integer $status
  * @property string $created_time
+ * @property string $updated_time
  */
 class CourseNewsDB extends \yii\db\ActiveRecord
 {
@@ -32,8 +33,9 @@ class CourseNewsDB extends \yii\db\ActiveRecord
         return [
             [['course_id', 'title'], 'required'],
             [['course_id', 'status'], 'integer'],
-            [['created_time'], 'safe'],
-            [['title', 'content'], 'string', 'max' => 255]
+            [['content'], 'string'],
+            [['created_time', 'updated_time'], 'safe'],
+            [['title'], 'string', 'max' => 255]
         ];
     }
 
@@ -44,11 +46,12 @@ class CourseNewsDB extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('cms', 'ID'),
-            'course_id' => Yii::t('cms', 'Course ID'),
-            'title' => Yii::t('cms', 'Title'),
-            'content' => Yii::t('cms', 'Content'),
-            'status' => Yii::t('cms', 'Status'),
-            'created_time' => Yii::t('cms', 'Created Time'),
+            'course_id' => Yii::t('cms', 'Khóa học'),
+            'title' => Yii::t('cms', 'Tiêu đề'),
+            'content' => Yii::t('cms', 'Nội dung'),
+            'status' => Yii::t('cms', 'Trạng thái'),
+            'created_time' => Yii::t('cms', 'Ngày tạo'),
+            'updated_time' => Yii::t('cms', 'Ngày sửa'),
         ];
     }
 }

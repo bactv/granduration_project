@@ -11,6 +11,7 @@ use common\components\Utility;
 use frontend\components\FrontendController;
 use frontend\models\ClassLevel;
 use frontend\models\Course;
+use frontend\models\CourseNews;
 use frontend\models\FreeLessonOnCourse;
 use frontend\models\LessonCourse;
 use frontend\models\Student;
@@ -193,16 +194,19 @@ class CourseController extends FrontendController
         }
 
         $arr_lessons = LessonCourse::get_all_lesson_by_course($course_id);
+        $arr_news = CourseNews::get_all_news($course_id, 5);
 
         if ($course['course_type_id'] == 1) {
             return $this->render('on_course_video', [
                 'course' => $course,
-                'arr_lessons' => $arr_lessons
+                'arr_lessons' => $arr_lessons,
+                'arr_news' => $arr_news
             ]);
         } else if ($course['course_type_id'] == 2) {
             return $this->render('on_course_live_stream', [
                 'course' => $course,
-                'arr_lessons' => $arr_lessons
+                'arr_lessons' => $arr_lessons,
+                'arr_news' => $arr_news
             ]);
         }
     }

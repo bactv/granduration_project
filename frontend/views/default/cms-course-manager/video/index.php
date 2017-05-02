@@ -19,8 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="card">
         <ul class="nav nav-tabs">
             <li class="active" style="width: 33%"><a data-toggle="pill" href="#lesson">Bài học</a></li>
-            <li style="width: 33%"><a data-toggle="pill" href="#references">Tài liệu tham khảo</a></li>
-            <li style="width: 33%"><a data-toggle="pill" href="#news">Thông báo</a></li>
+            <li style="width: 33%"><a data-toggle="pill" href="#references" onclick="references_manager()">Tài liệu tham khảo</a></li>
+            <li style="width: 33%"><a data-toggle="pill" href="#news" onclick="news_manager()">Thông báo</a></li>
         </ul>
 
         <div class="tab-content">
@@ -54,14 +54,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="lesson_info"></div>
                 </div>
             </div>
-            <div id="references" class="tab-pane fade">
-                <h3>Menu 1</h3>
-                <p>Some content in menu 1.</p>
-            </div>
-            <div id="news" class="tab-pane fade">
-                <h3>Menu 2</h3>
-                <p>Some content in menu 2.</p>
-            </div>
+            <div id="references" class="tab-pane fade"></div>
+            <div id="news" class="tab-pane fade"></div>
         </div>
     </div>
 </div>
@@ -101,4 +95,26 @@ $this->params['breadcrumbs'][] = $this->title;
             }
         });
     });
+
+    function references_manager() {
+        $.ajax({
+            method: 'GET',
+            data: {'course_id' : '<?php echo Utility::encrypt_decrypt('encrypt', $course['course_id']) ?>'},
+            url: '<?php echo Url::toRoute(['/cms-course-manager/references']) ?>',
+            success: function (data) {
+                $("div#references").html(data);
+            }
+        });
+    }
+
+    function news_manager() {
+        $.ajax({
+            method: 'GET',
+            data: {'course_id' : '<?php echo Utility::encrypt_decrypt('encrypt', $course['course_id']) ?>'},
+            url: '<?php echo Url::toRoute(['/cms-course-manager/news']) ?>',
+            success: function (data) {
+                $("div#news").html(data);
+            }
+        });
+    }
 </script>

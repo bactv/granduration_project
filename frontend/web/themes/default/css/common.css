@@ -98,3 +98,46 @@ form .control-label {
 .tab-content{padding:20px}
 
 .card {background: #FFF none repeat scroll 0% 0%; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3); margin-bottom: 30px; }
+
+/* TABLE GRID VIEW */
+.grid-view {
+
+}
+.grid-view .table {
+
+}
+.grid-view .table > thead {
+
+}
+
+.grid-view .table > thead > tr  {
+
+}
+.grid-view .table > thead > tr > th {
+    background: url("../images/table_th_4.png") repeat-x;
+    color: #337ab7;
+}
+.grid-view .table > thead > tr > th > a{
+    color: #337ab7;
+    font-size: 12px;
+}
+.grid-view .table > tbody {
+
+}
+.grid-view .table > tbody > tr {
+
+}
+.grid-view .table > tbody > tr > td {
+
+}
+.grid-view .table .empty {
+    font-size: 13px;
+    color: #777;
+    font-style: italic;
+    text-align: center;
+}
+
+.summary {
+    margin-bottom: 10px;
+    font-style: italic;
+}
