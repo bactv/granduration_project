@@ -1,0 +1,58 @@
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #ccc !important;
+}
+::-moz-placeholder { /* Firefox 19+ */
+    color: #ccc !important;
+}
+:-ms-input-placeholder { /* IE 10+ */
+    color: #ccc !important;
+}
+:-moz-placeholder { /* Firefox 18- */
+    color: #ccc !important;
+}
+
+body {
+    background-image: url("../images/background.png");
+}
+
+div#form-login {
+    width: 27%;
+    margin: 0 auto;
+    padding: 10px;
+    margin-top: 5%;
+    box-shadow: 0px 0px 20px #333;
+    background: #FFFFFF;
+}
+
+h3.form-title {
+    margin-bottom: 50px;
+}
+
+div#form-login form input {
+    border-radius: 0;
+}
+
+div#form-login button {
+    border-radius: 0;
+    float: right;
+}
+
+div#form-login div.checkbox {
+    float: left;
+}
+
+div#form-login div#google_auth {
+    clear: both;
+    margin-top: 40px;
+}
+
+div#form-login div#google_auth ul {
+    padding: 0;
+}
+
+p.m-t {
+    margin-top: 70px;
+    clear: both;
+    font-size: 15px;
+    font-family: monospace;
+}

@@ -11,6 +11,7 @@ use backend\models\Package;
 use common\components\Utility;
 use frontend\components\FrontendController;
 use frontend\models\Course;
+use frontend\models\CourseTest;
 use frontend\models\FeedbackToTeacher;
 use frontend\models\FreeLessonOnCourse;
 use frontend\models\Student;
@@ -318,7 +319,7 @@ class AccountController extends FrontendController
             ];
         }
         // lấy danh sách khóa học đã học thử
-        $data = FreeLessonOnCourse::find()->where(['student_id' => $student_id])->orderBy('course_id DESC')->asArray()->all();
+        $data = CourseTest::find()->where(['student_id' => $student_id])->orderBy('course_id DESC')->asArray()->all();
         foreach ($data as $dt) {
             if (!isset($arr_results_signed[$dt['course_id']])) {
                 $arr_results_not_signed[$dt['course_id']] = [

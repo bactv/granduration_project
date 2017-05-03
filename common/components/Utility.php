@@ -26,7 +26,7 @@ class Utility
         return trim($new_date . ' ' . $time);
     }
 
-    public static function uploadFile($folder, $folder_remote, $file)
+    public static function uploadFile($folder, $folder_remote, $file, $format = FTP_BINARY)
     {
         $ftp_server = Yii::$app->params['ftp']['ftp_server'];
         $ftp_user_name = Yii::$app->params['ftp']['ftp_user_name'];
@@ -41,11 +41,11 @@ class Utility
             return false;
         }
 
-        if (!in_array(trim(str_replace('/', '', $folder)), ftp_nlist($conn_id, ""))) {
+        if (!self::ftp_is_dir($conn_id, $folder)) {
             ftp_mkdir($conn_id, $folder);
         }
         // upload a file
-        if (ftp_put($conn_id, $folder_remote, $file, FTP_BINARY)) {
+        if (ftp_put($conn_id, $folder_remote, $file, $format)) {
             // close the connection
             ftp_close($conn_id);
             return true;
@@ -55,6 +55,20 @@ class Utility
             return false;
         }
     }
+
+    private static function ftp_is_dir($ftp, $dir)
+    {
+        $pushd = ftp_pwd($ftp);
+
+        if ($pushd !== false && @ftp_chdir($ftp, $dir))
+        {
+            ftp_chdir($ftp, $pushd);
+            return true;
+        }
+
+        return false;
+    }
+
 
     /**
      * @param string $url
@@ -102,7 +116,7 @@ class Utility
      */
     public static function exchangeMoney($real_money, $bonus = 0)
     {
-        $virtual = $real_money * 100;
+        $virtual = $real_money * 1000;
         if ($bonus != 0) {
             return $bonus * $virtual / 100;
         }
@@ -163,6 +177,28 @@ class Utility
         return $contents;
     }
 
+    public static function delete_file_on_remote($file_path)
+    {
+        $ftp_server = Yii::$app->params['ftp']['ftp_server'];
+        $ftp_user_name = Yii::$app->params['ftp']['ftp_user_name'];
+        $ftp_user_pass = Yii::$app->params['ftp']['ftp_user_pass'];
+
+        // set up basic connection
+        $conn_id = ftp_connect($ftp_server);
+
+        // login with username and password
+        $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+        if (!$login_result) {
+            return false;
+        }
+
+        if (ftp_delete($conn_id, $file_path)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static function truncateStringWords($str, $maxlen) {
         if (strlen($str) <= $maxlen) {
             return $str;
@@ -183,5 +219,12 @@ class Utility
         } else if ($action == 'decrypt'){
             return base64_decode($string);
         }
+    }
+
+    public static function clean_string($string) {
+        $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+        $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+
+        return preg_replace('/-+/', '-', $string); // Replaces multiple hyphens with single one.
     }
 }

@@ -179,5 +179,15 @@ AssetApp::regCssFilePlugin('owl.transitions.css', 'owl-carousel', true);
             itemsDesktopSmall : [979,3]
 
         });
+
+        $("#owl-course-all").owlCarousel({
+
+            autoPlay: 3000, //Set AutoPlay to 3 seconds
+
+            items : 4,
+            itemsDesktop : [1199,4],
+            itemsDesktopSmall : [979,3]
+
+        });
     });
 </script>

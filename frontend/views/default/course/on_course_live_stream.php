@@ -52,26 +52,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="item">
             <p id="title">Tin tức</p>
             <ul class="list_news">
-                <li>
-                    <div id="news_title"><a href="#">1. Real Madrid tung bom tiền 300 triệu euro xây “Galacticos 3.0”</a></div>
-                    <div id="news_time">16/04/2016, 09:18 Giang Nguyen Thi Thu</div>
-                </li>
-                <li>
-                    <div id="news_title"><a href="#">2. Everton - Chelsea: Cú nã đại bác thần thánh</a></div>
-                    <div id="news_time">16/04/2016, 09:18 Giang Nguyen Thi Thu</div>
-                </li>
-                <li>
-                    <div id="news_title"><a href="#">3. Tottenham - Arsenal: 146 giây định đoạt derby</a></div>
-                    <div id="news_time">16/04/2016, 09:18 Giang Nguyen Thi Thu</div>
-                </li>
-                <li>
-                    <div id="news_title"><a href="#">4. Messi dọa ra đi, chủ tịch Barca "bơm máu" 86 triệu...</a></div>
-                    <div id="news_time">16/04/2016, 09:18 Giang Nguyen Thi Thu</div>
-                </li>
-                <li>
-                    <div id="news_title"><a href="#">5. MU bất bại 25 trận: Mourinho bị "chế giễu" sấp...</a></div>
-                    <div id="news_time">16/04/2016, 09:18 Giang Nguyen Thi Thu</div>
-                </li>
+                <?php foreach ($arr_news as $k => $news) { ?>
+                    <li>
+                        <div id="news_title"><a href="#"><?php echo ($k + 1) . '. ' . $news['title'] ?></a></div>
+                        <div id="news_time"><?php echo Utility::formatDataTime($news['updated_time'], '-', '.', true) ?></div>
+                    </li>
+                <?php } ?>
                 <li>...</li>
                 <li style="text-align: center;">
                     <div id="news_title"><a href="#">Xem thêm >></a></div>
@@ -81,36 +67,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="item">
             <p id="title">Thống kê online</p>
-        </div>
-
-        <div class="item">
-            <p id="title">Thảo luận</p>
-            <ul class="list_news">
-                <li>
-                    <div id="news_title"><a href="#">1. Real Madrid tung bom tiền 300 triệu euro xây “Galacticos 3.0”</a></div>
-                    <div id="news_time">16/04/2016, 09:18 Giang Nguyen Thi Thu</div>
-                </li>
-                <li>
-                    <div id="news_title"><a href="#">2. Everton - Chelsea: Cú nã đại bác thần thánh</a></div>
-                    <div id="news_time">16/04/2016, 09:18 Giang Nguyen Thi Thu</div>
-                </li>
-                <li>
-                    <div id="news_title"><a href="#">3. Tottenham - Arsenal: 146 giây định đoạt derby</a></div>
-                    <div id="news_time">16/04/2016, 09:18 Giang Nguyen Thi Thu</div>
-                </li>
-                <li>
-                    <div id="news_title"><a href="#">4. Messi dọa ra đi, chủ tịch Barca "bơm máu" 86 triệu...</a></div>
-                    <div id="news_time">16/04/2016, 09:18 Giang Nguyen Thi Thu</div>
-                </li>
-                <li>
-                    <div id="news_title"><a href="#">5. MU bất bại 25 trận: Mourinho bị "chế giễu" sấp...</a></div>
-                    <div id="news_time">16/04/2016, 09:18 Giang Nguyen Thi Thu</div>
-                </li>
-                <li>...</li>
-                <li style="text-align: center;">
-                    <div id="news_title"><a href="#">Xem thêm >></a></div>
-                </li>
-            </ul>
         </div>
     </div>
 </div>

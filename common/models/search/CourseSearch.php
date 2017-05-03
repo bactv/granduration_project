@@ -38,11 +38,13 @@ class CourseSearch extends Course
      *
      * @param array $params
      *
+     * @param int $teacher_id
+     *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $teacher_id)
     {
-        $query = Course::find();
+        $query = Course::find()->where(['teacher_id' => $teacher_id])->andWhere('deleted <> 1');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

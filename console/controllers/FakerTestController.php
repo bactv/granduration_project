@@ -9,6 +9,7 @@ namespace console\controllers;
 
 use backend\models\Agreement;
 use backend\models\AgreementAddendum;
+use backend\models\Course;
 use backend\models\Party;
 use backend\models\Question;
 use backend\models\QuestionAnswer;
@@ -174,13 +175,13 @@ class FakerTestController extends Controller
         echo "DONE";
     }
 
-    public function actionTestLessonCourse($count = 10)
+    public function actionTestLessonCourse($count = 1000)
     {
         $faker = \Faker\Factory::create();
 
         for ($i = 0; $i < $count; $i++) {
             $model = new LessonCourse();
-            $model->course_id = 1;
+            $model->course_id = mt_rand(3, 32);
             $model->lesson_name = $faker->sentence(5);
             $model->lesson_desc = $faker->sentence(15);
             $model->sort = ($i + 1);
@@ -204,6 +205,28 @@ class FakerTestController extends Controller
             $model->status = mt_rand(0, 1);
             $model->created_time = date('Y-m-d H:i:s');
             $model->updated_time = date('Y-m-d H:i:s');
+            $model->save();
+            var_dump($model->getErrors());
+        }
+        echo "DONE";
+    }
+
+    public function actionTestCourse($count = 30)
+    {
+        $faker = \Faker\Factory::create();
+
+        for ($i = 0; $i < $count; $i++) {
+            $model = new Course();
+            $model->course_name = $faker->sentence(6);
+            $model->course_description = $faker->sentence(100);
+            $model->teacher_id = mt_rand(6, 17);
+            $model->course_type_id = mt_rand(1, 2);
+            $model->price = $faker->numberBetween(0, 500000);
+            $model->subject_id = mt_rand(1, 8);
+            $model->class_level_id = mt_rand(1, 12);
+            $model->privacy = mt_rand(1, 2);
+            $model->approved = 1;
+            $model->signed_to_date = date('Y-m-d', strtotime(date('Y-m-d') . ' +' . mt_rand(10, 20) . ' days'));
             $model->save();
             var_dump($model->getErrors());
         }

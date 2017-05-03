@@ -9,6 +9,7 @@ return [
         'agreement_addendum' => 'Phụ Lục Hợp Đồng'
     ],
     'cms_url' => 'http://cms.study.edu.vn/',
+    'cms_teacher_url' => 'http://cms-teacher.study.edu.vn/',
     'web_url' => 'http://study.edu.vn/',
     'storage_url' => 'http://static.study.edu.vn/',
     'img_url' => [

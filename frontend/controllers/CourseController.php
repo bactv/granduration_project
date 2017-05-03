@@ -12,6 +12,7 @@ use frontend\components\FrontendController;
 use frontend\models\ClassLevel;
 use frontend\models\Course;
 use frontend\models\CourseNews;
+use frontend\models\CourseTest;
 use frontend\models\FreeLessonOnCourse;
 use frontend\models\LessonCourse;
 use frontend\models\Student;
@@ -171,6 +172,14 @@ class CourseController extends FrontendController
             'student_id' => $user->student_id
         ]);
         if ((empty($check)) || (!empty($check) && $check->number_lesson < 2)) {
+            $model = CourseTest::findOne(['student_id' => $user->student_id, 'course_id' => $course_id]);
+            if (empty($model)) {
+                $model = new CourseTest();
+                $model->course_id = $course_id;
+                $model->student_id = $user->student_id;
+                $model->created_time = date('Y-m-d H:i:s');
+                $model->save();
+            }
             echo json_encode(['status' => 1, 'message' => 'OK']);
             Yii::$app->end();
         } else {

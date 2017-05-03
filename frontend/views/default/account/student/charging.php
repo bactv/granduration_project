@@ -163,6 +163,7 @@ AssetApp::regJsFile('jquery.min.js');
             success: function (data) {
                 var response = JSON.parse(data);
                 alert(response.message);
+                window.location = '<?php echo Url::toRoute(['/account/info']) ?>';
             }
         });
     }

@@ -1,0 +1,267 @@
+div.wrapper {
+
+}
+
+div.header {
+
+}
+
+div.left_col {
+    background: #2A3F54;
+    min-height: 100%;
+    width: 250px;
+    position: absolute;
+    z-index: 1;
+    box-shadow: 0px 0px 10px #333;
+}
+
+div.left_col div.side_left {
+}
+
+div.left_col div.side_left .person_info {
+    height: 200px;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+}
+
+div.left_col div.side_left .person_info .logo_header {
+    height: 100px;
+    position: relative;
+    padding: 0px 5px;
+    display: none;
+}
+
+div.left_col div.side_left .person_info .logo_header #logo_img {
+    position: absolute;
+    height: 100%;
+    float: left;
+    width: 30%;
+    padding: 5px 0;
+}
+
+div.left_col div.side_left .person_info .logo_header #logo_img img {
+    width: 80px;
+}
+
+div.left_col div.side_left .person_info .logo_header #site_name {
+    width: 70%;
+    height: 100%;
+    padding: 25px 0 25px 10px;
+    color: #ffffff;
+    font-size: 2.1em;
+    font-family: cursive;
+    margin-left: 30%;
+}
+
+div.left_col div.side_left .person_info .person {
+    position: absolute;
+    width: 100%;
+    padding-top: 30px;
+}
+
+div.left_col div.side_left .person_info .person .avatar {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+div.left_col div.side_left .person_info .person .avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+div.left_col div.side_left .person_info .person .username {
+    color: #ffffff;
+    font-family: cursive;
+    height: 100%;
+    text-align: center;
+    padding-top: 110px;
+}
+
+/* menu list */
+div.left_col div.side_left .menu_list {
+
+}
+
+div.left_col div.side_left .menu_list a {
+    color: #ffffff;
+}
+
+div.left_col div.side_left .menu_list ul {
+    padding: 0;
+}
+
+div.left_col div.side_left .menu_list ul li {
+    list-style-type: none;
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+div.left_col div.side_left .menu_list ul li a {
+    color: #E7E7E7;
+    font-weight: 500;
+    padding: 13px 15px 12px;
+    margin-bottom: 6px;
+    position: relative;
+    display: block;
+}
+
+div.left_col div.side_left .menu_list ul li a span#icon {
+    width: 26px;
+    opacity: .99;
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+div.left_col div.side_left .menu_list ul li a span#menu_name {
+
+}
+
+div.left_col div.side_left .menu_list ul li a span#chevron_icon {
+    float: right;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 10px;
+    min-width: inherit;
+    color: #C4CFDA;
+}
+
+div.left_col div.side_left .menu_list ul li ul.child_menu {
+    display: none;
+}
+
+div.left_col div.side_left .menu_list ul li ul.child_menu li {
+    padding-left: 30px;
+}
+
+div.left_col div.side_left .menu_list ul li ul.child_menu li a:hover {
+    color: #4bb1cf;
+}
+
+div.left_col div.side_left .menu_list ul li ul.child_menu li a{
+    padding: 5px 7px;
+}
+
+div.left_col div.side_left .menu_list ul li ul.child_menu li:before {
+    background: #425668;
+    bottom: auto;
+    content: "";
+    height: 8px;
+    left: 23px;
+    margin-top: 15px;
+    position: absolute;
+    right: auto;
+    width: 8px;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+div.left_col div.side_left .menu_list ul li ul.child_menu li:after {
+    border-left: 1px solid #425668;
+    bottom: 0;
+    content: "";
+    left: 27px;
+    position: absolute;
+    top: 0;
+}
+
+
+
+.menu_list ul li.active {
+    border-right: 5px solid #1ABB9C;
+}
+
+.menu_list ul li.active > a {
+    text-shadow: rgba(0,0,0,.25) 0 -1px 0;
+    background: linear-gradient(#334556,#2C4257),#2A3F54;
+    box-shadow: rgba(0,0,0,.25) 0 1px 0,inset rgba(255,255,255,.16) 0 1px 0;
+}
+
+
+/* HEADER */
+
+div.right_col {
+    margin-left: 250px;
+    background: #F7F7F7;
+    position: relative;
+}
+
+div.right_col div.header {
+
+}
+
+div.right_col div.header nav {
+    padding: 0 20px;
+    border-radius: 0;
+    box-shadow: 0 2px 10px 0 #ccc;
+    margin-bottom: 25px;
+}
+
+div.right_col div.header nav .person_info {
+
+}
+
+div.right_col div.header nav .person_info span {
+    padding-left: 10px;
+}
+
+div.right_col div.header nav .person_info #avatar {
+
+}
+
+div.right_col div.header nav .person_info #avatar img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+div.right_col div.header nav .person_info #username{
+
+}
+
+div.right_col div.header nav .person_info #chevron_icon {
+    font-size: 9px;
+    opacity: 0.7;
+}
+
+div.right_col div.header nav .person_info ul li a {
+    line-height: 3.0;
+}
+
+div.right_col div.header nav .person_info ul li:hover {
+
+}
+
+
+div.right_col div.main-content {
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+div.right_col div.footer {
+    height: 60px;
+    background: #EDEDED;
+    padding: 20px;
+    color: #777;
+    font-style: italic;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+#default_index {
+    font-size: 60px;
+    text-align: center;
+    padding: 100px 0px 200px;
+    font-style: italic;
+    color: #cacaca;
+}
+
+.agreement-view .table-bordered > tbody > tr > th {
+    text-align: left !important;
+}

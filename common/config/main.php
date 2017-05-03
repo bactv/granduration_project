@@ -15,6 +15,10 @@ return [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@common/messages'
                 ],
+                'cms_teacher' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@common/messages'
+                ],
             ]
         ]
     ],

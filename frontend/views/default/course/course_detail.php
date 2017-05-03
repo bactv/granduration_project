@@ -188,6 +188,8 @@ Icon::map($this, Icon::FA);
                         title: 'Có lỗi xảy ra!',
                         message: res.message
                     });
+                } else {
+                    click_on_course();
                 }
             }
         });

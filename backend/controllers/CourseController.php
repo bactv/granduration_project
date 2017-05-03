@@ -8,6 +8,7 @@ use Yii;
 use backend\models\Course;
 use common\models\search\CourseSearch;
 use backend\components\BackendController;
+use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -35,7 +36,9 @@ class CourseController extends BackendController
     public function actionIndex()
     {
         $searchModel = new CourseSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Course::find()
+        ]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

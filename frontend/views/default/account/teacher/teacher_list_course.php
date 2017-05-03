@@ -24,6 +24,14 @@ Icon::map($this, Icon::FA);
     ]) ?>
 </div>
 
+<div class="course_action" style="margin-bottom: 20px">
+    <?php echo Html::a(Icon::show('plus-circle') . Yii::t('web', 'Course manager'), Yii::$app->params['cms_teacher_url'],[
+        'role' => 'button',
+        'class' => 'btn btn-primary',
+        'target' => '_blank',
+    ]) ?>
+</div>
+
 <div class="list_course_open">
     <table class="table table-responsive table-condensed table-hover table-bordered table-striped">
         <thead>
